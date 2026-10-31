@@ -1,0 +1,3450 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Renu Agro Services | Connecting Nature's Bounty to the Global Market
+    </title>
+
+    <!-- Google Fonts: Anton, Instrument Serif, Manrope -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP & ScrollTrigger Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              forest: "#123F2A",
+              emerald: "#176B45",
+              fresh: "#82B96B",
+              sage: "#DCE9D8",
+              offwhite: "#F7F8F3",
+              dark: "#17251D",
+            },
+            fontFamily: {
+              display: ["Anton", "sans-serif"],
+              editorial: ["Instrument Serif", "serif"],
+              sans: ["Manrope", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      ::selection {
+        background: #123f2a;
+        color: #ffffff;
+      }
+
+      .grain-overlay {
+        background-image: radial-gradient(
+          rgba(18, 63, 42, 0.06) 1px,
+          transparent 0
+        );
+        background-size: 24px 24px;
+      }
+
+      @keyframes marqueeScroll {
+        0% {
+          transform: translate3d(0%, 0, 0);
+        }
+        100% {
+          transform: translate3d(-50%, 0, 0);
+        }
+      }
+
+      .animate-marquee {
+        display: flex;
+        width: max-content;
+        animation: marqueeScroll 28s linear infinite;
+      }
+
+      .animate-marquee:hover {
+        animation-play-state: paused;
+      }
+
+      .text-stroke-forest {
+        -webkit-text-stroke: 1.5px rgba(18, 63, 42, 0.28);
+        color: transparent;
+      }
+
+      .text-stroke-light {
+        -webkit-text-stroke: 1.5px rgba(220, 233, 216, 0.35);
+        color: transparent;
+      }
+
+      @keyframes pulseRing {
+        0% {
+          transform: scale(0.7);
+          opacity: 0.9;
+        }
+        100% {
+          transform: scale(2.8);
+          opacity: 0;
+        }
+      }
+
+      .hub-pulse {
+        transform-origin: center;
+        animation: pulseRing 2.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+      }
+
+      /* Hide scrollbars on touch swipeable rails */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* Mobile-Specific Architectural UI/UX Optimizations (< 1024px)
+           Preserves 100% of existing Desktop (>= 1024px) design & layout */
+      @media (max-width: 1023px) {
+        html,
+        body {
+          overflow-x: hidden;
+          max-width: 100vw;
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Dynamic viewport height prevents mobile browser bar jump on iPhone 17 & Galaxy A17 */
+        #preloader {
+          height: 100svh;
+        }
+
+        #home {
+          min-height: 100svh;
+        }
+
+        /* Balanced mobile display headline scaling for 360px - 430px viewports */
+        .mobile-hero-display {
+          font-size: clamp(3.15rem, 13.8vw, 4.8rem);
+          line-height: 0.9;
+          letter-spacing: -0.01em;
+        }
+
+        .mobile-hero-italic {
+          font-size: clamp(3.1rem, 13.5vw, 4.7rem);
+          line-height: 0.88;
+        }
+
+        .mobile-section-display {
+          font-size: clamp(2.65rem, 11.2vw, 4.25rem);
+          line-height: 0.91;
+        }
+
+        /* Prevent iOS Safari / iPhone 17 auto-zoom on form focus (requires >= 16px) */
+        #enquiry-form input,
+        #enquiry-form select,
+        #enquiry-form textarea {
+          font-size: 16px !important;
+        }
+      }
+
+      @media (max-width: 639px) {
+        /* Touch-target enforcement & crisp mobile card proportions */
+        .mobile-touch-btn {
+          min-height: 52px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        ::before,
+        ::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-[#F7F8F3] text-[#17251D] font-sans antialiased overflow-x-hidden"
+  >
+    <!-- Preloader Overlay -->
+    <div
+      id="preloader"
+      class="fixed inset-0 z-[10000] bg-[#123F2A] text-[#F7F8F3] flex flex-col justify-between p-5 sm:p-6 md:p-12 transition-transform duration-1000 ease-in-out"
+    >
+      <div
+        class="flex justify-between items-center border-b border-white/15 pb-4 md:pb-6"
+      >
+        <div class="flex items-center gap-2.5 md:gap-3">
+          <svg
+            class="w-5 h-5 md:w-6 md:h-6 text-[#82B96B] shrink-0"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+            ></path>
+          </svg>
+          <span
+            class="font-sans font-extrabold text-[11px] md:text-xs tracking-[0.2em] md:tracking-[0.25em] uppercase"
+            >Renu Agro Services</span
+          >
+        </div>
+        <span
+          class="font-sans text-[10px] md:text-xs tracking-[0.16em] md:tracking-[0.2em] uppercase text-[#DCE9D8]/70"
+          >Est. 2018</span
+        >
+      </div>
+      <div class="my-auto py-6">
+        <p
+          class="font-editorial italic text-2xl sm:text-3xl md:text-4xl text-[#82B96B] mb-2 md:mb-3"
+        >
+          Connecting Nature&apos;s Bounty
+        </p>
+        <h2
+          class="font-display text-[3.35rem] sm:text-8xl md:text-[9.5rem] text-white leading-[0.88] tracking-tight"
+        >
+          INDIAN SOIL.<br />GLOBAL SCALE.
+        </h2>
+      </div>
+      <div class="space-y-3 md:space-y-4">
+        <div class="flex justify-between items-end gap-4">
+          <span
+            class="font-sans text-[10px] md:text-xs uppercase tracking-[0.18em] md:tracking-[0.22em] text-[#DCE9D8]/70"
+            >Preparing Experience</span
+          >
+          <span
+            id="loader-percent"
+            class="font-display text-4xl sm:text-5xl md:text-7xl text-[#82B96B] leading-none"
+            >000%</span
+          >
+        </div>
+        <div class="w-full h-[2px] bg-white/15 overflow-hidden">
+          <div
+            id="loader-bar"
+            class="h-full bg-[#82B96B] w-0 transition-all duration-150"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom Desktop Cursor -->
+    <div
+      class="hidden lg:block pointer-events-none fixed inset-0 z-[9999] overflow-hidden"
+    >
+      <div
+        id="cursor-dot"
+        class="fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[#82B96B] mix-blend-difference"
+      ></div>
+      <div
+        id="cursor-ring"
+        class="fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center transition-all duration-300 w-10 h-10 border border-[#123F2A]/40 bg-transparent"
+      >
+        <span
+          id="cursor-label"
+          class="font-sans text-[10px] font-extrabold tracking-[0.2em] uppercase text-[#DCE9D8] hidden"
+        ></span>
+      </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header
+      id="navbar"
+      class="fixed top-0 left-0 w-full z-50 py-4 lg:py-6 bg-transparent border-b border-white/10 transition-all duration-500"
+    >
+      <div
+        class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 flex justify-between items-center"
+      >
+        <a href="#home" class="group flex items-center gap-2.5 sm:gap-3 z-50">
+          <div
+            id="nav-logo-icon"
+            class="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center border bg-white/10 border-white/25 text-[#82B96B] backdrop-blur-md transition-all duration-500 shrink-0"
+          >
+            <svg
+              class="w-5 h-5 group-hover:rotate-12 transition-transform duration-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              ></path>
+            </svg>
+          </div>
+          <div
+            id="nav-logo-text"
+            class="flex flex-col text-white transition-colors duration-300"
+          >
+            <span
+              class="font-display text-xl sm:text-2xl tracking-wide leading-none"
+              >RENU AGRO</span
+            >
+            <span
+              class="font-sans text-[9px] sm:text-[10px] font-extrabold tracking-[0.24em] sm:tracking-[0.26em] uppercase opacity-80 mt-0.5"
+              >Services • India</span
+            >
+          </div>
+        </a>
+
+        <!-- Desktop Links -->
+        <!-- Mobile Actions & Menu Toggle -->
+        <div class="flex items-center gap-2 lg:hidden z-50">
+          <a
+            href="#contact"
+            id="mobile-nav-enquire"
+            class="px-3.5 py-2 rounded-full bg-white text-[#123F2A] font-sans font-extrabold text-[10px] uppercase tracking-[0.16em] shadow-sm transition-all duration-300"
+          >
+            Enquire
+          </a>
+          <button
+            id="mobile-toggle"
+            aria-label="Toggle Menu"
+            aria-expanded="false"
+            class="w-11 h-11 rounded-full flex items-center justify-center border bg-white/15 text-white border-white/30 backdrop-blur-md transition-all duration-300 active:scale-95"
+          >
+            <svg
+              id="menu-icon-open"
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.2"
+                d="M4 7h16M4 12h16M10 17h10"
+              ></path>
+            </svg>
+            <svg
+              id="menu-icon-close"
+              class="w-5 h-5 hidden"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Fullscreen Menu -->
+    <div
+      id="mobile-menu"
+      class="fixed inset-0 z-40 bg-[#123F2A] text-white flex flex-col justify-between px-5 sm:px-8 pt-24 pb-8 overflow-y-auto opacity-0 pointer-events-none -translate-y-full transition-all duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] lg:hidden"
+    >
+      <div
+        class="flex flex-col divide-y divide-white/10 border-y border-white/15 my-auto"
+      >
+        <a
+          href="#home"
+          class="mob-link group flex items-center justify-between py-3.5 active:bg-white/5"
+        >
+          <div class="flex items-baseline gap-4">
+            <span class="font-sans text-xs font-extrabold text-[#82B96B] w-6"
+              >01</span
+            ><span
+              class="font-display text-[2.65rem] sm:text-5xl leading-none tracking-wide"
+              >Home</span
+            >
+          </div>
+          <span
+            class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-[#82B96B]"
+            ><svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M7 17L17 7m0 0H8m9 0v9"
+              ></path></svg
+          ></span>
+        </a>
+        <a
+          href="#about"
+          class="mob-link group flex items-center justify-between py-3.5 active:bg-white/5"
+        >
+          <div class="flex items-baseline gap-4">
+            <span class="font-sans text-xs font-extrabold text-[#82B96B] w-6"
+              >02</span
+            ><span
+              class="font-display text-[2.65rem] sm:text-5xl leading-none tracking-wide"
+              >About</span
+            >
+          </div>
+          <span
+            class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-[#82B96B]"
+            ><svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M7 17L17 7m0 0H8m9 0v9"
+              ></path></svg
+          ></span>
+        </a>
+        <a
+          href="#products"
+          class="mob-link group flex items-center justify-between py-3.5 active:bg-white/5"
+        >
+          <div class="flex items-baseline gap-4">
+            <span class="font-sans text-xs font-extrabold text-[#82B96B] w-6"
+              >03</span
+            ><span
+              class="font-display text-[2.65rem] sm:text-5xl leading-none tracking-wide"
+              >Products</span
+            >
+          </div>
+          <span
+            class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-[#82B96B]"
+            ><svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M7 17L17 7m0 0H8m9 0v9"
+              ></path></svg
+          ></span>
+        </a>
+        <a
+          href="#process"
+          class="mob-link group flex items-center justify-between py-3.5 active:bg-white/5"
+        >
+          <div class="flex items-baseline gap-4">
+            <span class="font-sans text-xs font-extrabold text-[#82B96B] w-6"
+              >04</span
+            ><span
+              class="font-display text-[2.65rem] sm:text-5xl leading-none tracking-wide"
+              >Our Process</span
+            >
+          </div>
+          <span
+            class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-[#82B96B]"
+            ><svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M7 17L17 7m0 0H8m9 0v9"
+              ></path></svg
+          ></span>
+        </a>
+        <a
+          href="#why-us"
+          class="mob-link group flex items-center justify-between py-3.5 active:bg-white/5"
+        >
+          <div class="flex items-baseline gap-4">
+            <span class="font-sans text-xs font-extrabold text-[#82B96B] w-6"
+              >05</span
+            ><span
+              class="font-display text-[2.65rem] sm:text-5xl leading-none tracking-wide"
+              >Why Us</span
+            >
+          </div>
+          <span
+            class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-[#82B96B]"
+            ><svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M7 17L17 7m0 0H8m9 0v9"
+              ></path></svg
+          ></span>
+        </a>
+        <a
+          href="#contact"
+          class="mob-link group flex items-center justify-between py-3.5 active:bg-white/5"
+        >
+          <div class="flex items-baseline gap-4">
+            <span class="font-sans text-xs font-extrabold text-[#82B96B] w-6"
+              >06</span
+            ><span
+              class="font-display text-[2.65rem] sm:text-5xl leading-none tracking-wide"
+              >Contact</span
+            >
+          </div>
+          <span
+            class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-[#82B96B]"
+            ><svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M7 17L17 7m0 0H8m9 0v9"
+              ></path></svg
+          ></span>
+        </a>
+      </div>
+      <div class="pt-6 space-y-4 mob-drawer-footer">
+        <div
+          class="flex items-center justify-between text-xs text-[#DCE9D8]/80 font-sans"
+        >
+          <span class="font-editorial italic text-xl text-[#DCE9D8]"
+            >Kolhapur, Maharashtra</span
+          >
+          <a
+            href="tel:+917875717111"
+            class="font-extrabold uppercase tracking-[0.14em] text-[#82B96B]"
+            >+91 7875717111</a
+          >
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <a
+            href="#contact"
+            class="mob-link py-4 rounded-full bg-[#82B96B] text-[#123F2A] text-center font-sans font-extrabold uppercase tracking-[0.15em] text-[11px] flex items-center justify-center"
+            >Start Enquiry</a
+          >
+          <a
+            href="https://wa.me/917875717111?text=Hello%20Renu%20Agro%20Services,%20I%20would%20like%20to%20enquire%20about%20your%20export%20products."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="py-4 rounded-full bg-white/10 border border-white/20 text-white text-center font-sans font-extrabold uppercase tracking-[0.15em] text-[11px] flex items-center justify-center"
+            >WhatsApp</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main>
+      <!-- HERO SECTION -->
+      <section
+        id="home"
+        class="relative min-h-screen w-full flex flex-col justify-between overflow-hidden bg-[#123F2A] text-white pt-24 sm:pt-28 lg:pt-32 pb-7 sm:pb-10"
+      >
+        <div class="absolute inset-0 z-0 overflow-hidden">
+          <img
+            id="hero-img"
+            src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2000&q=85"
+            alt="Verdant Agricultural Landscape"
+            class="w-full h-full object-cover object-center scale-105 will-change-transform"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-b from-[#123F2A]/80 via-[#123F2A]/45 to-[#123F2A]/95"
+          ></div>
+        </div>
+
+        <div
+          class="relative z-10 max-w-[1440px] w-full mx-auto px-4 sm:px-6 md:px-10 flex justify-between items-center hero-meta"
+        >
+          <div
+            class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20"
+          >
+            <span
+              class="w-2 h-2 rounded-full bg-[#82B96B] animate-pulse shrink-0"
+            ></span>
+            <span
+              class="font-sans font-extrabold text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.22em] text-[#DCE9D8]"
+              >Agricultural Exporter • Est. 2018</span
+            >
+          </div>
+          <div
+            class="hidden sm:flex items-center gap-6 font-sans text-xs font-bold tracking-[0.18em] uppercase text-[#DCE9D8]/80"
+          >
+            <span>16.7050° N, 74.2433° E</span>
+            <span class="text-[#82B96B]">•</span>
+            <span>Kolhapur, Maharashtra, India</span>
+          </div>
+        </div>
+
+        <div
+          class="relative z-10 max-w-[1440px] w-full mx-auto px-4 sm:px-6 md:px-10 my-auto py-8 sm:py-12"
+        >
+          <div class="max-w-6xl">
+            <h1
+              class="mobile-hero-display font-display lg:text-[10.2rem] md:text-[8.2rem] sm:text-[6rem] leading-[0.88] tracking-tight text-white"
+            >
+              <span class="block hero-line-1 overflow-hidden"
+                ><span class="inline-block">FROM INDIAN SOIL.</span></span
+              >
+              <span class="block mt-1.5 md:mt-2 hero-line-2 overflow-hidden">
+                <span
+                  class="mobile-hero-italic inline-block font-editorial italic font-normal lowercase text-[#82B96B] sm:text-[6.2rem] md:text-[8.5rem] lg:text-[10.4rem] leading-[0.85] mr-2.5 sm:mr-4"
+                  >to the</span
+                >
+                <span class="inline-block">WORLD.</span>
+              </span>
+            </h1>
+          </div>
+
+          <div
+            class="mt-6 sm:mt-8 md:mt-12 grid lg:grid-cols-12 gap-6 sm:gap-8 items-end hero-meta"
+          >
+            <div class="lg:col-span-6">
+              <p
+                class="font-sans text-[15px] sm:text-lg md:text-xl text-[#F7F8F3]/90 font-medium max-w-xl leading-relaxed"
+              >
+                Connecting Nature&apos;s Bounty to the Global Market. Direct
+                farm sourcing, rigorous grading, and reefer cold-chain exports
+                from the heartland of Maharashtra.
+              </p>
+            </div>
+            <div
+              class="lg:col-span-6 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center lg:justify-end gap-3 sm:gap-4"
+            >
+              <a
+                href="#products"
+                class="mobile-touch-btn group relative inline-flex items-center justify-center px-7 py-4 rounded-full overflow-hidden bg-white text-[#123F2A] border border-white font-sans font-extrabold text-xs uppercase tracking-[0.16em] transition-all active:scale-[0.98]"
+              >
+                <span
+                  class="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-[#82B96B]"
+                ></span>
+                <span
+                  class="relative z-10 flex items-center justify-center gap-3"
+                  ><span>Explore Products</span
+                  ><svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    ></path></svg
+                ></span>
+              </a>
+              <a
+                href="#about"
+                class="mobile-touch-btn group relative inline-flex items-center justify-center px-7 py-4 rounded-full overflow-hidden bg-white/10 sm:bg-white/5 text-white border border-white/35 backdrop-blur-md font-sans font-extrabold text-xs uppercase tracking-[0.16em] transition-all active:scale-[0.98]"
+              >
+                <span
+                  class="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-[#82B96B]"
+                ></span>
+                <span
+                  class="relative z-10 flex items-center justify-center gap-3 group-hover:text-[#123F2A]"
+                  ><span>Discover Our Story</span></span
+                >
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="relative z-10 max-w-[1440px] w-full mx-auto px-4 sm:px-6 md:px-10 pt-5 sm:pt-6 border-t border-white/15 flex flex-wrap justify-between items-center gap-3 hero-meta"
+        >
+          <div
+            class="flex items-center gap-3 sm:gap-8 text-[10px] sm:text-xs font-sans font-extrabold uppercase tracking-[0.14em] sm:tracking-[0.18em] text-[#DCE9D8]/85"
+          >
+            <span>Exporter</span><span class="text-[#82B96B]">/</span
+            ><span>Trader</span><span class="text-[#82B96B]">/</span
+            ><span>Sourcing Partner</span>
+          </div>
+          <a
+            href="#about"
+            class="group inline-flex items-center gap-2.5 sm:gap-3 text-[10px] sm:text-xs font-sans font-extrabold uppercase tracking-[0.18em] sm:tracking-[0.22em] text-white"
+          >
+            <span class="hidden xs:inline sm:inline">Scroll to Explore</span>
+            <span
+              class="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center overflow-hidden"
+              ><svg
+                class="w-3.5 h-3.5 rotate-90 group-hover:translate-y-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path></svg
+            ></span>
+          </a>
+        </div>
+      </section>
+
+      <!-- KINETIC MARQUEE -->
+      <div
+        class="bg-[#82B96B] text-[#123F2A] py-3 sm:py-4 border-y border-[#123F2A]/15 overflow-hidden select-none"
+      >
+        <div class="animate-marquee flex items-center">
+          <div class="flex items-center shrink-0">
+            <span
+              class="font-display text-xl sm:text-2xl md:text-3xl tracking-wide px-4 sm:px-6"
+              >DIRECT FARMER NETWORK</span
+            ><svg
+              class="w-4 h-4 sm:w-5 sm:h-5 text-[#123F2A] shrink-0"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="12" cy="12" r="6" />
+            </svg>
+          </div>
+          <div class="flex items-center shrink-0">
+            <span
+              class="font-display text-xl sm:text-2xl md:text-3xl tracking-wide px-4 sm:px-6"
+              >KOLHAPURI JAGGERY</span
+            ><svg
+              class="w-4 h-4 sm:w-5 sm:h-5 text-[#123F2A] shrink-0"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="12" cy="12" r="6" />
+            </svg>
+          </div>
+          <div class="flex items-center shrink-0">
+            <span
+              class="font-display text-xl sm:text-2xl md:text-3xl tracking-wide px-4 sm:px-6"
+              >DEVGAD ALPHONSO MANGO</span
+            ><svg
+              class="w-4 h-4 sm:w-5 sm:h-5 text-[#123F2A] shrink-0"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="12" cy="12" r="6" />
+            </svg>
+          </div>
+          <div class="flex items-center shrink-0">
+            <span
+              class="font-display text-xl sm:text-2xl md:text-3xl tracking-wide px-4 sm:px-6"
+              >REEFER COLD-CHAIN LOGISTICS</span
+            ><svg
+              class="w-4 h-4 sm:w-5 sm:h-5 text-[#123F2A] shrink-0"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="12" cy="12" r="6" />
+            </svg>
+          </div>
+          <div class="flex items-center shrink-0">
+            <span
+              class="font-display text-xl sm:text-2xl md:text-3xl tracking-wide px-4 sm:px-6"
+              >EXPORT QUALITY GRADING</span
+            ><svg
+              class="w-4 h-4 sm:w-5 sm:h-5 text-[#123F2A] shrink-0"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="12" cy="12" r="6" />
+            </svg>
+          </div>
+          <div class="flex items-center shrink-0">
+            <span
+              class="font-display text-xl sm:text-2xl md:text-3xl tracking-wide px-4 sm:px-6"
+              >INDIAN SPICES & MILLETS</span
+            ><svg
+              class="w-4 h-4 sm:w-5 sm:h-5 text-[#123F2A] shrink-0"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="12" cy="12" r="6" />
+            </svg>
+          </div>
+          <!-- Duplicate for infinite loop -->
+          <div class="flex items-center shrink-0">
+            <span
+              class="font-display text-xl sm:text-2xl md:text-3xl tracking-wide px-4 sm:px-6"
+              >DIRECT FARMER NETWORK</span
+            ><svg
+              class="w-4 h-4 sm:w-5 sm:h-5 text-[#123F2A] shrink-0"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="12" cy="12" r="6" />
+            </svg>
+          </div>
+          <div class="flex items-center shrink-0">
+            <span
+              class="font-display text-xl sm:text-2xl md:text-3xl tracking-wide px-4 sm:px-6"
+              >KOLHAPURI JAGGERY</span
+            ><svg
+              class="w-4 h-4 sm:w-5 sm:h-5 text-[#123F2A] shrink-0"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="12" cy="12" r="6" />
+            </svg>
+          </div>
+          <div class="flex items-center shrink-0">
+            <span
+              class="font-display text-xl sm:text-2xl md:text-3xl tracking-wide px-4 sm:px-6"
+              >DEVGAD ALPHONSO MANGO</span
+            ><svg
+              class="w-4 h-4 sm:w-5 sm:h-5 text-[#123F2A] shrink-0"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="12" cy="12" r="6" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- 01 / ABOUT SECTION -->
+      <section
+        id="about"
+        class="py-16 sm:py-24 md:py-36 bg-[#F7F8F3] grain-overlay relative overflow-hidden"
+      >
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10">
+          <div
+            class="flex flex-col md:flex-row md:items-end justify-between border-b border-[#123F2A]/15 pb-5 md:pb-8 mb-10 sm:mb-16 md:mb-24 gap-3 md:gap-6"
+          >
+            <div class="flex items-center gap-3 md:gap-4 about-reveal-text">
+              <span class="font-display text-2xl md:text-3xl text-[#176B45]"
+                >01</span
+              >
+              <span class="w-8 md:w-10 h-[2px] bg-[#176B45]"></span>
+              <span
+                class="font-sans font-extrabold text-[11px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.24em] text-[#123F2A]"
+                >Our Heritage & Identity</span
+              >
+            </div>
+            <p
+              class="font-sans font-bold text-[11px] md:text-xs uppercase tracking-[0.18em] md:tracking-[0.2em] text-[#17251D]/60 about-reveal-text"
+            >
+              Kolhapur • Maharashtra • India
+            </p>
+          </div>
+
+          <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+            <div class="lg:col-span-7 space-y-7 sm:space-y-10">
+              <h2
+                class="about-reveal-text mobile-section-display font-display sm:text-7xl md:text-[6.2rem] text-[#123F2A] leading-[0.9]"
+              >
+                ROOTED IN NATURE.<br />
+                <span
+                  class="font-editorial italic font-normal lowercase text-[#176B45] text-[2.95rem] sm:text-7xl md:text-[6.6rem]"
+                  >connected</span
+                >
+                TO THE WORLD.
+              </h2>
+
+              <div
+                class="grid sm:grid-cols-2 gap-5 sm:gap-8 pt-1 sm:pt-4 about-reveal-text"
+              >
+                <p
+                  class="font-sans text-[15px] sm:text-base md:text-lg text-[#17251D]/85 font-medium leading-relaxed"
+                >
+                  Established in
+                  <strong class="font-extrabold text-[#123F2A]">2018</strong> in
+                  the fertile agricultural heartland of Kolhapur, Maharashtra,
+                  Renu Agro Services operates as a premier agricultural
+                  exporter, trader, supplier, and dedicated sourcing partner.
+                </p>
+                <p
+                  class="font-sans text-[15px] sm:text-base md:text-lg text-[#17251D]/75 leading-relaxed"
+                >
+                  Through our extensive grassroots farmer network and direct
+                  farm-gate aggregation, we eliminate unnecessary
+                  intermediaries—ensuring authentic origin quality, strict
+                  grading, and temperature-controlled reefer logistics for
+                  delicate produce.
+                </p>
+              </div>
+
+              <!-- Responsive Bento Stats on Mobile / Classic 3-Col Row on Tablet & Desktop -->
+              <div
+                class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-8 pt-6 sm:pt-8 border-t border-[#123F2A]/15 about-reveal-text"
+              >
+                <div
+                  class="p-4 sm:p-0 rounded-2xl sm:rounded-none bg-white sm:bg-transparent border border-[#123F2A]/10 sm:border-0"
+                >
+                  <span
+                    class="font-display text-4xl sm:text-6xl text-[#123F2A] block"
+                    >2018</span
+                  >
+                  <span
+                    class="font-sans font-extrabold text-[10px] sm:text-[11px] uppercase tracking-[0.14em] sm:tracking-[0.16em] text-[#176B45] mt-1.5 sm:mt-2 block"
+                    >Established in Kolhapur</span
+                  >
+                </div>
+                <div
+                  class="p-4 sm:p-0 rounded-2xl sm:rounded-none bg-white sm:bg-transparent border border-[#123F2A]/10 sm:border-0"
+                >
+                  <span
+                    class="font-display text-4xl sm:text-6xl text-[#123F2A] block"
+                    >10+</span
+                  >
+                  <span
+                    class="font-sans font-extrabold text-[10px] sm:text-[11px] uppercase tracking-[0.14em] sm:tracking-[0.16em] text-[#176B45] mt-1.5 sm:mt-2 block"
+                    >Core Product Verticals</span
+                  >
+                </div>
+                <div
+                  class="col-span-2 sm:col-span-1 p-4 sm:p-0 rounded-2xl sm:rounded-none bg-[#123F2A] sm:bg-transparent text-white sm:text-inherit flex sm:block items-center justify-between"
+                >
+                  <span
+                    class="font-display text-4xl sm:text-6xl text-[#82B96B] sm:text-[#123F2A] block"
+                    >DIRECT</span
+                  >
+                  <span
+                    class="font-sans font-extrabold text-[10px] sm:text-[11px] uppercase tracking-[0.14em] sm:tracking-[0.16em] text-[#DCE9D8] sm:text-[#176B45] sm:mt-2 block text-right sm:text-left"
+                    >Farmer Network Sourcing</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:col-span-5 relative">
+              <div
+                class="about-clip-img relative h-[360px] sm:h-[580px] rounded-2xl sm:rounded-2xl overflow-hidden shadow-2xl"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1200&q=85"
+                  alt="Lush Fields"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-[#123F2A]/80 via-[#123F2A]/15 to-transparent"
+                ></div>
+                <div
+                  class="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6 text-white"
+                >
+                  <span
+                    class="font-sans text-[10px] font-extrabold uppercase tracking-[0.22em] text-[#82B96B] block mb-1"
+                    >Origin Guarantee</span
+                  >
+                  <p
+                    class="font-editorial italic text-2xl sm:text-3xl leading-snug"
+                  >
+                    Cultivated in the rich river valleys of Maharashtra.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 / PRODUCTS GALLERY -->
+      <section
+        id="products"
+        class="bg-white text-[#123F2A] relative overflow-hidden py-16 sm:py-24"
+      >
+        <div
+          class="max-w-[1440px] w-full mx-auto px-4 sm:px-6 md:px-10 mb-8 sm:mb-12"
+        >
+          <div
+            class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 sm:gap-6"
+          >
+            <div>
+              <div class="flex items-center gap-3 mb-3 sm:mb-4">
+                <span class="font-display text-2xl text-[#176B45]">02</span>
+                <span class="w-8 h-[2px] bg-[#176B45]"></span>
+                <span
+                  class="font-sans font-extrabold text-[11px] sm:text-xs uppercase tracking-[0.22em] sm:tracking-[0.24em] text-[#176B45]"
+                  >10 Export Verticals</span
+                >
+              </div>
+              <h2
+                class="mobile-section-display font-display sm:text-7xl lg:text-[6.2rem] text-[#123F2A] leading-[0.88]"
+              >
+                NATURE&apos;S
+                <span
+                  class="font-editorial italic font-normal lowercase text-[#176B45]"
+                  >finest</span
+                >
+                PORTFOLIO.
+              </h2>
+            </div>
+            <div class="lg:max-w-sm space-y-4">
+              <p
+                class="font-sans text-sm md:text-base text-[#17251D]/75 font-medium leading-relaxed"
+              >
+                Browse all ten agricultural product lines—tap any category to
+                inspect varieties and request a custom export quote.
+              </p>
+            </div>
+          </div>
+
+          <!-- Mobile-Only Quick Filter Rail (Hidden on Desktop lg:) -->
+          <div
+            id="mobile-product-filters"
+            class="flex lg:hidden items-center gap-2 overflow-x-auto no-scrollbar pt-6 pb-1 -mx-4 px-4 sm:mx-0 sm:px-0"
+          >
+            <button
+              type="button"
+              data-filter="all"
+              class="mob-filter-pill shrink-0 px-4 py-2.5 rounded-full bg-[#123F2A] text-white font-sans font-extrabold text-[11px] uppercase tracking-[0.15em] transition-all"
+            >
+              All (10)
+            </button>
+            <button
+              type="button"
+              data-filter="fresh"
+              class="mob-filter-pill shrink-0 px-4 py-2.5 rounded-full bg-[#F7F8F3] text-[#123F2A] border border-[#123F2A]/15 font-sans font-extrabold text-[11px] uppercase tracking-[0.15em] transition-all"
+            >
+              Fresh Produce
+            </button>
+            <button
+              type="button"
+              data-filter="spices"
+              class="mob-filter-pill shrink-0 px-4 py-2.5 rounded-full bg-[#F7F8F3] text-[#123F2A] border border-[#123F2A]/15 font-sans font-extrabold text-[11px] uppercase tracking-[0.15em] transition-all"
+            >
+              Spices &amp; Blends
+            </button>
+            <button
+              type="button"
+              data-filter="sweeteners"
+              class="mob-filter-pill shrink-0 px-4 py-2.5 rounded-full bg-[#F7F8F3] text-[#123F2A] border border-[#123F2A]/15 font-sans font-extrabold text-[11px] uppercase tracking-[0.15em] transition-all"
+            >
+              Jaggery &amp; Sugar
+            </button>
+            <button
+              type="button"
+              data-filter="grains"
+              class="mob-filter-pill shrink-0 px-4 py-2.5 rounded-full bg-[#F7F8F3] text-[#123F2A] border border-[#123F2A]/15 font-sans font-extrabold text-[11px] uppercase tracking-[0.15em] transition-all"
+            >
+              Grains &amp; Dry
+            </button>
+          </div>
+        </div>
+
+        <!-- Product Cards Grid -->
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10">
+          <div
+            id="products-grid"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
+          ></div>
+        </div>
+      </section>
+
+      <!-- 03 / FRESH FRUIT SHOWCASE -->
+      <section
+        id="fruit-showcase-section"
+        class="py-16 sm:py-24 md:py-36 bg-[#123F2A] text-white relative overflow-hidden"
+      >
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 relative z-10">
+          <div
+            class="flex flex-col md:flex-row md:items-end justify-between border-b border-white/15 pb-6 md:pb-8 mb-8 sm:mb-14 gap-4 sm:gap-6"
+          >
+            <div>
+              <div class="flex items-center gap-3 mb-3 sm:mb-4">
+                <span class="font-display text-2xl text-[#82B96B]">03</span>
+                <span class="w-8 h-[2px] bg-[#82B96B]"></span>
+                <span
+                  class="font-sans font-extrabold text-[11px] sm:text-xs uppercase tracking-[0.22em] sm:tracking-[0.24em] text-[#82B96B]"
+                  >Reefer Container Specialists</span
+                >
+              </div>
+              <h2
+                class="mobile-section-display font-display sm:text-7xl md:text-[6rem] leading-[0.9]"
+              >
+                FRESH FRUIT
+                <span
+                  class="font-editorial italic font-normal lowercase text-[#82B96B]"
+                  >export</span
+                >
+                SHOWCASE.
+              </h2>
+            </div>
+            <div
+              class="inline-flex items-center gap-2.5 sm:gap-3 px-3.5 sm:px-4 py-2.5 rounded-2xl bg-white/5 border border-white/15 self-start md:self-auto"
+            >
+              <svg
+                class="w-4 h-4 sm:w-5 sm:h-5 text-[#82B96B] shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                ></path>
+              </svg>
+              <span
+                class="font-sans text-[11px] sm:text-xs font-bold text-[#DCE9D8]"
+                >Temperature-Controlled Reefer Logistics</span
+              >
+            </div>
+          </div>
+
+          <div class="grid lg:grid-cols-12 gap-6 lg:gap-14 items-center">
+            <!-- Swipeable Horizontal Thumb Rail on Mobile/Tablet (<1024px) | Classic Vertical List on Desktop (lg:) -->
+            <div
+              id="fruit-selector-list"
+              class="lg:col-span-5 flex lg:block overflow-x-auto lg:overflow-visible no-scrollbar snap-x snap-mandatory gap-2.5 lg:gap-0 lg:space-y-2 -mx-4 px-4 sm:mx-0 sm:px-0 pb-1 lg:pb-0"
+            ></div>
+            <div
+              id="fruit-card-wrapper"
+              class="lg:col-span-7 bg-[#17251D] rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-white/15 shadow-2xl"
+            >
+              <div
+                id="fruit-image-stage"
+                class="relative h-[240px] sm:h-[380px] rounded-xl sm:rounded-2xl overflow-hidden mb-5 sm:mb-7"
+              >
+                <img
+                  id="fruit-img"
+                  src=""
+                  alt="Fruit"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-[#17251D] via-transparent to-transparent opacity-75"
+                ></div>
+                <div
+                  id="fruit-badges"
+                  class="absolute top-3 left-3 right-3 sm:top-4 sm:left-4 sm:right-auto flex flex-wrap gap-1.5 sm:gap-2"
+                ></div>
+              </div>
+              <div class="space-y-4 sm:space-y-5">
+                <div
+                  class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 sm:gap-4"
+                >
+                  <h3
+                    id="fruit-title"
+                    class="font-display text-3xl sm:text-5xl text-white tracking-wide"
+                  ></h3>
+                  <button
+                    type="button"
+                    id="fruit-enquire-btn"
+                    class="inline-flex items-center justify-center sm:justify-start gap-2 px-4 py-2.5 sm:p-0 rounded-full sm:rounded-none bg-[#82B96B]/15 sm:bg-transparent border border-[#82B96B]/40 sm:border-0 font-sans font-extrabold text-xs uppercase tracking-[0.18em] text-[#82B96B] hover:text-white transition-colors self-start sm:self-auto"
+                  >
+                    <span>Enquire Export Lot</span>
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+                <p
+                  id="fruit-desc"
+                  class="font-sans text-sm sm:text-base text-[#DCE9D8]/85 leading-relaxed"
+                ></p>
+                <div
+                  class="grid sm:grid-cols-2 gap-3 sm:gap-4 pt-3 sm:pt-4 border-t border-white/10"
+                >
+                  <div class="bg-white/5 p-3.5 sm:p-4 rounded-xl">
+                    <span
+                      class="font-sans font-extrabold text-[10px] uppercase tracking-[0.2em] text-[#82B96B] block mb-1"
+                      >Agricultural Sourcing</span
+                    >
+                    <span
+                      id="fruit-sourcing"
+                      class="font-sans text-xs sm:text-sm text-white/90 leading-snug block"
+                    ></span>
+                  </div>
+                  <div class="bg-white/5 p-3.5 sm:p-4 rounded-xl">
+                    <span
+                      class="font-sans font-extrabold text-[10px] uppercase tracking-[0.2em] text-[#82B96B] block mb-1"
+                      >Cold-Chain Handling</span
+                    >
+                    <span
+                      id="fruit-logistics"
+                      class="font-sans text-xs sm:text-sm text-white/90 leading-snug block"
+                    ></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 / SPICES & KOLHAPURI JAGGERY -->
+      <section
+        id="spices-jaggery-section"
+        class="py-16 sm:py-24 md:py-36 bg-[#F7F8F3] grain-overlay overflow-hidden"
+      >
+        <div
+          class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 space-y-20 sm:space-y-28 md:space-y-36"
+        >
+          <!-- Spices -->
+          <div
+            class="spices-block grid lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-16 items-center"
+          >
+            <div
+              class="lg:col-span-6 relative h-[300px] sm:h-[540px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl group"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1588252303782-cb80119abd6d?auto=format&fit=crop&w=1200&q=85"
+                alt="Spices"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-[#123F2A]/85 via-transparent to-transparent"
+              ></div>
+              <div
+                class="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6 text-white"
+              >
+                <span
+                  class="font-sans font-extrabold text-[10px] uppercase tracking-[0.24em] text-[#82B96B] block"
+                  >Aromatic Potency</span
+                >
+                <p class="font-display text-2xl sm:text-4xl mt-1">
+                  SUN-DRIED &amp; FRESH RHIZOMES
+                </p>
+              </div>
+            </div>
+            <div class="lg:col-span-6 space-y-6 sm:space-y-8">
+              <div class="flex items-center gap-3">
+                <span class="font-display text-2xl text-[#176B45]">04A</span>
+                <span class="w-8 h-[2px] bg-[#176B45]"></span>
+                <span
+                  class="font-sans font-extrabold text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.22em] text-[#176B45]"
+                  >Bold Culinary Origins</span
+                >
+              </div>
+              <h2
+                class="mobile-section-display font-display sm:text-7xl text-[#123F2A] leading-[0.9]"
+              >
+                FIERY CHILLIES,<br />GINGER &amp;
+                <span
+                  class="font-editorial italic font-normal lowercase text-[#176B45]"
+                  >golden</span
+                >
+                TURMERIC.
+              </h2>
+              <p
+                class="font-sans text-[15px] sm:text-base md:text-lg text-[#17251D]/80 leading-relaxed font-medium"
+              >
+                Sourced directly from trusted spice growers, our spice division
+                delivers vibrant color value, pungent heat, and rich essential
+                oils across whole, fresh, and finely ground formats.
+              </p>
+              <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                <div
+                  class="p-4 sm:p-5 rounded-2xl bg-white border border-[#123F2A]/10"
+                >
+                  <h4
+                    class="font-sans font-extrabold text-xs sm:text-sm uppercase text-[#123F2A]"
+                  >
+                    Red Chilli &amp; Powder
+                  </h4>
+                  <p
+                    class="font-sans text-[11px] sm:text-xs text-[#17251D]/70 mt-1 leading-relaxed"
+                  >
+                    Stemless whole pods &amp; fine-mesh grind
+                  </p>
+                </div>
+                <div
+                  class="p-4 sm:p-5 rounded-2xl bg-white border border-[#123F2A]/10"
+                >
+                  <h4
+                    class="font-sans font-extrabold text-xs sm:text-sm uppercase text-[#123F2A]"
+                  >
+                    Fresh Ginger
+                  </h4>
+                  <p
+                    class="font-sans text-[11px] sm:text-xs text-[#17251D]/70 mt-1 leading-relaxed"
+                  >
+                    Plump, clean-washed aromatic rhizomes
+                  </p>
+                </div>
+                <div
+                  class="p-4 sm:p-5 rounded-2xl bg-white border border-[#123F2A]/10"
+                >
+                  <h4
+                    class="font-sans font-extrabold text-xs sm:text-sm uppercase text-[#123F2A]"
+                  >
+                    Indian Turmeric
+                  </h4>
+                  <p
+                    class="font-sans text-[11px] sm:text-xs text-[#17251D]/70 mt-1 leading-relaxed"
+                  >
+                    Golden fingers &amp; high-curcumin powder
+                  </p>
+                </div>
+                <div
+                  class="p-4 sm:p-5 rounded-2xl bg-white border border-[#123F2A]/10"
+                >
+                  <h4
+                    class="font-sans font-extrabold text-xs sm:text-sm uppercase text-[#123F2A]"
+                  >
+                    Masalas &amp; Chutneys
+                  </h4>
+                  <p
+                    class="font-sans text-[11px] sm:text-xs text-[#17251D]/70 mt-1 leading-relaxed"
+                  >
+                    Authentic roasted regional spice blends
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Jaggery -->
+          <div
+            class="jaggery-block grid lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-16 items-center"
+          >
+            <div
+              class="lg:col-span-6 order-2 lg:order-1 space-y-6 sm:space-y-8"
+            >
+              <div class="flex items-center gap-3">
+                <span class="font-display text-2xl text-[#176B45]">04B</span>
+                <span class="w-8 h-[2px] bg-[#176B45]"></span>
+                <span
+                  class="font-sans font-extrabold text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.22em] text-[#176B45]"
+                  >Signature Regional Pride</span
+                >
+              </div>
+              <h2
+                class="mobile-section-display font-display sm:text-7xl text-[#123F2A] leading-[0.9]"
+              >
+                AUTHENTIC<br />KOLHAPURI
+                <span
+                  class="font-editorial italic font-normal lowercase text-[#176B45]"
+                  >jaggery.</span
+                >
+              </h2>
+              <p
+                class="font-sans text-[15px] sm:text-base md:text-lg text-[#17251D]/80 leading-relaxed font-medium"
+              >
+                Renowned across the world for its golden hue, mineral richness,
+                and pure sugarcane sweetness, our Kolhapuri Jaggery is supplied
+                in traditional blocks, convenient cubes, and free-flowing
+                jaggery powder.
+              </p>
+              <div class="flex flex-wrap gap-2 sm:gap-3">
+                <span
+                  class="px-3.5 sm:px-4 py-2 rounded-full bg-[#DCE9D8] text-[#123F2A] font-sans font-extrabold text-[11px] sm:text-xs uppercase"
+                  >Solid Blocks</span
+                >
+                <span
+                  class="px-3.5 sm:px-4 py-2 rounded-full bg-[#DCE9D8] text-[#123F2A] font-sans font-extrabold text-[11px] sm:text-xs uppercase"
+                  >Jaggery Powder</span
+                >
+                <span
+                  class="px-3.5 sm:px-4 py-2 rounded-full bg-[#DCE9D8] text-[#123F2A] font-sans font-extrabold text-[11px] sm:text-xs uppercase"
+                  >Bite-Sized Cubes</span
+                >
+              </div>
+              <div
+                class="p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-white border border-[#123F2A]/12 space-y-4 shadow-sm"
+              >
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span
+                    class="font-sans font-extrabold text-[11px] sm:text-xs uppercase tracking-[0.16em] sm:tracking-[0.2em] text-[#123F2A] flex items-center gap-2"
+                  >
+                    <svg
+                      class="w-4 h-4 text-[#176B45] shrink-0"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                      ></path>
+                    </svg>
+                    Export Packaging
+                  </span>
+                  <span
+                    id="selected-pack-label"
+                    class="px-2.5 py-1 rounded-full bg-[#DCE9D8]/60 font-sans font-extrabold text-[11px] text-[#176B45]"
+                    >Selected: 5 kg</span
+                  >
+                </div>
+                <!-- 2x2 Touch Grid on Mobile (<640px) | 4-Col Row on Tablet & Desktop (sm:) -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+                  <button
+                    type="button"
+                    class="pack-btn min-h-[50px] py-3 sm:py-3.5 rounded-xl font-display text-2xl tracking-wide bg-[#F7F8F3] text-[#123F2A] hover:bg-[#DCE9D8] transition-all active:scale-95"
+                    data-pack="1 kg"
+                  >
+                    1 kg
+                  </button>
+                  <button
+                    type="button"
+                    class="pack-btn min-h-[50px] py-3 sm:py-3.5 rounded-xl font-display text-2xl tracking-wide bg-[#F7F8F3] text-[#123F2A] hover:bg-[#DCE9D8] transition-all active:scale-95"
+                    data-pack="2 kg"
+                  >
+                    2 kg
+                  </button>
+                  <button
+                    type="button"
+                    class="pack-btn min-h-[50px] py-3 sm:py-3.5 rounded-xl font-display text-2xl tracking-wide bg-[#123F2A] text-white shadow-lg sm:scale-[1.03] active:scale-95"
+                    data-pack="5 kg"
+                  >
+                    5 kg
+                  </button>
+                  <button
+                    type="button"
+                    class="pack-btn min-h-[50px] py-3 sm:py-3.5 rounded-xl font-display text-2xl tracking-wide bg-[#F7F8F3] text-[#123F2A] hover:bg-[#DCE9D8] transition-all active:scale-95"
+                    data-pack="10 kg"
+                  >
+                    10 kg
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  id="jaggery-enquire-btn"
+                  class="mobile-touch-btn w-full py-3.5 px-4 rounded-xl bg-[#176B45] hover:bg-[#123F2A] text-white font-sans font-extrabold text-xs uppercase tracking-[0.16em] sm:tracking-[0.18em] transition-colors flex items-center justify-center gap-2 active:scale-[0.99]"
+                >
+                  <span>Enquire 5 kg Jaggery Export Lot</span>
+                  <svg
+                    class="w-4 h-4 shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div
+              class="lg:col-span-6 order-1 lg:order-2 relative h-[300px] sm:h-[540px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl group"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1615485500704-8e990f9900f7?auto=format&fit=crop&w=1200&q=85"
+                alt="Kolhapuri Jaggery"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-[#123F2A]/85 via-transparent to-transparent"
+              ></div>
+              <div
+                class="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6 text-white"
+              >
+                <span
+                  class="font-sans font-extrabold text-[10px] uppercase tracking-[0.24em] text-[#82B96B] block"
+                  >Kolhapur Heritage</span
+                >
+                <p class="font-display text-2xl sm:text-4xl mt-1">
+                  1 KG • 2 KG • 5 KG • 10 KG PACKS
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 / FARM TO GLOBAL PROCESS -->
+      <section
+        id="process"
+        class="py-16 sm:py-24 md:py-36 bg-white text-[#123F2A] relative overflow-hidden"
+      >
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10">
+          <div class="max-w-4xl mb-12 sm:mb-20">
+            <div class="flex items-center gap-3 mb-3 sm:mb-4">
+              <span class="font-display text-2xl text-[#176B45]">05</span>
+              <span class="w-8 h-[2px] bg-[#176B45]"></span>
+              <span
+                class="font-sans font-extrabold text-[11px] sm:text-xs uppercase tracking-[0.22em] sm:tracking-[0.24em] text-[#176B45]"
+                >6-Stage Export Chain</span
+              >
+            </div>
+            <h2
+              class="mobile-section-display font-display sm:text-7xl md:text-[6.4rem] leading-[0.88]"
+            >
+              FROM INDIAN
+              <span
+                class="font-editorial italic font-normal lowercase text-[#176B45]"
+                >farm</span
+              ><br />TO GLOBAL MARKET.
+            </h2>
+          </div>
+
+          <div class="relative">
+            <div
+              class="absolute left-3.5 sm:left-5 lg:left-1/2 top-0 bottom-0 w-[2px] bg-[#DCE9D8] -translate-x-1/2"
+            >
+              <div
+                id="process-line-fill"
+                class="w-full h-full bg-[#176B45] origin-top scale-y-0 transition-none"
+              ></div>
+            </div>
+            <div
+              class="space-y-6 sm:space-y-12 lg:space-y-16"
+              id="process-steps-container"
+            ></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 06 / WHY CHOOSE US -->
+      <section
+        id="why-us"
+        class="py-16 sm:py-24 md:py-36 bg-[#DCE9D8]/55 relative overflow-hidden"
+      >
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10">
+          <div
+            class="text-left sm:text-center max-w-5xl mx-auto mb-10 sm:mb-16 md:mb-24"
+          >
+            <span
+              class="font-sans font-extrabold text-[11px] sm:text-xs uppercase tracking-[0.22em] sm:tracking-[0.26em] text-[#176B45] block mb-3 sm:mb-4"
+              >06 / The Renu Agro Standard</span
+            >
+            <h2
+              class="mobile-section-display font-display sm:text-7xl md:text-[6.6rem] text-[#123F2A] leading-[0.89]"
+            >
+              QUALITY ISN&apos;T A PROMISE.<br />IT&apos;S OUR
+              <span
+                class="font-editorial italic font-normal lowercase text-[#176B45]"
+                >process.</span
+              >
+            </h2>
+          </div>
+          <div class="grid lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+            <div
+              class="why-card group bg-white hover:bg-[#123F2A] text-[#123F2A] hover:text-white p-6 sm:p-11 rounded-2xl sm:rounded-3xl border border-[#123F2A]/12 transition-all duration-500 flex flex-col justify-between lg:min-h-[390px] shadow-sm"
+            >
+              <div class="flex justify-between items-start">
+                <div
+                  class="w-13 h-13 sm:w-16 sm:h-16 p-3.5 sm:p-0 rounded-2xl bg-[#DCE9D8] group-hover:bg-[#176B45] flex items-center justify-center transition-colors"
+                >
+                  <svg
+                    class="w-6 h-6 sm:w-7 sm:h-7 text-[#123F2A] group-hover:text-[#82B96B]"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    ></path>
+                  </svg>
+                </div>
+                <span
+                  class="font-display text-5xl sm:text-6xl text-stroke-forest group-hover:text-[#82B96B]"
+                  >01</span
+                >
+              </div>
+              <div class="mt-6 sm:mt-12 space-y-2.5 sm:space-y-3">
+                <span
+                  class="font-sans font-extrabold text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-[#176B45] group-hover:text-[#82B96B] block"
+                  >Strict Farm-to-Port Grading</span
+                >
+                <h3 class="font-display text-3xl sm:text-5xl">
+                  Premium Quality
+                </h3>
+                <p
+                  class="font-sans text-sm sm:text-base text-[#17251D]/75 group-hover:text-[#DCE9D8]/90 leading-relaxed pt-1 sm:pt-2"
+                >
+                  Direct sourcing paired with multi-stage sorting, aggregation,
+                  and hygienic handling ensures every export consignment meets
+                  exacting benchmarks.
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="why-card group bg-white hover:bg-[#123F2A] text-[#123F2A] hover:text-white p-6 sm:p-11 rounded-2xl sm:rounded-3xl border border-[#123F2A]/12 transition-all duration-500 flex flex-col justify-between lg:min-h-[390px] shadow-sm"
+            >
+              <div class="flex justify-between items-start">
+                <div
+                  class="w-13 h-13 sm:w-16 sm:h-16 p-3.5 sm:p-0 rounded-2xl bg-[#DCE9D8] group-hover:bg-[#176B45] flex items-center justify-center transition-colors"
+                >
+                  <svg
+                    class="w-6 h-6 sm:w-7 sm:h-7 text-[#123F2A] group-hover:text-[#82B96B]"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
+                    ></path>
+                  </svg>
+                </div>
+                <span
+                  class="font-display text-5xl sm:text-6xl text-stroke-forest group-hover:text-[#82B96B]"
+                  >02</span
+                >
+              </div>
+              <div class="mt-6 sm:mt-12 space-y-2.5 sm:space-y-3">
+                <span
+                  class="font-sans font-extrabold text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-[#176B45] group-hover:text-[#82B96B] block"
+                  >Reefer Cold-Chain Precision</span
+                >
+                <h3 class="font-display text-3xl sm:text-5xl">
+                  On-Time Delivery
+                </h3>
+                <p
+                  class="font-sans text-sm sm:text-base text-[#17251D]/75 group-hover:text-[#DCE9D8]/90 leading-relaxed pt-1 sm:pt-2"
+                >
+                  Temperature-controlled logistics using modern reefer
+                  containers safeguard delicate fruit freshness and ensure
+                  dependable dispatch schedules.
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="why-card group bg-white hover:bg-[#123F2A] text-[#123F2A] hover:text-white p-6 sm:p-11 rounded-2xl sm:rounded-3xl border border-[#123F2A]/12 transition-all duration-500 flex flex-col justify-between lg:min-h-[390px] shadow-sm"
+            >
+              <div class="flex justify-between items-start">
+                <div
+                  class="w-13 h-13 sm:w-16 sm:h-16 p-3.5 sm:p-0 rounded-2xl bg-[#DCE9D8] group-hover:bg-[#176B45] flex items-center justify-center transition-colors"
+                >
+                  <svg
+                    class="w-6 h-6 sm:w-7 sm:h-7 text-[#123F2A] group-hover:text-[#82B96B]"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
+                  </svg>
+                </div>
+                <span
+                  class="font-display text-5xl sm:text-6xl text-stroke-forest group-hover:text-[#82B96B]"
+                  >03</span
+                >
+              </div>
+              <div class="mt-6 sm:mt-12 space-y-2.5 sm:space-y-3">
+                <span
+                  class="font-sans font-extrabold text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-[#176B45] group-hover:text-[#82B96B] block"
+                  >Direct Farmer Network Advantage</span
+                >
+                <h3 class="font-display text-3xl sm:text-5xl">
+                  Competitive Pricing
+                </h3>
+                <p
+                  class="font-sans text-sm sm:text-base text-[#17251D]/75 group-hover:text-[#DCE9D8]/90 leading-relaxed pt-1 sm:pt-2"
+                >
+                  By partnering directly with growers across Kolhapur and
+                  Maharashtra, we deliver transparent, internationally
+                  competitive trade value.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 07 / GLOBAL CONNECTION MAP -->
+      <section
+        id="global-map-section"
+        class="py-16 sm:py-24 md:py-32 bg-[#123F2A] text-white relative overflow-hidden"
+      >
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10">
+          <div class="grid lg:grid-cols-12 gap-8 sm:gap-12 items-center">
+            <div class="lg:col-span-5 space-y-5 sm:space-y-6">
+              <div class="flex items-center gap-3">
+                <span class="font-display text-2xl text-[#82B96B]">07</span>
+                <span class="w-8 h-[2px] bg-[#82B96B]"></span>
+                <span
+                  class="font-sans font-extrabold text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.24em] text-[#82B96B]"
+                  >International Export Readiness</span
+                >
+              </div>
+              <h2
+                class="mobile-section-display font-display sm:text-6xl md:text-7xl leading-[0.9]"
+              >
+                INDIAN ORIGIN.<br /><span
+                  class="font-editorial italic font-normal lowercase text-[#82B96B]"
+                  >global</span
+                >
+                HORIZONS.
+              </h2>
+              <p
+                class="font-sans text-[15px] sm:text-base text-[#DCE9D8]/85 leading-relaxed"
+              >
+                Anchored in Kolhapur, Maharashtra—with streamlined access to
+                major western Indian sea and air cargo corridors—Renu Agro
+                Services connects authentic Indian harvests to international
+                buyers worldwide.
+              </p>
+              <div
+                class="pt-1 sm:pt-4 inline-flex items-center gap-3 px-4 sm:px-5 py-3 rounded-2xl bg-white/5 border border-white/15"
+              >
+                <span
+                  class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#82B96B] shrink-0"
+                ></span>
+                <span
+                  class="font-sans font-extrabold text-[11px] sm:text-xs uppercase tracking-[0.14em] sm:tracking-[0.18em] text-[#DCE9D8]"
+                  >Origin Hub: Kolhapur, Maharashtra, India</span
+                >
+              </div>
+            </div>
+            <div
+              class="lg:col-span-7 bg-[#17251D] rounded-2xl sm:rounded-3xl p-4 sm:p-10 border border-white/10 shadow-2xl overflow-hidden"
+            >
+              <svg viewBox="0 0 800 400" class="w-full h-auto overflow-visible">
+                <g
+                  fill="rgba(220, 233, 216, 0.14)"
+                  stroke="rgba(130, 185, 107, 0.25)"
+                  stroke-width="1"
+                >
+                  <path
+                    d="M95,75 L195,70 L225,135 L185,195 L235,255 L205,355 L165,335 L155,240 L110,175 Z"
+                  ></path>
+                  <path
+                    d="M355,65 L455,60 L475,125 L435,155 L485,215 L450,335 L395,325 L370,220 L345,150 Z"
+                  ></path>
+                  <path
+                    d="M475,70 L695,75 L725,165 L655,220 L595,205 L562,248 L538,200 L485,165 Z"
+                  ></path>
+                  <path d="M645,275 L730,275 L740,335 L660,340 Z"></path>
+                </g>
+                <g
+                  fill="none"
+                  stroke="#82B96B"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                >
+                  <path
+                    class="trade-arc"
+                    stroke-dasharray="500"
+                    stroke-dashoffset="500"
+                    d="M558,222 Q490,115 405,120"
+                  ></path>
+                  <path
+                    class="trade-arc"
+                    stroke-dasharray="500"
+                    stroke-dashoffset="500"
+                    d="M558,222 Q480,195 435,245"
+                  ></path>
+                  <path
+                    class="trade-arc"
+                    stroke-dasharray="500"
+                    stroke-dashoffset="500"
+                    d="M558,222 Q635,140 685,165"
+                  ></path>
+                  <path
+                    class="trade-arc"
+                    stroke-dasharray="500"
+                    stroke-dashoffset="500"
+                    d="M558,222 Q360,45 180,145"
+                  ></path>
+                  <path
+                    class="trade-arc"
+                    stroke-dasharray="500"
+                    stroke-dashoffset="500"
+                    d="M558,222 Q625,265 685,305"
+                  ></path>
+                </g>
+                <g transform="translate(558, 222)">
+                  <circle
+                    r="18"
+                    fill="rgba(130, 185, 107, 0.35)"
+                    class="hub-pulse"
+                  ></circle>
+                  <circle
+                    r="7"
+                    fill="#82B96B"
+                    stroke="#FFFFFF"
+                    stroke-width="2"
+                  ></circle>
+                  <text
+                    x="14"
+                    y="5"
+                    fill="#FFFFFF"
+                    fontSize="13"
+                    fontWeight="800"
+                    fontFamily="Manrope, sans-serif"
+                    letterSpacing="1.5"
+                  >
+                    KOLHAPUR, INDIA
+                  </text>
+                </g>
+              </svg>
+              <div
+                class="grid grid-cols-2 gap-2.5 mt-4 pt-4 border-t border-white/10 lg:hidden"
+              >
+                <div class="bg-white/5 rounded-xl p-3">
+                  <span
+                    class="font-sans font-extrabold text-[9px] uppercase tracking-[0.18em] text-[#82B96B] block"
+                    >Sea &amp; Air Access</span
+                  >
+                  <span
+                    class="font-sans font-bold text-xs text-white mt-0.5 block"
+                    >Western India Ports</span
+                  >
+                </div>
+                <div class="bg-white/5 rounded-xl p-3">
+                  <span
+                    class="font-sans font-extrabold text-[9px] uppercase tracking-[0.18em] text-[#82B96B] block"
+                    >Cold-Chain Mode</span
+                  >
+                  <span
+                    class="font-sans font-bold text-xs text-white mt-0.5 block"
+                    >Reefer Containers</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 08 / CONTACT SECTION -->
+      <section
+        id="contact"
+        class="py-16 sm:py-24 md:py-36 bg-[#F7F8F3] grain-overlay relative"
+      >
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10">
+          <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+            <div class="lg:col-span-6 space-y-7 sm:space-y-10">
+              <div>
+                <div class="flex items-center gap-3 mb-3 sm:mb-4">
+                  <span class="font-display text-2xl text-[#176B45]">08</span>
+                  <span class="w-8 h-[2px] bg-[#176B45]"></span>
+                  <span
+                    class="font-sans font-extrabold text-[11px] sm:text-xs uppercase tracking-[0.22em] sm:tracking-[0.24em] text-[#176B45]"
+                    >Direct Trade Desk</span
+                  >
+                </div>
+                <h2
+                  class="mobile-section-display font-display sm:text-7xl md:text-[6.2rem] text-[#123F2A] leading-[0.89]"
+                >
+                  LET&apos;S GROW<br />SOMETHING
+                  <span
+                    class="font-editorial italic font-normal lowercase text-[#176B45]"
+                    >global.</span
+                  >
+                </h2>
+              </div>
+              <p
+                class="font-sans text-[15px] sm:text-base md:text-lg text-[#17251D]/80 max-w-xl leading-relaxed font-medium"
+              >
+                Connect directly with our leadership team in Kolhapur for
+                seasonal availability, packaging specifications, and
+                international trade enquiries.
+              </p>
+              <div class="space-y-3 sm:space-y-4">
+                <div
+                  class="p-4 sm:p-6 rounded-2xl bg-white border border-[#123F2A]/10 flex items-start gap-3.5 sm:gap-4"
+                >
+                  <div
+                    class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#DCE9D8] flex items-center justify-center shrink-0"
+                  >
+                    <svg
+                      class="w-5 h-5 text-[#123F2A]"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="space-y-1.5 min-w-0">
+                    <span
+                      class="font-sans font-extrabold text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#176B45] block"
+                      >Direct Leadership Contacts</span
+                    >
+                    <p
+                      class="font-sans font-bold text-sm sm:text-base text-[#123F2A]"
+                    >
+                      Mrs. Preeti Pawar:
+                      <a
+                        href="tel:+917875717111"
+                        class="hover:text-[#176B45] underline whitespace-nowrap"
+                        >+91 7875717111</a
+                      >
+                    </p>
+                    <p
+                      class="font-sans font-bold text-sm sm:text-base text-[#123F2A]"
+                    >
+                      Mrs. Minal Kothare:
+                      <a
+                        href="tel:+9198506216603"
+                        class="hover:text-[#176B45] underline whitespace-nowrap"
+                        >+91 98506216603</a
+                      >
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="p-4 sm:p-6 rounded-2xl bg-white border border-[#123F2A]/10 flex items-start gap-3.5 sm:gap-4"
+                >
+                  <div
+                    class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#DCE9D8] flex items-center justify-center shrink-0"
+                  >
+                    <svg
+                      class="w-5 h-5 text-[#123F2A]"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="min-w-0">
+                    <span
+                      class="font-sans font-extrabold text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#176B45] block mb-1"
+                      >Official Export Desk Email</span
+                    >
+                    <a
+                      href="mailto:renuagroservices@gmail.com"
+                      class="font-sans font-extrabold text-sm sm:text-lg text-[#123F2A] hover:text-[#176B45] break-all"
+                      >renuagroservices@gmail.com</a
+                    >
+                  </div>
+                </div>
+                <div
+                  class="p-4 sm:p-6 rounded-2xl bg-white border border-[#123F2A]/10 flex items-start gap-3.5 sm:gap-4"
+                >
+                  <div
+                    class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#DCE9D8] flex items-center justify-center shrink-0"
+                  >
+                    <svg
+                      class="w-5 h-5 text-[#123F2A]"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      ></path>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <span
+                      class="font-sans font-extrabold text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#176B45] block mb-1"
+                      >Registered Office</span
+                    >
+                    <p
+                      class="font-sans font-medium text-sm sm:text-base text-[#17251D]/85 leading-relaxed"
+                    >
+                      CS No. 484/C/5, Plot No. 13, Behind Seema Apartment,
+                      Kolhapur, Maharashtra 416003, India.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <a
+                  id="whatsapp-btn"
+                  href="https://wa.me/917875717111?text=Hello%20Renu%20Agro%20Services,%20I%20would%20like%20to%20enquire%20about%20your%20export%20products."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mobile-touch-btn w-full sm:w-auto inline-flex items-center justify-center gap-3 px-7 py-4 rounded-full bg-[#176B45] hover:bg-[#123F2A] text-white font-sans font-extrabold text-xs uppercase tracking-[0.16em] sm:tracking-[0.18em] transition-colors shadow-lg active:scale-[0.98]"
+                >
+                  <svg
+                    class="w-5 h-5 text-[#82B96B] shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12.031 6.172c-3.181 0-5.767 2.586-5.767 5.766 0 1.018.267 1.977.734 2.812l-.78 2.848 2.915-.764c.797.437 1.714.686 2.698.686 3.181 0 5.766-2.587 5.766-5.766 0-3.18-2.585-5.766-5.766-5.766zm3.385 8.163c-.144.407-.834.782-1.156.832-.303.047-.687.067-1.107-.067-.255-.082-.584-.199-1.026-.395-1.782-.78-2.952-2.576-3.041-2.697-.089-.12-1.424-1.896-1.424-3.618 0-1.722.903-2.568 1.226-2.914.323-.346.702-.433.936-.433.234 0 .468.005.672.015.214.01.503-.082.787.592.285.674.975 2.378 1.06 2.551.085.173.143.375.028.604-.114.229-.172.373-.343.575-.171.203-.359.355-.512.502-.172.164-.352.341-.151.687.201.346.892 1.472 1.912 2.384 1.314 1.166 2.422 1.528 2.768 1.697.346.169.549.141.753-.098.204-.239.876-1.018 1.109-1.368.234-.351.468-.293.782-.175.314.118 1.996.942 2.339 1.111.343.169.572.253.655.391.083.138.083.805-.061 1.212z"
+                    />
+                  </svg>
+                  <span>Chat via WhatsApp Enquiry</span>
+                  <svg
+                    class="w-4 h-4 shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    ></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <div
+              class="lg:col-span-6 bg-white p-5 sm:p-11 rounded-2xl sm:rounded-3xl shadow-2xl border border-[#123F2A]/10"
+            >
+              <div id="form-container">
+                <div class="mb-6 sm:mb-8">
+                  <span
+                    class="font-sans font-extrabold text-[11px] uppercase tracking-[0.2em] text-[#176B45] block mb-1.5 sm:mb-2"
+                    >Export Trade Inquiry</span
+                  >
+                  <h3 class="font-display text-3xl sm:text-5xl text-[#123F2A]">
+                    SEND AN ENQUIRY
+                  </h3>
+                </div>
+                <form id="enquiry-form" class="space-y-4 sm:space-y-6">
+                  <div class="grid sm:grid-cols-2 gap-4 sm:gap-5">
+                    <div class="space-y-1.5 sm:space-y-2">
+                      <label
+                        class="font-sans font-extrabold text-xs uppercase tracking-[0.14em] text-[#123F2A]"
+                        >Full Name *</label
+                      >
+                      <input
+                        type="text"
+                        id="form-name"
+                        required
+                        placeholder="Your Name / Company"
+                        class="w-full px-4 py-3.5 rounded-xl bg-[#F7F8F3] border border-[#123F2A]/15 focus:outline-none focus:border-[#123F2A] font-sans text-base lg:text-sm font-medium"
+                      />
+                    </div>
+                    <div class="space-y-1.5 sm:space-y-2">
+                      <label
+                        class="font-sans font-extrabold text-xs uppercase tracking-[0.14em] text-[#123F2A]"
+                        >Email Address *</label
+                      >
+                      <input
+                        type="email"
+                        id="form-email"
+                        required
+                        placeholder="buyer@company.com"
+                        class="w-full px-4 py-3.5 rounded-xl bg-[#F7F8F3] border border-[#123F2A]/15 focus:outline-none focus:border-[#123F2A] font-sans text-base lg:text-sm font-medium"
+                      />
+                    </div>
+                  </div>
+                  <div class="space-y-1.5 sm:space-y-2">
+                    <label
+                      class="font-sans font-extrabold text-xs uppercase tracking-[0.14em] text-[#123F2A]"
+                      >Product Category *</label
+                    >
+                    <select
+                      id="form-category"
+                      class="w-full px-4 py-3.5 rounded-xl bg-[#F7F8F3] border border-[#123F2A]/15 focus:outline-none focus:border-[#123F2A] font-sans text-base lg:text-sm font-bold text-[#123F2A]"
+                    ></select>
+                  </div>
+                  <div class="space-y-1.5 sm:space-y-2">
+                    <label
+                      class="font-sans font-extrabold text-xs uppercase tracking-[0.14em] text-[#123F2A]"
+                      >Order Specifications / Message *</label
+                    >
+                    <textarea
+                      id="form-message"
+                      rows="4"
+                      required
+                      placeholder="Share required varieties, packaging size (e.g. 1kg–10kg jaggery or reefer fruit volume), and destination port..."
+                      class="w-full px-4 py-3.5 rounded-xl bg-[#F7F8F3] border border-[#123F2A]/15 focus:outline-none focus:border-[#123F2A] font-sans text-base lg:text-sm font-medium resize-none"
+                    ></textarea>
+                  </div>
+                  <button
+                    type="submit"
+                    class="mobile-touch-btn group relative w-full inline-flex items-center justify-center px-7 py-4 rounded-full overflow-hidden bg-[#123F2A] text-white border border-[#123F2A] font-sans font-extrabold text-xs uppercase tracking-[0.18em] transition-all active:scale-[0.99]"
+                  >
+                    <span
+                      class="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-[#82B96B]"
+                    ></span>
+                    <span
+                      class="relative z-10 flex items-center justify-center gap-2 group-hover:text-[#123F2A]"
+                      ><span>Submit Export Enquiry</span
+                      ><svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M14 5l7 7m0 0l-7 7m7-7H3"
+                        ></path></svg
+                    ></span>
+                  </button>
+                </form>
+              </div>
+              <div id="form-success" class="hidden py-12 text-center space-y-6">
+                <div
+                  class="w-20 h-20 rounded-full bg-[#DCE9D8] text-[#123F2A] flex items-center justify-center mx-auto"
+                >
+                  <svg
+                    class="w-10 h-10 text-[#176B45]"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                </div>
+                <h3 class="font-display text-4xl sm:text-5xl text-[#123F2A]">
+                  ENQUIRY READY FOR DISPATCH
+                </h3>
+                <p
+                  class="font-sans text-sm sm:text-base text-[#17251D]/80 max-w-md mx-auto leading-relaxed"
+                >
+                  Thank you,
+                  <strong id="success-name" class="text-[#123F2A]"></strong>.
+                  Your enquiry has been registered successfully. Click below to
+                  open your email client or submit another.
+                </p>
+                <div class="flex flex-wrap justify-center gap-3 pt-2">
+                  <a
+                    id="success-email-link"
+                    href="#"
+                    class="px-7 py-4 rounded-full bg-[#123F2A] text-white font-sans font-extrabold text-xs uppercase tracking-[0.18em] inline-flex items-center gap-2"
+                  >
+                    <span>Send via Email Client</span>
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      ></path>
+                    </svg>
+                  </a>
+                  <button
+                    type="button"
+                    id="reset-form-btn"
+                    class="px-7 py-4 rounded-full bg-[#DCE9D8] text-[#123F2A] font-sans font-extrabold text-xs uppercase tracking-[0.18em]"
+                  >
+                    New Enquiry
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer
+      class="bg-[#123F2A] text-white pt-14 sm:pt-20 pb-8 sm:pb-10 border-t border-white/10 overflow-hidden"
+    >
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10">
+        <div
+          class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-12 pb-12 sm:pb-16 border-b border-white/15"
+        >
+          <div class="col-span-2 lg:col-span-4 space-y-4 sm:space-y-5">
+            <div class="flex items-center gap-3">
+              <div
+                class="w-11 h-11 rounded-full bg-[#176B45] flex items-center justify-center shrink-0"
+              >
+                <svg
+                  class="w-5 h-5 text-[#82B96B]"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                  ></path>
+                </svg>
+              </div>
+              <div>
+                <span
+                  class="font-display text-2xl sm:text-3xl tracking-wide block leading-none"
+                  >RENU AGRO SERVICES</span
+                >
+                <span
+                  class="font-sans text-[10px] font-extrabold uppercase tracking-[0.22em] sm:tracking-[0.24em] text-[#82B96B]"
+                  >Est. 2018 • Kolhapur, India</span
+                >
+              </div>
+            </div>
+            <p class="font-editorial italic text-xl sm:text-2xl text-[#DCE9D8]">
+              &ldquo;Connecting Nature&apos;s Bounty to the Global
+              Market.&rdquo;
+            </p>
+            <p
+              class="font-sans text-sm text-[#DCE9D8]/75 leading-relaxed max-w-sm"
+            >
+              Agricultural exporter, trader, supplier, and direct farm sourcing
+              partner based in Kolhapur, Maharashtra.
+            </p>
+          </div>
+          <div class="col-span-1 lg:col-span-2 space-y-3 sm:space-y-4">
+            <h4
+              class="font-sans font-extrabold text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.22em] text-[#82B96B]"
+            >
+              Navigation
+            </h4>
+            <ul
+              class="space-y-2.5 font-sans text-sm font-semibold text-[#DCE9D8]/85"
+            >
+              <li>
+                <a href="#home" class="hover:text-white transition-colors"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a href="#about" class="hover:text-white transition-colors"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a href="#products" class="hover:text-white transition-colors"
+                  >Products</a
+                >
+              </li>
+              <li>
+                <a href="#process" class="hover:text-white transition-colors"
+                  >Our Process</a
+                >
+              </li>
+              <li>
+                <a href="#why-us" class="hover:text-white transition-colors"
+                  >Why Choose Us</a
+                >
+              </li>
+              <li>
+                <a href="#contact" class="hover:text-white transition-colors"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-span-1 lg:col-span-3 space-y-3 sm:space-y-4">
+            <h4
+              class="font-sans font-extrabold text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.22em] text-[#82B96B]"
+            >
+              Export Portfolio
+            </h4>
+            <ul
+              class="grid grid-cols-1 gap-2 font-sans text-xs sm:text-sm text-[#DCE9D8]/85"
+            >
+              <li>
+                <a href="#products" class="hover:text-white"
+                  >Fresh Fruits &amp; Vegetables</a
+                >
+              </li>
+              <li>
+                <a href="#products" class="hover:text-white"
+                  >Kolhapuri Jaggery (1kg–10kg)</a
+                >
+              </li>
+              <li>
+                <a href="#products" class="hover:text-white"
+                  >Red Chilli, Ginger &amp; Turmeric</a
+                >
+              </li>
+              <li>
+                <a href="#products" class="hover:text-white"
+                  >Millets &amp; Millet Flour</a
+                >
+              </li>
+              <li>
+                <a href="#products" class="hover:text-white"
+                  >Cashews, Raisins &amp; Raw Sugar</a
+                >
+              </li>
+              <li>
+                <a href="#products" class="hover:text-white"
+                  >Dehydrated &amp; Microgreens</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div
+            class="col-span-2 lg:col-span-3 space-y-3 sm:space-y-4 pt-4 lg:pt-0 border-t border-white/10 lg:border-0"
+          >
+            <h4
+              class="font-sans font-extrabold text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.22em] text-[#82B96B]"
+            >
+              Kolhapur Office
+            </h4>
+            <p class="font-sans text-sm text-[#DCE9D8]/85 leading-relaxed">
+              CS No. 484/C/5, Plot No. 13, Behind Seema Apartment, Kolhapur,
+              Maharashtra 416003, India
+            </p>
+            <div class="font-sans text-sm text-white font-bold space-y-1">
+              <p>
+                <a href="tel:+917875717111" class="hover:text-[#82B96B]"
+                  >+91 7875717111</a
+                >
+              </p>
+              <p>
+                <a href="tel:+9198506216603" class="hover:text-[#82B96B]"
+                  >+91 98506216603</a
+                >
+              </p>
+              <p class="text-[#82B96B] break-all">
+                <a href="mailto:renuagroservices@gmail.com"
+                  >renuagroservices@gmail.com</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="py-6 sm:py-8 border-b border-white/10 flex items-center justify-between gap-4 sm:gap-6"
+        >
+          <span
+            class="font-display text-[15.5vw] lg:text-[11.5rem] leading-[0.82] text-white/95 tracking-tight select-none"
+            >RENU AGRO</span
+          >
+          <a
+            href="#home"
+            aria-label="Back to top"
+            class="w-12 h-12 sm:w-20 sm:h-20 rounded-full bg-[#82B96B] hover:bg-white text-[#123F2A] flex items-center justify-center shrink-0 transition-transform duration-300 hover:-translate-y-1 active:scale-95"
+          >
+            <svg
+              class="w-5 h-5 sm:w-8 sm:h-8"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 10l7-7m0 0l7 7m-7-7v18"
+              ></path>
+            </svg>
+          </a>
+        </div>
+        <div
+          class="pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-4 font-sans text-[11px] sm:text-xs text-[#DCE9D8]/65 text-center sm:text-left"
+        >
+          <p>
+            &copy; <span id="current-year"></span> Renu Agro Services. All
+            rights reserved.
+          </p>
+          <p class="uppercase tracking-[0.18em] sm:tracking-[0.2em] font-bold">
+            Kolhapur • Maharashtra • India
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- PRODUCT DETAIL MODAL (App-Style Bottom Sheet on Mobile | Centered Modal on Desktop) -->
+    <div
+      id="product-modal"
+      class="fixed inset-0 z-[9990] bg-[#123F2A]/80 backdrop-blur-md flex items-end sm:items-center justify-center p-0 sm:p-6 opacity-0 pointer-events-none transition-opacity duration-300"
+    >
+      <div
+        id="modal-content"
+        class="bg-[#F7F8F3] text-[#123F2A] max-w-3xl w-full max-h-[90svh] sm:max-h-none overflow-y-auto rounded-t-3xl sm:rounded-3xl shadow-2xl border border-[#123F2A]/15 grid md:grid-cols-12 translate-y-6 sm:translate-y-0 sm:scale-95 transition-all duration-300"
+      >
+        <div class="md:col-span-5 h-52 sm:h-60 md:h-auto relative">
+          <img
+            id="modal-img"
+            src=""
+            alt="Product"
+            class="w-full h-full object-cover"
+          />
+          <span
+            id="modal-id"
+            class="absolute top-4 left-4 font-display text-4xl text-white drop-shadow"
+            >01</span
+          >
+          <button
+            type="button"
+            id="modal-close-btn-mobile"
+            aria-label="Close modal"
+            class="md:hidden absolute top-4 right-4 w-10 h-10 rounded-full bg-[#123F2A]/85 text-white backdrop-blur-md flex items-center justify-center"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+          </button>
+        </div>
+        <div
+          class="md:col-span-7 p-5 sm:p-9 flex flex-col justify-between space-y-5 sm:space-y-6"
+        >
+          <div>
+            <div class="flex justify-between items-start gap-4">
+              <span
+                id="modal-subtitle"
+                class="font-sans font-extrabold text-[11px] uppercase tracking-[0.22em] text-[#176B45]"
+              ></span>
+              <button
+                type="button"
+                id="modal-close-btn"
+                class="hidden md:flex w-9 h-9 rounded-full bg-[#DCE9D8] hover:bg-[#123F2A] hover:text-white items-center justify-center transition-colors"
+              >
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <h3
+              id="modal-title"
+              class="font-display text-3xl sm:text-5xl text-[#123F2A] mt-1.5 sm:mt-2 mb-3 sm:mb-4"
+            ></h3>
+            <p
+              id="modal-desc"
+              class="font-sans text-sm sm:text-base text-[#17251D]/80 leading-relaxed mb-5 sm:mb-6"
+            ></p>
+            <div class="space-y-2">
+              <span
+                class="font-sans font-extrabold text-xs uppercase tracking-[0.18em] text-[#123F2A] block"
+                >Export Highlights</span
+              >
+              <div id="modal-specs" class="flex flex-wrap gap-2"></div>
+            </div>
+          </div>
+          <div class="pt-4 border-t border-[#123F2A]/10">
+            <button
+              type="button"
+              id="modal-enquire-btn"
+              class="mobile-touch-btn w-full py-3.5 px-6 rounded-full bg-[#123F2A] hover:bg-[#176B45] text-white font-sans font-extrabold text-xs uppercase tracking-[0.18em] transition-colors flex items-center justify-center gap-2"
+            >
+              <span>Request Export Quote</span>
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+      const productCategories = [
+        {
+          id: "01",
+          group: "fresh",
+          name: "Fresh Fruits",
+          subtitle: "Reefer Cold-Chain Export",
+          desc: "Export-grade table grapes, Devgad Alphonso mangoes, Bhagwa pomegranates, Taiwan guava, and Cavendish bananas harvested at peak Brix levels.",
+          specs: [
+            "Grapes",
+            "Alphonso Mango",
+            "Pomegranate",
+            "Taiwan Guava",
+            "Banana",
+          ],
+          image:
+            "https://images.unsplash.com/photo-1619566636858-adf3ef46400b?auto=format&fit=crop&w=1000&q=85",
+        },
+        {
+          id: "02",
+          group: "fresh",
+          name: "Fresh Vegetables",
+          subtitle: "Farm-Direct Aggregation",
+          desc: "Crisp, residue-monitored Indian vegetables sourced directly from progressive growers across fertile Maharashtra belts.",
+          specs: ["Direct Farm Harvest", "Graded & Washed", "Export Cartons"],
+          image:
+            "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1000&q=85",
+        },
+        {
+          id: "03",
+          group: "spices",
+          name: "Spices",
+          subtitle: "High Essential-Oil Potency",
+          desc: "Vibrant whole red chillies, fine chilli powder, aromatic fresh ginger, and high-curcumin Indian turmeric sorted for purity.",
+          specs: ["Red Chilli & Powder", "Fresh Ginger", "Turmeric"],
+          image:
+            "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1000&q=85",
+        },
+        {
+          id: "04",
+          group: "sweeteners",
+          name: "Kolhapuri Jaggery",
+          subtitle: "Heritage Sugarcane Craft",
+          desc: "Authentic chemical-free golden Kolhapuri jaggery crafted from rich river-basin sugarcane in solid blocks, cubes, and free-flowing powder.",
+          specs: ["Blocks, Cubes & Powder", "1 kg / 2 kg / 5 kg / 10 kg"],
+          image:
+            "https://images.unsplash.com/photo-1587049352847-4a222e784d38?auto=format&fit=crop&w=1000&q=85",
+        },
+        {
+          id: "05",
+          group: "grains",
+          name: "Millets & Flour",
+          subtitle: "Ancient Nutrient Grains",
+          desc: "Naturally resilient Indian millets and freshly stone-milled millet flours cleaned and graded for international health markets.",
+          specs: ["Whole Millets", "Fine Millet Flour", "Cleaned & Sortexed"],
+          image:
+            "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=1000&q=85",
+        },
+        {
+          id: "06",
+          group: "grains",
+          name: "Dehydrated Products",
+          subtitle: "Concentrated Shelf-Stable",
+          desc: "Moisture-controlled dehydrated agricultural produce retaining natural aroma, nutrition, and vibrant culinary flavor profiles.",
+          specs: [
+            "Flakes & Powders",
+            "Extended Shelf Life",
+            "Bulk Export Packs",
+          ],
+          image:
+            "https://images.unsplash.com/photo-1509358271058-acd22cc93898?auto=format&fit=crop&w=1000&q=85",
+        },
+        {
+          id: "07",
+          group: "grains",
+          name: "Cashews & Raisins",
+          subtitle: "Crisp Kernels & Sun-Dried Vine",
+          desc: "Whole ivory cashew kernels and plump, naturally sweet Indian raisins selected for uniform sizing and moisture balance.",
+          specs: ["Graded Cashew Kernels", "Golden & Green Raisins"],
+          image:
+            "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&w=1000&q=85",
+        },
+        {
+          id: "08",
+          group: "fresh",
+          name: "Microgreens",
+          subtitle: "Living Nutrient Shoots",
+          desc: "Delicate, flavor-dense young greens cultivated under hygienic controlled environments for culinary and retail buyers.",
+          specs: ["Precision Grown", "High Phytonutrients", "Cold Dispatched"],
+          image:
+            "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=1000&q=85",
+        },
+        {
+          id: "09",
+          group: "spices",
+          name: "Masalas & Chutneys",
+          subtitle: "Authentic Regional Blends",
+          desc: "Signature Indian spice blends and traditional dry and wet chutneys balanced with roasted whole spices.",
+          specs: [
+            "Traditional Roasts",
+            "Aroma-Locked Packs",
+            "Custom Export Lots",
+          ],
+          image:
+            "https://images.unsplash.com/photo-1532336414038-cf19250c5757?auto=format&fit=crop&w=1000&q=85",
+        },
+        {
+          id: "10",
+          group: "sweeteners",
+          name: "Raw Sugar",
+          subtitle: "Unbleached Cane Crystals",
+          desc: "Natural golden raw cane sugar from Maharashtra sugar belts offering rich molasses notes and clean crystal structure.",
+          specs: [
+            "Maharashtra Cane Belt",
+            "Natural Golden Hue",
+            "Bulk Trade Bags",
+          ],
+          image:
+            "https://images.unsplash.com/photo-1581441363689-1f3c3c414635?auto=format&fit=crop&w=1000&q=85",
+        },
+      ];
+
+      const freshFruitsData = [
+        {
+          id: "01",
+          name: "Export Grapes",
+          italicTag: "Crisp Vineyard Clusters",
+          varieties: ["Manikchaman", "Sonaka", "Sarita", "Krishna"],
+          sourcing:
+            "Selected Maharashtra vineyard belts with strict berry-size grading",
+          logistics:
+            "Pre-cooled & shipped in temperature-controlled Reefer containers",
+          desc: "Seedless elongated and round export varieties celebrated for crisp skin, balanced sugar-acid ratio, and superior transit resilience.",
+          image:
+            "https://images.unsplash.com/photo-1537640538966-79f369143f8f?auto=format&fit=crop&w=1200&q=85",
+        },
+        {
+          id: "02",
+          name: "Alphonso Mango",
+          italicTag: "Authentic Devgad Hapus",
+          varieties: ["Devgad Hapus"],
+          sourcing: "Coastal Konkan & Devgad laterite orchards",
+          logistics:
+            "Ripeness-staged sorting & protective ventilated export cartons",
+          desc: "The undisputed king of mangoes—prized globally for saffron-golden fibreless pulp, intoxicating aroma, and rich tropical sweetness.",
+          image:
+            "https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=1200&q=85",
+        },
+        {
+          id: "03",
+          name: "Pomegranate",
+          italicTag: "Ruby Aril Brilliance",
+          varieties: ["Bhagwa", "Ganesh"],
+          sourcing: "Dryland orchards of Maharashtra known for deep-red skin",
+          logistics:
+            "Reefer cold-chain maintaining rind gloss & aril juiciness",
+          desc: "Glossy saffron-red Bhagwa and sweet Ganesh pomegranates packed with soft, jewel-toned antioxidant-rich arils and long shelf stability.",
+          image:
+            "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=1200&q=85",
+        },
+        {
+          id: "04",
+          name: "Taiwan Guava",
+          italicTag: "Orchard-Fresh Crunch",
+          varieties: ["Taiwan Pink / White"],
+          sourcing:
+            "Direct partner orchards with protective fruit-bagging practices",
+          logistics:
+            "Foam-netted individual fruit protection & chilled transit",
+          desc: "Large, uniform guavas with spotless emerald rinds, fewer seeds, crisp texture, and refreshing tropical fragrance.",
+          image:
+            "https://images.unsplash.com/photo-1536511132770-e5058c7e8c46?auto=format&fit=crop&w=1200&q=85",
+        },
+        {
+          id: "05",
+          name: "Fresh Banana",
+          italicTag: "Uniform Export Hands",
+          varieties: ["G9 (Grand Naine)", "Cavendish", "Velchi"],
+          sourcing: "Nutrient-rich irrigated plantations across Maharashtra",
+          logistics:
+            "Vacuum-sealed polybags in Reefer containers for controlled ripening",
+          desc: "Blemish-free export hands of G9 and Cavendish alongside aromatic bite-sized Velchi bananas sorted by finger length and calibration.",
+          image:
+            "https://images.unsplash.com/photo-1603833665858-e61d17a86224?auto=format&fit=crop&w=1200&q=85",
+        },
+      ];
+
+      const processSteps = [
+        {
+          num: "01",
+          title: "Farmer Network",
+          tag: "Grassroots Partnership",
+          desc: "Long-standing direct relationships with progressive farmers across Kolhapur and Maharashtra ensuring traceability and ethical sourcing.",
+        },
+        {
+          num: "02",
+          title: "Agricultural Sourcing",
+          tag: "Peak-Harvest Selection",
+          desc: "On-field crop inspection and harvest-window coordination to procure produce at optimal maturity, color, and natural nutrition.",
+        },
+        {
+          num: "03",
+          title: "Quality Sorting",
+          tag: "Zero-Compromise Grading",
+          desc: "Multi-stage sorting and aggregation by caliber, weight, color uniformity, and skin integrity for international buyer specifications.",
+        },
+        {
+          num: "04",
+          title: "Product Preparation",
+          tag: "Hygienic Handling",
+          desc: "Clean processing, moisture balancing for dry goods, and rapid pre-cooling for delicate fresh fruits and vegetables.",
+        },
+        {
+          num: "05",
+          title: "Packaging & Logistics",
+          tag: "Reefer Cold-Chain",
+          desc: "Export-grade ventilated cartons, food-safe jaggery packs (1kg–10kg), and temperature-controlled reefer containers.",
+        },
+        {
+          num: "06",
+          title: "Global Market Connection",
+          tag: "Seamless Export Trade",
+          desc: "Reliable documentation, port coordination, and timely international dispatch connecting Indian soil to buyers worldwide.",
+        },
+      ];
+
+      let activeFruitIndex = 0;
+      let selectedJaggeryPack = "5 kg";
+      let currentModalCategory = null;
+
+      document.getElementById("current-year").textContent =
+        new Date().getFullYear();
+
+      // Render Products
+      const gridEl = document.getElementById("products-grid");
+      productCategories.forEach((cat) => {
+        const article = document.createElement("article");
+        article.setAttribute("data-group", cat.group);
+        article.className =
+          "product-card-item group relative h-[370px] sm:h-[500px] rounded-2xl overflow-hidden bg-[#123F2A] cursor-pointer border border-[#123F2A]/10 flex flex-col justify-between active:scale-[0.99] transition-transform";
+        const specTagsHtml = cat.specs
+          .slice(0, 3)
+          .map(
+            (sp) =>
+              `<span class="text-[10px] font-sans font-bold text-white/95 bg-white/15 backdrop-blur-sm px-2.5 py-1 rounded-md">${sp}</span>`,
+          )
+          .join("");
+        article.innerHTML = `
+                <img src="${cat.image}" alt="${cat.name}" loading="lazy" class="absolute inset-0 w-full h-full object-cover opacity-85 group-hover:scale-110 group-hover:opacity-65 transition-all duration-700 ease-out">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#123F2A] via-[#123F2A]/45 to-black/25"></div>
+                <div class="relative z-10 p-5 sm:p-6 flex justify-between items-start">
+                    <span class="font-display text-4xl sm:text-5xl text-white/90 leading-none">${cat.id}</span>
+                    <span class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center text-white group-hover:bg-[#82B96B] group-hover:text-[#123F2A] transition-all">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-45 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7m0 0H8m9 0v9"></path></svg>
+                    </span>
+                </div>
+                <div class="relative z-10 p-5 sm:p-7 space-y-2.5 sm:space-y-3">
+                    <span class="inline-block font-sans font-extrabold text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.22em] text-[#82B96B] bg-[#123F2A]/85 backdrop-blur-sm px-3 py-1 rounded-full">${cat.subtitle}</span>
+                    <h3 class="font-display text-3xl sm:text-4xl text-white leading-[0.92]">${cat.name}</h3>
+                    <p class="font-sans text-xs sm:text-sm text-[#DCE9D8]/90 line-clamp-2 leading-relaxed">${cat.desc}</p>
+                    <div class="flex flex-wrap gap-1.5 pt-1 lg:hidden">${specTagsHtml}</div>
+                </div>
+            `;
+        article.addEventListener("click", () => openModal(cat));
+        gridEl.appendChild(article);
+      });
+
+      // Mobile Quick Filter Pills Logic (Desktop always displays all cards)
+      document.querySelectorAll(".mob-filter-pill").forEach((pill) => {
+        pill.addEventListener("click", () => {
+          const filter = pill.getAttribute("data-filter");
+          document.querySelectorAll(".mob-filter-pill").forEach((p) => {
+            p.className =
+              "mob-filter-pill shrink-0 px-4 py-2.5 rounded-full bg-[#F7F8F3] text-[#123F2A] border border-[#123F2A]/15 font-sans font-extrabold text-[11px] uppercase tracking-[0.15em] transition-all";
+          });
+          pill.className =
+            "mob-filter-pill shrink-0 px-4 py-2.5 rounded-full bg-[#123F2A] text-white font-sans font-extrabold text-[11px] uppercase tracking-[0.15em] transition-all shadow-sm";
+
+          document.querySelectorAll(".product-card-item").forEach((card) => {
+            const matches =
+              filter === "all" || card.getAttribute("data-group") === filter;
+            if (matches) {
+              card.classList.remove("hidden");
+              if (window.gsap) {
+                gsap.fromTo(
+                  card,
+                  { y: 18, opacity: 0 },
+                  { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" },
+                );
+              }
+            } else {
+              card.classList.add("hidden");
+            }
+          });
+          if (window.ScrollTrigger) ScrollTrigger.refresh();
+        });
+      });
+
+      // Ensure all cards restore if resized to desktop
+      window.addEventListener("resize", () => {
+        if (window.innerWidth >= 1024) {
+          document
+            .querySelectorAll(".product-card-item")
+            .forEach((c) => c.classList.remove("hidden"));
+        }
+      });
+
+      // Form Select Dropdown
+      const selectEl = document.getElementById("form-category");
+      if (selectEl) {
+        productCategories.forEach((cat) => {
+          const opt = document.createElement("option");
+          opt.value = cat.name;
+          opt.textContent = cat.name;
+          selectEl.appendChild(opt);
+        });
+      }
+
+      // Fruit Selector (Horizontal Touch Pill Rail on Mobile/Tablet | Vertical Interactive List on Desktop)
+      const fruitListEl = document.getElementById("fruit-selector-list");
+      function renderFruitList() {
+        fruitListEl.innerHTML = "";
+        freshFruitsData.forEach((fruit, idx) => {
+          const isSelected = idx === activeFruitIndex;
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = `snap-start shrink-0 lg:w-full text-left px-4 py-3 lg:p-5 rounded-2xl border transition-all duration-300 flex items-center justify-between gap-3 lg:gap-4 ${isSelected ? "bg-[#176B45] border-[#82B96B] lg:translate-x-2 shadow-xl" : "bg-white/5 border-white/10 hover:bg-white/10"}`;
+          btn.innerHTML = `
+                    <div class="flex items-baseline gap-2.5 lg:gap-4">
+                        <span class="font-display text-xl lg:text-2xl ${isSelected ? "text-[#82B96B]" : "text-white/40"}">${fruit.id}</span>
+                        <div>
+                            <h3 class="font-display text-2xl sm:text-3xl lg:text-4xl tracking-wide text-white whitespace-nowrap lg:whitespace-normal">${fruit.name}</h3>
+                            <p class="hidden lg:block font-editorial italic text-lg text-[#DCE9D8]/85">${fruit.italicTag}</p>
+                        </div>
+                    </div>
+                    <svg class="hidden lg:block w-5 h-5 shrink-0 transition-transform ${isSelected ? "text-[#82B96B] translate-x-1" : "text-white/30"}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                `;
+          btn.addEventListener("click", () => {
+            if (activeFruitIndex === idx) return;
+            activeFruitIndex = idx;
+            renderFruitList();
+            updateFruitStage(true);
+          });
+          fruitListEl.appendChild(btn);
+        });
+      }
+
+      function updateFruitStage(animateChange = false) {
+        const fruit = freshFruitsData[activeFruitIndex];
+        const stageEl = document.getElementById("fruit-image-stage");
+        document.getElementById("fruit-img").src = fruit.image;
+        document.getElementById("fruit-title").textContent = fruit.name;
+        document.getElementById("fruit-desc").textContent = fruit.desc;
+        document.getElementById("fruit-sourcing").textContent = fruit.sourcing;
+        document.getElementById("fruit-logistics").textContent =
+          fruit.logistics;
+
+        const badgesEl = document.getElementById("fruit-badges");
+        badgesEl.innerHTML = "";
+        fruit.varieties.forEach((v) => {
+          const span = document.createElement("span");
+          span.className =
+            "px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#123F2A]/90 backdrop-blur-md border border-[#82B96B]/50 font-sans font-extrabold text-[10px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.14em] text-[#DCE9D8]";
+          span.textContent = v;
+          badgesEl.appendChild(span);
+        });
+
+        if (animateChange && window.gsap && stageEl) {
+          gsap.fromTo(
+            stageEl,
+            { opacity: 0.35, scale: 0.98 },
+            { opacity: 1, scale: 1, duration: 0.45, ease: "power3.out" },
+          );
+        }
+      }
+      renderFruitList();
+      updateFruitStage();
+
+      document
+        .getElementById("fruit-enquire-btn")
+        .addEventListener("click", () => {
+          const fruit = freshFruitsData[activeFruitIndex];
+          selectCategoryInForm(`Fresh Fruits - ${fruit.name}`);
+        });
+
+      // Process Steps
+      const processContainer = document.getElementById(
+        "process-steps-container",
+      );
+      processSteps.forEach((step, index) => {
+        const isEven = index % 2 === 0;
+        const div = document.createElement("div");
+        div.className = `process-step-card relative flex flex-col lg:flex-row items-start lg:items-center justify-between ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"}`;
+        div.innerHTML = `
+                <div class="w-full lg:w-[45%] pl-9 sm:pl-14 lg:pl-0">
+                    <div class="group p-5 sm:p-9 rounded-2xl sm:rounded-3xl bg-[#F7F8F3] hover:bg-[#123F2A] hover:text-white border border-[#123F2A]/10 transition-all duration-500 shadow-sm">
+                        <div class="flex items-center justify-between mb-2.5 sm:mb-4">
+                            <span class="font-sans font-extrabold text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#176B45] group-hover:text-[#82B96B]">${step.tag}</span>
+                            <span class="font-display text-4xl sm:text-5xl text-[#123F2A]/15 group-hover:text-[#82B96B] leading-none">${step.num}</span>
+                        </div>
+                        <h3 class="font-display text-2xl sm:text-4xl tracking-wide mb-2 sm:mb-3">${step.title}</h3>
+                        <p class="font-sans text-sm sm:text-base text-[#17251D]/75 group-hover:text-[#DCE9D8]/90 leading-relaxed">${step.desc}</p>
+                    </div>
+                </div>
+                <div class="absolute left-3.5 sm:left-5 lg:left-1/2 top-7 sm:top-8 lg:top-1/2 -translate-x-1/2 lg:-translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#82B96B] border-[3px] sm:border-4 border-white shadow-[0_0_0_2px_#123F2A] z-10"></div>
+                <div class="hidden lg:block lg:w-[45%]"></div>
+            `;
+        processContainer.appendChild(div);
+      });
+
+      // Jaggery selector
+      document.querySelectorAll(".pack-btn").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          selectedJaggeryPack = e.currentTarget.getAttribute("data-pack");
+          document.querySelectorAll(".pack-btn").forEach((b) => {
+            b.className =
+              "pack-btn min-h-[50px] py-3 sm:py-3.5 rounded-xl font-display text-2xl tracking-wide bg-[#F7F8F3] text-[#123F2A] hover:bg-[#DCE9D8] transition-all active:scale-95";
+          });
+          e.currentTarget.className =
+            "pack-btn min-h-[50px] py-3 sm:py-3.5 rounded-xl font-display text-2xl tracking-wide bg-[#123F2A] text-white shadow-lg sm:scale-[1.03] active:scale-95";
+          document.getElementById("selected-pack-label").textContent =
+            `Selected: ${selectedJaggeryPack}`;
+          document
+            .getElementById("jaggery-enquire-btn")
+            .querySelector("span").textContent =
+            `Enquire ${selectedJaggeryPack} Jaggery Export Lot`;
+        });
+      });
+
+      document
+        .getElementById("jaggery-enquire-btn")
+        .addEventListener("click", () => {
+          selectCategoryInForm(
+            `Kolhapuri Jaggery (${selectedJaggeryPack} Packaging)`,
+          );
+        });
+
+      function selectCategoryInForm(catName) {
+        if (
+          !Array.from(selectEl.options).some((opt) => opt.value === catName)
+        ) {
+          const customOpt = document.createElement("option");
+          customOpt.value = catName;
+          customOpt.textContent = catName;
+          selectEl.appendChild(customOpt);
+        }
+        selectEl.value = catName;
+        document
+          .getElementById("contact")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Modal
+      const modalEl = document.getElementById("product-modal");
+      const modalContent = document.getElementById("modal-content");
+
+      function openModal(cat) {
+        currentModalCategory = cat;
+        document.getElementById("modal-img").src = cat.image;
+        document.getElementById("modal-id").textContent = cat.id;
+        document.getElementById("modal-subtitle").textContent = cat.subtitle;
+        document.getElementById("modal-title").textContent = cat.name;
+        document.getElementById("modal-desc").textContent = cat.desc;
+
+        const specsEl = document.getElementById("modal-specs");
+        specsEl.innerHTML = "";
+        cat.specs.forEach((s) => {
+          const badge = document.createElement("span");
+          badge.className =
+            "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#DCE9D8]/70 text-[#123F2A] font-sans font-bold text-xs";
+          badge.innerHTML = `<svg class="w-3.5 h-3.5 text-[#176B45]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>${s}`;
+          specsEl.appendChild(badge);
+        });
+
+        modalEl.classList.remove("opacity-0", "pointer-events-none");
+        modalContent.classList.remove("translate-y-6", "sm:scale-95");
+        modalContent.classList.add("translate-y-0", "sm:scale-100");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        modalEl.classList.add("opacity-0", "pointer-events-none");
+        modalContent.classList.remove("translate-y-0", "sm:scale-100");
+        modalContent.classList.add("translate-y-6", "sm:scale-95");
+        if (!mobileOpen) document.body.style.overflow = "";
+      }
+
+      document
+        .getElementById("modal-close-btn")
+        .addEventListener("click", closeModal);
+      document
+        .getElementById("modal-close-btn-mobile")
+        .addEventListener("click", closeModal);
+      modalEl.addEventListener("click", (e) => {
+        if (e.target === modalEl) closeModal();
+      });
+      document
+        .getElementById("modal-enquire-btn")
+        .addEventListener("click", () => {
+          if (currentModalCategory) {
+            closeModal();
+            selectCategoryInForm(currentModalCategory.name);
+          }
+        });
+      // Mobile Menu & Navbar Contrast State
+      const mobileToggle = document.getElementById("mobile-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const menuIconOpen = document.getElementById("menu-icon-open");
+      const menuIconClose = document.getElementById("menu-icon-close");
+      const mobileNavEnquire = document.getElementById("mobile-nav-enquire");
+      let mobileOpen = false;
+
+      function syncHeaderAppearance() {
+        const navbar = document.getElementById("navbar");
+        const logoText = document.getElementById("nav-logo-text");
+        const logoIcon = document.getElementById("nav-logo-icon");
+        const navCta = document.getElementById("nav-cta");
+        const isScrolled = window.scrollY > 60;
+
+        if (mobileOpen) {
+          navbar.className =
+            "fixed top-0 left-0 w-full z-50 py-4 bg-transparent border-b border-white/10 transition-all duration-300";
+          logoText.className =
+            "flex flex-col text-white transition-colors duration-300";
+          logoIcon.className =
+            "w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center border bg-white/10 border-white/25 text-[#82B96B] shrink-0";
+          mobileToggle.className =
+            "w-11 h-11 rounded-full flex items-center justify-center border bg-white text-[#123F2A] border-white transition-all duration-300 active:scale-95";
+          if (mobileNavEnquire)
+            mobileNavEnquire.classList.add("opacity-0", "pointer-events-none");
+          return;
+        }
+
+        if (mobileNavEnquire)
+          mobileNavEnquire.classList.remove("opacity-0", "pointer-events-none");
+
+        if (isScrolled) {
+          navbar.className =
+            "fixed top-0 left-0 w-full z-50 py-2.5 lg:py-3 bg-[#F7F8F3]/95 backdrop-blur-xl border-b border-[#123F2A]/12 shadow-sm transition-all duration-500";
+          logoText.className =
+            "flex flex-col text-[#123F2A] transition-colors duration-300";
+          logoIcon.className =
+            "w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center border bg-[#123F2A] border-[#123F2A] text-[#82B96B] transition-all duration-500 shrink-0";
+          mobileToggle.className =
+            "w-11 h-11 rounded-full flex items-center justify-center border bg-[#123F2A] text-white border-[#123F2A] transition-all duration-300 active:scale-95";
+          if (mobileNavEnquire)
+            mobileNavEnquire.className =
+              "px-3.5 py-2 rounded-full bg-[#176B45] text-white font-sans font-extrabold text-[10px] uppercase tracking-[0.16em] shadow-sm transition-all duration-300";
+          navCta.className =
+            "group relative inline-flex items-center justify-center px-7 py-3 rounded-full overflow-hidden bg-[#123F2A] text-white border border-[#123F2A] font-sans font-extrabold text-xs uppercase tracking-[0.16em] transition-all";
+          navCta.querySelector("span:nth-child(1)").className =
+            "absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-[#82B96B]";
+          navCta.querySelector("span:nth-child(2)").className =
+            "relative z-10 flex items-center gap-2 group-hover:text-[#123F2A] transition-colors";
+        } else {
+          navbar.className =
+            "fixed top-0 left-0 w-full z-50 py-4 lg:py-6 bg-transparent border-b border-white/10 transition-all duration-500";
+          logoText.className =
+            "flex flex-col text-white transition-colors duration-300";
+          logoIcon.className =
+            "w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center border bg-white/10 border-white/25 text-[#82B96B] backdrop-blur-md transition-all duration-500 shrink-0";
+          mobileToggle.className =
+            "w-11 h-11 rounded-full flex items-center justify-center border bg-white/15 text-white border-white/30 backdrop-blur-md transition-all duration-300 active:scale-95";
+          if (mobileNavEnquire)
+            mobileNavEnquire.className =
+              "px-3.5 py-2 rounded-full bg-white text-[#123F2A] font-sans font-extrabold text-[10px] uppercase tracking-[0.16em] shadow-sm transition-all duration-300";
+          navCta.className =
+            "group relative inline-flex items-center justify-center px-7 py-3.5 rounded-full overflow-hidden bg-white text-[#123F2A] border border-white font-sans font-extrabold text-xs uppercase tracking-[0.16em] transition-all";
+          navCta.querySelector("span:nth-child(1)").className =
+            "absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-[#176B45]";
+          navCta.querySelector("span:nth-child(2)").className =
+            "relative z-10 flex items-center gap-2 group-hover:text-white transition-colors";
+        }
+      }
+
+      function setMobileMenuState(open) {
+        mobileOpen = open;
+        mobileToggle.setAttribute("aria-expanded", String(mobileOpen));
+        menuIconOpen.classList.toggle("hidden", mobileOpen);
+        menuIconClose.classList.toggle("hidden", !mobileOpen);
+        document.body.style.overflow = mobileOpen ? "hidden" : "";
+
+        if (mobileOpen) {
+          mobileMenu.classList.remove(
+            "opacity-0",
+            "pointer-events-none",
+            "-translate-y-full",
+          );
+          mobileMenu.classList.add("opacity-100", "translate-y-0");
+          if (window.gsap) {
+            gsap.fromTo(
+              "#mobile-menu .mob-link",
+              { y: 24, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.45,
+                stagger: 0.05,
+                delay: 0.12,
+                ease: "power3.out",
+              },
+            );
+            gsap.fromTo(
+              ".mob-drawer-footer",
+              { y: 16, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.45,
+                delay: 0.35,
+                ease: "power2.out",
+              },
+            );
+          }
+        } else {
+          mobileMenu.classList.add(
+            "opacity-0",
+            "pointer-events-none",
+            "-translate-y-full",
+          );
+          mobileMenu.classList.remove("opacity-100", "translate-y-0");
+        }
+        syncHeaderAppearance();
+      }
+
+      mobileToggle.addEventListener("click", () =>
+        setMobileMenuState(!mobileOpen),
+      );
+
+      document.querySelectorAll(".mob-link").forEach((link) => {
+        link.addEventListener("click", () => setMobileMenuState(false));
+      });
+
+      // Navbar Scroll
+      window.addEventListener("scroll", syncHeaderAppearance, {
+        passive: true,
+      });
+
+      // Preloader & GSAP
+      const initPreloader = () => {
+        let percent = 0;
+        const percentEl = document.getElementById("loader-percent");
+        const barEl = document.getElementById("loader-bar");
+        const preloader = document.getElementById("preloader");
+
+        const interval = setInterval(() => {
+          percent += Math.floor(Math.random() * 18) + 8;
+          if (percent >= 100) {
+            percent = 100;
+            clearInterval(interval);
+            setTimeout(() => {
+              gsap.to(preloader, {
+                clipPath: "inset(0% 0% 100% 0%)",
+                duration: 1.05,
+                ease: "power4.inOut",
+                onComplete: () => (preloader.style.display = "none"),
+              });
+              initGSAPAnimations();
+            }, 200);
+          }
+          percentEl.textContent = String(percent).padStart(3, "0") + "%";
+          barEl.style.width = percent + "%";
+        }, 50);
+      };
+
+      if (document.readyState === "complete") {
+        initPreloader();
+      } else {
+        window.addEventListener("load", initPreloader);
+      }
+
+      function initGSAPAnimations() {
+        if (!window.gsap || !window.ScrollTrigger) return;
+        gsap.registerPlugin(ScrollTrigger);
+
+        const mm = gsap.matchMedia();
+
+        // =========================================================================
+        // DESKTOP ANIMATIONS (>= 1024px) — Preserved 100% Intact
+        // =========================================================================
+        mm.add("(min-width: 1024px)", () => {
+          const heroTl = gsap.timeline({ defaults: { ease: "power4.out" } });
+          heroTl
+            .fromTo(
+              ".hero-line-1 span, .hero-line-2 span",
+              { yPercent: 120, opacity: 0 },
+              { yPercent: 0, opacity: 1, duration: 1.15, stagger: 0.15 },
+            )
+            .fromTo(
+              ".hero-meta",
+              { y: 28, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.85, stagger: 0.1 },
+              "-=0.75",
+            );
+
+          gsap.to("#hero-img", {
+            scale: 1.22,
+            yPercent: 14,
+            ease: "none",
+            scrollTrigger: {
+              trigger: "#home",
+              start: "top top",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
+
+          gsap.fromTo(
+            ".about-reveal-text",
+            { y: 60, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1,
+              stagger: 0.14,
+              ease: "power3.out",
+              scrollTrigger: { trigger: "#about", start: "top 75%" },
+            },
+          );
+
+          gsap.fromTo(
+            ".about-clip-img",
+            { clipPath: "inset(18% 12% 18% 12%)", scale: 1.12 },
+            {
+              clipPath: "inset(0% 0% 0% 0%)",
+              scale: 1,
+              duration: 1.35,
+              ease: "power4.out",
+              scrollTrigger: { trigger: ".about-clip-img", start: "top 80%" },
+            },
+          );
+
+          gsap.fromTo(
+            "#process-line-fill",
+            { scaleY: 0 },
+            {
+              scaleY: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: "#process",
+                start: "top 65%",
+                end: "bottom 75%",
+                scrub: true,
+              },
+            },
+          );
+
+          gsap.fromTo(
+            ".trade-arc",
+            { strokeDashoffset: 500 },
+            {
+              strokeDashoffset: 0,
+              duration: 2.4,
+              stagger: 0.25,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: "#global-map-section",
+                start: "top 75%",
+              },
+            },
+          );
+        });
+
+        // =========================================================================
+        // MOBILE & TABLET CINEMATIC TOUCH ANIMATIONS (< 1024px)
+        // Smooth, GPU-lightweight, zero-jitter ScrollTrigger choreography
+        // =========================================================================
+        mm.add(
+          "(max-width: 1023px) and (prefers-reduced-motion: no-preference)",
+          () => {
+            // 1. Mobile Hero Entrance (crisp masked typography + gentle ambient zoom)
+            const mobHeroTl = gsap.timeline({
+              defaults: { ease: "power3.out" },
+            });
+            mobHeroTl
+              .fromTo(
+                "#hero-img",
+                { scale: 1.14 },
+                { scale: 1.03, duration: 1.6, ease: "power2.out" },
+                0,
+              )
+              .fromTo(
+                ".hero-line-1 span, .hero-line-2 span",
+                { yPercent: 110, opacity: 0 },
+                { yPercent: 0, opacity: 1, duration: 0.9, stagger: 0.12 },
+                0.05,
+              )
+              .fromTo(
+                ".hero-meta",
+                { y: 18, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.65, stagger: 0.08 },
+                "-=0.5",
+              );
+
+            // 2. About Section Stagger & Smooth Image Unveil
+            gsap.fromTo(
+              ".about-reveal-text",
+              { y: 32, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.75,
+                stagger: 0.1,
+                ease: "power3.out",
+                scrollTrigger: { trigger: "#about", start: "top 82%" },
+              },
+            );
+
+            gsap.fromTo(
+              ".about-clip-img",
+              { clipPath: "inset(10% 6% 10% 6% round 16px)", opacity: 0.6 },
+              {
+                clipPath: "inset(0% 0% 0% 0% round 16px)",
+                opacity: 1,
+                duration: 0.95,
+                ease: "power3.out",
+                scrollTrigger: { trigger: ".about-clip-img", start: "top 85%" },
+              },
+            );
+
+            // 3. Product Cards Lightweight Staggered Scroll Entrances
+            gsap.utils.toArray(".product-card-item").forEach((card) => {
+              gsap.fromTo(
+                card,
+                { y: 28, opacity: 0 },
+                {
+                  y: 0,
+                  opacity: 1,
+                  duration: 0.65,
+                  ease: "power2.out",
+                  scrollTrigger: {
+                    trigger: card,
+                    start: "top 88%",
+                    once: true,
+                  },
+                },
+              );
+            });
+
+            // 4. Fresh Fruit Showcase Entrance
+            gsap.fromTo(
+              "#fruit-card-wrapper",
+              { y: 30, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.75,
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: "#fruit-showcase-section",
+                  start: "top 78%",
+                  once: true,
+                },
+              },
+            );
+
+            // 5. Spices & Kolhapuri Jaggery Blocks
+            gsap.utils
+              .toArray([".spices-block", ".jaggery-block"])
+              .forEach((block) => {
+                gsap.fromTo(
+                  block,
+                  { y: 34, opacity: 0 },
+                  {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                      trigger: block,
+                      start: "top 84%",
+                      once: true,
+                    },
+                  },
+                );
+              });
+
+            // 6. Farm-to-Global Scrubbed Timeline Beam + Step Cards
+            gsap.fromTo(
+              "#process-line-fill",
+              { scaleY: 0 },
+              {
+                scaleY: 1,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: "#process-steps-container",
+                  start: "top 75%",
+                  end: "bottom 80%",
+                  scrub: 0.4,
+                },
+              },
+            );
+
+            gsap.utils.toArray(".process-step-card").forEach((stepCard) => {
+              gsap.fromTo(
+                stepCard,
+                { x: 18, opacity: 0 },
+                {
+                  x: 0,
+                  opacity: 1,
+                  duration: 0.6,
+                  ease: "power2.out",
+                  scrollTrigger: {
+                    trigger: stepCard,
+                    start: "top 88%",
+                    once: true,
+                  },
+                },
+              );
+            });
+
+            // 7. Why Us Strength Cards
+            gsap.utils.toArray(".why-card").forEach((card) => {
+              gsap.fromTo(
+                card,
+                { y: 26, opacity: 0 },
+                {
+                  y: 0,
+                  opacity: 1,
+                  duration: 0.65,
+                  ease: "power2.out",
+                  scrollTrigger: {
+                    trigger: card,
+                    start: "top 88%",
+                    once: true,
+                  },
+                },
+              );
+            });
+
+            // 8. Global Map Trade Arcs Reveal on Mobile Viewport Entry
+            gsap.fromTo(
+              ".trade-arc",
+              { strokeDashoffset: 500 },
+              {
+                strokeDashoffset: 0,
+                duration: 1.8,
+                stagger: 0.18,
+                ease: "power2.out",
+                scrollTrigger: {
+                  trigger: "#global-map-section",
+                  start: "top 80%",
+                  once: true,
+                },
+              },
+            );
+          },
+        );
+      }
+    </script>
+  </body>
+</html>
