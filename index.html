@@ -50,6 +50,26 @@
         color: #ffffff;
       }
 
+      /* Disable text cursor / caret on display and heading elements */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      span,
+      a,
+      button {
+        caret-color: transparent;
+        user-select: none;
+      }
+      input,
+      textarea,
+      select {
+        caret-color: #123f2a;
+      }
+
       .grain-overlay {
         background-image: radial-gradient(
           rgba(18, 63, 42, 0.06) 1px,
@@ -112,17 +132,107 @@
         scrollbar-width: none;
       }
 
-      /* Mobile-Specific Architectural UI/UX Optimizations (< 1024px)
-           Preserves 100% of existing Desktop (>= 1024px) design & layout */
+      /* =====================================================================
+           PROCESS SLIDES SCROLL-COLOR TRANSITION SYSTEM
+           Smoothly morphs slide colors as you scroll down Section 05
+           ===================================================================== */
+      .process-card-inner {
+        background-color: #f7f8f3;
+        color: #123f2a;
+        border-color: rgba(18, 63, 42, 0.12);
+        transition:
+          background-color 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+          color 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+          border-color 0.65s ease;
+      }
+      .process-card-inner .proc-tag {
+        color: #176b45;
+        transition: color 0.5s ease;
+      }
+      .process-card-inner .proc-num {
+        color: rgba(18, 63, 42, 0.14);
+        transition:
+          color 0.5s ease,
+          transform 0.5s ease;
+      }
+      .process-card-inner .proc-desc {
+        color: rgba(23, 37, 29, 0.78);
+        transition: color 0.5s ease;
+      }
+
+      /* Active Scroll-Lit Color Palette States */
+      .process-card-inner.is-scroll-active[data-theme="forest"] {
+        background-color: #123f2a;
+        color: #ffffff;
+        border-color: #82b96b;
+        transform: translateY(-4px) scale(1.015);
+        box-shadow: 0 24px 50px -12px rgba(18, 63, 42, 0.38);
+      }
+      .process-card-inner.is-scroll-active[data-theme="emerald"] {
+        background-color: #176b45;
+        color: #ffffff;
+        border-color: #dce9d8;
+        transform: translateY(-4px) scale(1.015);
+        box-shadow: 0 24px 50px -12px rgba(23, 107, 69, 0.38);
+      }
+      .process-card-inner.is-scroll-active[data-theme="dark"] {
+        background-color: #17251d;
+        color: #ffffff;
+        border-color: #82b96b;
+        transform: translateY(-4px) scale(1.015);
+        box-shadow: 0 24px 50px -12px rgba(23, 37, 29, 0.42);
+      }
+      .process-card-inner.is-scroll-active .proc-tag {
+        color: #82b96b;
+      }
+      .process-card-inner.is-scroll-active .proc-num {
+        color: #82b96b;
+        transform: scale(1.06);
+      }
+      .process-card-inner.is-scroll-active .proc-desc {
+        color: rgba(220, 233, 216, 0.94);
+      }
+      .process-step-node {
+        transition:
+          background-color 0.45s ease,
+          transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.45s ease;
+      }
+      .process-step-node.is-node-active {
+        background-color: #123f2a;
+        transform: translate(-50%, -50%) scale(1.35);
+        box-shadow: 0 0 0 4px #82b96b;
+      }
       @media (max-width: 1023px) {
+        .process-step-node.is-node-active {
+          transform: translateX(-50%) scale(1.3);
+        }
+      }
+
+      /* =====================================================================
+           MOBILE LUXURY EDITORIAL UI/UX SYSTEM (< 1024px)
+           Preserves 100% of existing Desktop (>= 1024px) design & layout
+           Optimized for Samsung Galaxy A17 5G (360-412px) & iPhone 17 (393-430px)
+           ===================================================================== */
+      @media (max-width: 1023px) {
+        /* Use clip instead of hidden so position:sticky stacked cards work natively on iOS & Android */
         html,
         body {
-          overflow-x: hidden;
+          overflow-x: clip;
           max-width: 100vw;
           -webkit-tap-highlight-color: transparent;
         }
 
-        /* Dynamic viewport height prevents mobile browser bar jump on iPhone 17 & Galaxy A17 */
+        /* Mobile Left-Right Staggered Duet Offset (1 Left, 2 Right slightly offset, 3 Left, 4 Right...) */
+        #products-grid .product-card-item:nth-child(even) {
+          margin-top: 1.35rem;
+        }
+        #products-grid .product-card-wide {
+          margin-top: 0.5rem !important;
+        }
+
         #preloader {
           height: 100svh;
         }
@@ -131,21 +241,61 @@
           min-height: 100svh;
         }
 
-        /* Balanced mobile display headline scaling for 360px - 430px viewports */
+        /* Calibrated Single-Line Hero Display Typography (Prevents single-letter line wraps) */
         .mobile-hero-display {
-          font-size: clamp(3.15rem, 13.8vw, 4.8rem);
+          font-size: clamp(2.25rem, 10.6vw, 4.25rem);
           line-height: 0.9;
-          letter-spacing: -0.01em;
+          letter-spacing: -0.015em;
         }
 
         .mobile-hero-italic {
-          font-size: clamp(3.1rem, 13.5vw, 4.7rem);
+          font-size: clamp(2.35rem, 11vw, 4.35rem);
           line-height: 0.88;
         }
 
         .mobile-section-display {
-          font-size: clamp(2.65rem, 11.2vw, 4.25rem);
-          line-height: 0.91;
+          font-size: clamp(2.75rem, 12.2vw, 4.5rem);
+          line-height: 0.89;
+          letter-spacing: -0.015em;
+        }
+
+        .mobile-oversized-num {
+          font-size: clamp(4.5rem, 20vw, 7rem);
+          line-height: 0.8;
+        }
+
+        .text-stroke-white-mob {
+          -webkit-text-stroke: 1.25px rgba(255, 255, 255, 0.45);
+          color: transparent;
+        }
+
+        .text-stroke-forest-mob {
+          -webkit-text-stroke: 1.35px rgba(18, 63, 42, 0.32);
+          color: transparent;
+        }
+
+        /* Sticky Stacked Editorial Card Offsets */
+        .mob-sticky-card-1 {
+          position: sticky;
+          top: 78px;
+          z-index: 10;
+        }
+        .mob-sticky-card-2 {
+          position: sticky;
+          top: 96px;
+          z-index: 20;
+        }
+        .mob-sticky-card-3 {
+          position: sticky;
+          top: 114px;
+          z-index: 30;
+        }
+
+        /* Touch-optimized carousel viewport */
+        .mob-carousel-viewport {
+          touch-action: pan-y;
+          user-select: none;
+          -webkit-user-select: none;
         }
 
         /* Prevent iOS Safari / iPhone 17 auto-zoom on form focus (requires >= 16px) */
@@ -157,9 +307,8 @@
       }
 
       @media (max-width: 639px) {
-        /* Touch-target enforcement & crisp mobile card proportions */
         .mobile-touch-btn {
-          min-height: 52px;
+          min-height: 54px;
         }
       }
 
@@ -178,67 +327,96 @@
   <body
     class="bg-[#F7F8F3] text-[#17251D] font-sans antialiased overflow-x-hidden"
   >
-    <!-- Preloader Overlay -->
+    <!-- GLOBAL TOP SCROLL PROGRESS BAR -->
     <div
-      id="preloader"
-      class="fixed inset-0 z-[10000] bg-[#123F2A] text-[#F7F8F3] flex flex-col justify-between p-5 sm:p-6 md:p-12 transition-transform duration-1000 ease-in-out"
+      class="fixed top-0 left-0 w-full h-[3px] z-[9998] pointer-events-none bg-transparent"
     >
       <div
-        class="flex justify-between items-center border-b border-white/15 pb-4 md:pb-6"
+        id="global-scroll-bar"
+        class="h-full bg-[#82B96B] w-0 origin-left"
+      ></div>
+    </div>
+
+    <!-- LIGHTWEIGHT NON-BLOCKING PRELOADER (Ensures zero freeze) -->
+    <div
+      id="preloader"
+      class="fixed inset-0 z-[10000] bg-[#123F2A] text-[#FFFFFF] flex flex-col justify-between p-5 sm:p-8 md:p-12 overflow-hidden select-none transition-transform duration-500 ease-in-out"
+    >
+      <div
+        class="pointer-events-none absolute inset-0 grid grid-cols-3 lg:grid-cols-4 opacity-10"
       >
-        <div class="flex items-center gap-2.5 md:gap-3">
-          <svg
-            class="w-5 h-5 md:w-6 md:h-6 text-[#82B96B] shrink-0"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-            ></path>
-          </svg>
+        <div class="border-r border-[#FFFFFF] h-full"></div>
+        <div class="border-r border-[#FFFFFF] h-full"></div>
+        <div class="border-r border-[#FFFFFF] h-full hidden lg:block"></div>
+      </div>
+
+      <div
+        class="preloader-fade relative z-10 flex justify-between items-center border-b border-[#FFFFFF]/20 pb-4 md:pb-6"
+      >
+        <div>
           <span
-            class="font-sans font-extrabold text-[11px] md:text-xs tracking-[0.2em] md:tracking-[0.25em] uppercase"
+            class="font-sans font-extrabold text-[11px] md:text-xs tracking-[0.24em] uppercase text-[#FFFFFF] block leading-none"
             >Renu Agro Services</span
+          >
+          <span
+            class="font-sans font-bold text-[9px] tracking-[0.2em] uppercase text-[#FFFFFF]/65 block mt-1"
+            >Kolhapur • India</span
           >
         </div>
         <span
-          class="font-sans text-[10px] md:text-xs tracking-[0.16em] md:tracking-[0.2em] uppercase text-[#DCE9D8]/70"
+          class="px-3 py-1 rounded-full border border-[#FFFFFF]/30 font-sans font-extrabold text-[10px] tracking-[0.2em] uppercase text-[#FFFFFF]"
           >Est. 2018</span
         >
       </div>
-      <div class="my-auto py-6">
-        <p
-          class="font-editorial italic text-2xl sm:text-3xl md:text-4xl text-[#82B96B] mb-2 md:mb-3"
-        >
-          Connecting Nature&apos;s Bounty
-        </p>
+
+      <div class="relative z-10 my-auto py-4">
+        <div class="overflow-hidden mb-2">
+          <p
+            class="preloader-word font-editorial italic text-3xl sm:text-4xl md:text-5xl text-[#FFFFFF]/90"
+          >
+            Connecting Nature&apos;s Bounty
+          </p>
+        </div>
         <h2
-          class="font-display text-[3.35rem] sm:text-8xl md:text-[9.5rem] text-white leading-[0.88] tracking-tight"
+          class="font-display text-[3.85rem] sm:text-8xl md:text-[9.5rem] text-[#FFFFFF] leading-[0.85] tracking-tight"
         >
-          INDIAN SOIL.<br />GLOBAL SCALE.
+          <span class="block overflow-hidden"
+            ><span class="preloader-word inline-block">RENU AGRO</span></span
+          >
+          <span class="block overflow-hidden"
+            ><span
+              class="preloader-word inline-block"
+              style="-webkit-text-stroke: 1.5px #ffffff; color: transparent"
+              >GLOBAL</span
+            >
+            <span class="preloader-word inline-block">EXPORT.</span></span
+          >
         </h2>
       </div>
-      <div class="space-y-3 md:space-y-4">
+
+      <div class="preloader-fade relative z-10 space-y-3.5 md:space-y-4">
         <div class="flex justify-between items-end gap-4">
-          <span
-            class="font-sans text-[10px] md:text-xs uppercase tracking-[0.18em] md:tracking-[0.22em] text-[#DCE9D8]/70"
-            >Preparing Experience</span
-          >
+          <div class="space-y-1">
+            <span
+              id="loader-status"
+              class="font-sans font-extrabold text-[10px] md:text-xs uppercase tracking-[0.22em] text-[#FFFFFF] block"
+              >Sourcing From Indian Soil</span
+            >
+            <span
+              class="font-sans text-[10px] uppercase tracking-[0.16em] text-[#FFFFFF]/60 block"
+              >Editorial Issue • Maharashtra</span
+            >
+          </div>
           <span
             id="loader-percent"
-            class="font-display text-4xl sm:text-5xl md:text-7xl text-[#82B96B] leading-none"
-            >000%</span
+            class="font-display text-6xl sm:text-7xl md:text-8xl text-[#FFFFFF] leading-[0.82] tracking-tight"
+            >100%</span
           >
         </div>
-        <div class="w-full h-[2px] bg-white/15 overflow-hidden">
-          <div
-            id="loader-bar"
-            class="h-full bg-[#82B96B] w-0 transition-all duration-150"
-          ></div>
+        <div
+          class="w-full h-[3px] bg-[#FFFFFF]/20 overflow-hidden rounded-full"
+        >
+          <div id="loader-bar" class="h-full bg-[#FFFFFF] w-full"></div>
         </div>
       </div>
     </div>
@@ -262,7 +440,7 @@
       </div>
     </div>
 
-    <!-- Navigation Bar -->
+    <!-- Navigation Bar (Clean Editorial Masthead — Start Logo & Top Enquire Button Removed) -->
     <header
       id="navbar"
       class="fixed top-0 left-0 w-full z-50 py-4 lg:py-6 bg-transparent border-b border-white/10 transition-all duration-500"
@@ -270,31 +448,13 @@
       <div
         class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 flex justify-between items-center"
       >
-        <a href="#home" class="group flex items-center gap-2.5 sm:gap-3 z-50">
-          <div
-            id="nav-logo-icon"
-            class="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center border bg-white/10 border-white/25 text-[#82B96B] backdrop-blur-md transition-all duration-500 shrink-0"
-          >
-            <svg
-              class="w-5 h-5 group-hover:rotate-12 transition-transform duration-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-              ></path>
-            </svg>
-          </div>
+        <a href="#home" class="group flex items-center z-50">
           <div
             id="nav-logo-text"
             class="flex flex-col text-white transition-colors duration-300"
           >
             <span
-              class="font-display text-xl sm:text-2xl tracking-wide leading-none"
+              class="font-display text-2xl sm:text-3xl tracking-wide leading-none"
               >RENU AGRO</span
             >
             <span
@@ -304,16 +464,44 @@
           </div>
         </a>
 
-        <!-- Desktop Links -->
-        <!-- Mobile Actions & Menu Toggle -->
-        <div class="flex items-center gap-2 lg:hidden z-50">
+        <!-- Desktop Navigation Links -->
+        <nav
+          class="hidden lg:flex items-center gap-1 px-2 py-1.5 rounded-full border border-white/15 bg-black/10 backdrop-blur-md"
+        >
+          <a
+            href="#home"
+            class="nav-desk-link px-4 py-2 rounded-full font-sans text-xs font-extrabold uppercase tracking-[0.14em] text-white/90 hover:text-white transition-all"
+            >Home</a
+          >
+          <a
+            href="#about"
+            class="nav-desk-link px-4 py-2 rounded-full font-sans text-xs font-extrabold uppercase tracking-[0.14em] text-white/90 hover:text-white transition-all"
+            >About</a
+          >
+          <a
+            href="#products"
+            class="nav-desk-link px-4 py-2 rounded-full font-sans text-xs font-extrabold uppercase tracking-[0.14em] text-white/90 hover:text-white transition-all"
+            >Products</a
+          >
+          <a
+            href="#process"
+            class="nav-desk-link px-4 py-2 rounded-full font-sans text-xs font-extrabold uppercase tracking-[0.14em] text-white/90 hover:text-white transition-all"
+            >Our Process</a
+          >
+          <a
+            href="#why-us"
+            class="nav-desk-link px-4 py-2 rounded-full font-sans text-xs font-extrabold uppercase tracking-[0.14em] text-white/90 hover:text-white transition-all"
+            >Why Us</a
+          >
           <a
             href="#contact"
-            id="mobile-nav-enquire"
-            class="px-3.5 py-2 rounded-full bg-white text-[#123F2A] font-sans font-extrabold text-[10px] uppercase tracking-[0.16em] shadow-sm transition-all duration-300"
+            class="nav-desk-link px-4 py-2 rounded-full font-sans text-xs font-extrabold uppercase tracking-[0.14em] text-white/90 hover:text-white transition-all"
+            >Contact</a
           >
-            Enquire
-          </a>
+        </nav>
+
+        <!-- Mobile Menu Toggle Only (Top Enquire Button Removed) -->
+        <div class="flex items-center lg:hidden z-50">
           <button
             id="mobile-toggle"
             aria-label="Toggle Menu"
@@ -605,21 +793,82 @@
         <div
           class="relative z-10 max-w-[1440px] w-full mx-auto px-4 sm:px-6 md:px-10 my-auto py-8 sm:py-12"
         >
+          <!-- Mobile Editorial Issue Tag -->
+          <div
+            class="lg:hidden flex items-center justify-between mb-4 hero-meta"
+          >
+            <span
+              class="font-sans font-extrabold text-[10px] uppercase tracking-[0.24em] text-[#82B96B]"
+              >VOL. 01 / GLOBAL HARVEST</span
+            >
+            <span class="font-editorial italic text-lg text-[#DCE9D8]"
+              >Kolhapur, India</span
+            >
+          </div>
+
           <div class="max-w-6xl">
             <h1
-              class="mobile-hero-display font-display lg:text-[10.2rem] md:text-[8.2rem] sm:text-[6rem] leading-[0.88] tracking-tight text-white"
+              id="hero-main-heading"
+              class="mobile-hero-display font-display sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem] xl:text-[8.8rem] leading-[0.9] tracking-tight text-white"
             >
-              <span class="block hero-line-1 overflow-hidden"
-                ><span class="inline-block">FROM INDIAN SOIL.</span></span
+              <span class="block hero-line-1 overflow-hidden whitespace-nowrap"
+                ><span class="inline-block hero-split-target"
+                  >FROM INDIAN SOIL.</span
+                ></span
               >
-              <span class="block mt-1.5 md:mt-2 hero-line-2 overflow-hidden">
+              <span
+                class="block mt-1.5 md:mt-2 hero-line-2 overflow-hidden whitespace-nowrap"
+              >
                 <span
-                  class="mobile-hero-italic inline-block font-editorial italic font-normal lowercase text-[#82B96B] sm:text-[6.2rem] md:text-[8.5rem] lg:text-[10.4rem] leading-[0.85] mr-2.5 sm:mr-4"
+                  class="mobile-hero-italic inline-block font-editorial italic font-normal lowercase text-[#82B96B] sm:text-[4.7rem] md:text-[6.2rem] lg:text-[7.8rem] xl:text-[9rem] leading-[0.86] mr-2 sm:mr-4"
                   >to the</span
                 >
-                <span class="inline-block">WORLD.</span>
+                <span class="inline-block hero-split-target">WORLD.</span>
               </span>
             </h1>
+          </div>
+
+          <!-- Mobile-Exclusive Overlapping Editorial Feature Strip -->
+          <div class="lg:hidden mt-6 relative hero-meta">
+            <div
+              class="relative rounded-2xl overflow-hidden border border-white/20 bg-[#17251D]/85 backdrop-blur-md p-3.5 flex items-center gap-3.5 shadow-2xl"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1537640538966-79f369143f8f?auto=format&fit=crop&w=400&q=80"
+                alt="Export Harvest"
+                class="w-16 h-16 rounded-xl object-cover shrink-0 border border-[#82B96B]/40"
+              />
+              <div class="min-w-0 flex-1">
+                <span
+                  class="font-sans font-extrabold text-[9px] uppercase tracking-[0.22em] text-[#82B96B] block"
+                  >Direct Farm-Gate To Port</span
+                >
+                <p
+                  class="font-display text-xl text-white tracking-wide leading-tight mt-0.5"
+                >
+                  11 EXPORT VERTICALS • REEFER COLD-CHAIN
+                </p>
+              </div>
+              <a
+                href="#products"
+                aria-label="Explore Products"
+                class="w-10 h-10 rounded-full bg-[#82B96B] text-[#123F2A] flex items-center justify-center shrink-0 active:scale-95 transition-transform"
+              >
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2.3"
+                    d="M7 17L17 7m0 0H8m9 0v9"
+                  ></path>
+                </svg>
+              </a>
+            </div>
           </div>
 
           <div
@@ -743,6 +992,30 @@
           <div class="flex items-center shrink-0">
             <span
               class="font-display text-xl sm:text-2xl md:text-3xl tracking-wide px-4 sm:px-6"
+              >HERBAL MORINGA POWDER</span
+            ><svg
+              class="w-4 h-4 sm:w-5 sm:h-5 text-[#123F2A] shrink-0"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="12" cy="12" r="6" />
+            </svg>
+          </div>
+          <div class="flex items-center shrink-0">
+            <span
+              class="font-display text-xl sm:text-2xl md:text-3xl tracking-wide px-4 sm:px-6"
+              >DIWALI SNACKS &amp; NAMKEENS</span
+            ><svg
+              class="w-4 h-4 sm:w-5 sm:h-5 text-[#123F2A] shrink-0"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="12" cy="12" r="6" />
+            </svg>
+          </div>
+          <div class="flex items-center shrink-0">
+            <span
+              class="font-display text-xl sm:text-2xl md:text-3xl tracking-wide px-4 sm:px-6"
               >DEVGAD ALPHONSO MANGO</span
             ><svg
               class="w-4 h-4 sm:w-5 sm:h-5 text-[#123F2A] shrink-0"
@@ -756,30 +1029,6 @@
             <span
               class="font-display text-xl sm:text-2xl md:text-3xl tracking-wide px-4 sm:px-6"
               >REEFER COLD-CHAIN LOGISTICS</span
-            ><svg
-              class="w-4 h-4 sm:w-5 sm:h-5 text-[#123F2A] shrink-0"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <circle cx="12" cy="12" r="6" />
-            </svg>
-          </div>
-          <div class="flex items-center shrink-0">
-            <span
-              class="font-display text-xl sm:text-2xl md:text-3xl tracking-wide px-4 sm:px-6"
-              >EXPORT QUALITY GRADING</span
-            ><svg
-              class="w-4 h-4 sm:w-5 sm:h-5 text-[#123F2A] shrink-0"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <circle cx="12" cy="12" r="6" />
-            </svg>
-          </div>
-          <div class="flex items-center shrink-0">
-            <span
-              class="font-display text-xl sm:text-2xl md:text-3xl tracking-wide px-4 sm:px-6"
-              >INDIAN SPICES & MILLETS</span
             ><svg
               class="w-4 h-4 sm:w-5 sm:h-5 text-[#123F2A] shrink-0"
               fill="currentColor"
@@ -816,7 +1065,19 @@
           <div class="flex items-center shrink-0">
             <span
               class="font-display text-xl sm:text-2xl md:text-3xl tracking-wide px-4 sm:px-6"
-              >DEVGAD ALPHONSO MANGO</span
+              >HERBAL MORINGA POWDER</span
+            ><svg
+              class="w-4 h-4 sm:w-5 sm:h-5 text-[#123F2A] shrink-0"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="12" cy="12" r="6" />
+            </svg>
+          </div>
+          <div class="flex items-center shrink-0">
+            <span
+              class="font-display text-xl sm:text-2xl md:text-3xl tracking-wide px-4 sm:px-6"
+              >DIWALI SNACKS &amp; NAMKEENS</span
             ><svg
               class="w-4 h-4 sm:w-5 sm:h-5 text-[#123F2A] shrink-0"
               fill="currentColor"
@@ -911,7 +1172,7 @@
                 >
                   <span
                     class="font-display text-4xl sm:text-6xl text-[#123F2A] block"
-                    >10+</span
+                    >11</span
                   >
                   <span
                     class="font-sans font-extrabold text-[10px] sm:text-[11px] uppercase tracking-[0.14em] sm:tracking-[0.16em] text-[#176B45] mt-1.5 sm:mt-2 block"
@@ -935,16 +1196,21 @@
 
             <div class="lg:col-span-5 relative">
               <div
-                class="about-clip-img relative h-[360px] sm:h-[580px] rounded-2xl sm:rounded-2xl overflow-hidden shadow-2xl"
+                class="about-clip-img relative h-[390px] sm:h-[580px] rounded-2xl sm:rounded-2xl overflow-hidden shadow-2xl"
               >
                 <img
                   src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1200&q=85"
                   alt="Lush Fields"
-                  class="w-full h-full object-cover"
+                  class="about-parallax-img w-full h-full object-cover scale-105"
                 />
                 <div
-                  class="absolute inset-0 bg-gradient-to-t from-[#123F2A]/80 via-[#123F2A]/15 to-transparent"
+                  class="absolute inset-0 bg-gradient-to-t from-[#123F2A]/85 via-[#123F2A]/20 to-transparent"
                 ></div>
+                <div
+                  class="absolute top-4 right-4 lg:hidden px-3 py-1.5 rounded-full bg-white/95 text-[#123F2A] font-sans font-extrabold text-[10px] uppercase tracking-[0.2em] shadow-lg"
+                >
+                  Est. 2018 • Kolhapur
+                </div>
                 <div
                   class="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6 text-white"
                 >
@@ -959,12 +1225,32 @@
                   </p>
                 </div>
               </div>
+
+              <!-- Mobile-Exclusive Overlapping Asymmetric Harvest Card -->
+              <div
+                class="lg:hidden relative -mt-10 ml-8 z-10 bg-[#123F2A] text-white p-5 rounded-2xl shadow-2xl border border-[#82B96B]/35 about-reveal-text"
+              >
+                <div class="flex items-center justify-between gap-3 mb-2">
+                  <span
+                    class="font-sans font-extrabold text-[10px] uppercase tracking-[0.22em] text-[#82B96B]"
+                    >Grassroots Aggregation</span
+                  >
+                  <span class="font-display text-2xl text-white/30 leading-none"
+                    >01—A</span
+                  >
+                </div>
+                <p
+                  class="font-display text-2xl tracking-wide leading-tight text-white"
+                >
+                  EXPORTER • TRADER • SUPPLIER • SOURCING PARTNER
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 02 / PRODUCTS GALLERY -->
+      <!-- 02 / PRODUCTS GALLERY (11 VERTICALS: LEFT-RIGHT COMBINATION ON PHONE + FULL GRID ON DESKTOP) -->
       <section
         id="products"
         class="bg-white text-[#123F2A] relative overflow-hidden py-16 sm:py-24"
@@ -981,7 +1267,7 @@
                 <span class="w-8 h-[2px] bg-[#176B45]"></span>
                 <span
                   class="font-sans font-extrabold text-[11px] sm:text-xs uppercase tracking-[0.22em] sm:tracking-[0.24em] text-[#176B45]"
-                  >10 Export Verticals</span
+                  >11 Export Verticals</span
                 >
               </div>
               <h2
@@ -991,7 +1277,7 @@
                 <span
                   class="font-editorial italic font-normal lowercase text-[#176B45]"
                   >finest</span
-                >
+                ><br class="lg:hidden" />
                 PORTFOLIO.
               </h2>
             </div>
@@ -999,23 +1285,24 @@
               <p
                 class="font-sans text-sm md:text-base text-[#17251D]/75 font-medium leading-relaxed"
               >
-                Browse all ten agricultural product lines—tap any category to
-                inspect varieties and request a custom export quote.
+                Explore all eleven signature export verticals—arranged in an
+                asymmetric Left–Right duet on mobile and an editorial gallery on
+                desktop. Tap any card to inspect specifications.
               </p>
             </div>
           </div>
 
-          <!-- Mobile-Only Quick Filter Rail (Hidden on Desktop lg:) -->
+          <!-- Quick Category Filter Rail (Mobile & Desktop) -->
           <div
             id="mobile-product-filters"
-            class="flex lg:hidden items-center gap-2 overflow-x-auto no-scrollbar pt-6 pb-1 -mx-4 px-4 sm:mx-0 sm:px-0"
+            class="flex items-center gap-2 overflow-x-auto no-scrollbar pt-6 pb-1 -mx-4 px-4 sm:mx-0 sm:px-0"
           >
             <button
               type="button"
               data-filter="all"
               class="mob-filter-pill shrink-0 px-4 py-2.5 rounded-full bg-[#123F2A] text-white font-sans font-extrabold text-[11px] uppercase tracking-[0.15em] transition-all"
             >
-              All (10)
+              All (11)
             </button>
             <button
               type="button"
@@ -1029,14 +1316,21 @@
               data-filter="spices"
               class="mob-filter-pill shrink-0 px-4 py-2.5 rounded-full bg-[#F7F8F3] text-[#123F2A] border border-[#123F2A]/15 font-sans font-extrabold text-[11px] uppercase tracking-[0.15em] transition-all"
             >
-              Spices &amp; Blends
+              Spices &amp; Herbal
             </button>
             <button
               type="button"
               data-filter="sweeteners"
               class="mob-filter-pill shrink-0 px-4 py-2.5 rounded-full bg-[#F7F8F3] text-[#123F2A] border border-[#123F2A]/15 font-sans font-extrabold text-[11px] uppercase tracking-[0.15em] transition-all"
             >
-              Jaggery &amp; Sugar
+              Kolhapuri Jaggery
+            </button>
+            <button
+              type="button"
+              data-filter="snacks"
+              class="mob-filter-pill shrink-0 px-4 py-2.5 rounded-full bg-[#F7F8F3] text-[#123F2A] border border-[#123F2A]/15 font-sans font-extrabold text-[11px] uppercase tracking-[0.15em] transition-all"
+            >
+              Diwali Snacks
             </button>
             <button
               type="button"
@@ -1048,11 +1342,16 @@
           </div>
         </div>
 
-        <!-- Product Cards Grid -->
-        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10">
+        <!-- Product Cards Grid:
+                 Mobile (<1024px): Left-Right 2-Column Combination (01-10 in pairs + 11 spanning 2 boxes)
+                 Desktop (>=1024px): 4-Column Luxury Export Grid (01-10 + 11 spanning 2 boxes = 3 full rows) -->
+        <div
+          id="products-grid-container"
+          class="block max-w-[1440px] mx-auto px-3.5 sm:px-6 md:px-10"
+        >
           <div
             id="products-grid"
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
+            class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 items-start"
           ></div>
         </div>
       </section>
@@ -1062,6 +1361,16 @@
         id="fruit-showcase-section"
         class="py-16 sm:py-24 md:py-36 bg-[#123F2A] text-white relative overflow-hidden"
       >
+        <!-- Mobile Oversized Watermark -->
+        <div
+          class="lg:hidden pointer-events-none select-none absolute top-10 -right-6 opacity-15"
+        >
+          <span
+            class="font-display text-[7.5rem] leading-none text-stroke-white-mob"
+            >REEFER</span
+          >
+        </div>
+
         <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 relative z-10">
           <div
             class="flex flex-col md:flex-row md:items-end justify-between border-b border-white/15 pb-6 md:pb-8 mb-8 sm:mb-14 gap-4 sm:gap-6"
@@ -1082,7 +1391,7 @@
                 <span
                   class="font-editorial italic font-normal lowercase text-[#82B96B]"
                   >export</span
-                >
+                ><br class="lg:hidden" />
                 SHOWCASE.
               </h2>
             </div>
@@ -1109,46 +1418,68 @@
             </div>
           </div>
 
-          <div class="grid lg:grid-cols-12 gap-6 lg:gap-14 items-center">
-            <!-- Swipeable Horizontal Thumb Rail on Mobile/Tablet (<1024px) | Classic Vertical List on Desktop (lg:) -->
-            <div
-              id="fruit-selector-list"
-              class="lg:col-span-5 flex lg:block overflow-x-auto lg:overflow-visible no-scrollbar snap-x snap-mandatory gap-2.5 lg:gap-0 lg:space-y-2 -mx-4 px-4 sm:mx-0 sm:px-0 pb-1 lg:pb-0"
-            ></div>
+          <div
+            class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-12 items-center"
+          >
+            <!-- Contained Centered Thumb Rail on Mobile/Tablet (<1024px) | Vertical List on Desktop (lg:) -->
+            <div class="lg:col-span-5 min-w-0 w-full overflow-hidden">
+              <div
+                id="fruit-selector-list"
+                class="flex lg:flex-col overflow-x-auto lg:overflow-visible no-scrollbar gap-2.5 lg:gap-2.5 px-1 py-1 scroll-smooth"
+              ></div>
+            </div>
+
             <div
               id="fruit-card-wrapper"
-              class="lg:col-span-7 bg-[#17251D] rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-white/15 shadow-2xl"
+              class="mob-carousel-viewport lg:col-span-7 min-w-0 w-full bg-[#17251D] rounded-3xl p-4 sm:p-8 border border-white/15 shadow-2xl relative overflow-hidden"
             >
               <div
                 id="fruit-image-stage"
-                class="relative h-[240px] sm:h-[380px] rounded-xl sm:rounded-2xl overflow-hidden mb-5 sm:mb-7"
+                class="relative h-[260px] sm:h-[380px] w-full rounded-2xl overflow-hidden mb-5 sm:mb-7 bg-[#123F2A]"
               >
                 <img
                   id="fruit-img"
                   src=""
                   alt="Fruit"
-                  class="w-full h-full object-cover"
+                  class="w-full h-full object-cover object-center will-change-transform"
                 />
                 <div
-                  class="absolute inset-0 bg-gradient-to-t from-[#17251D] via-transparent to-transparent opacity-75"
+                  class="absolute inset-0 bg-gradient-to-t from-[#17251D] via-transparent to-black/30 opacity-85"
                 ></div>
                 <div
                   id="fruit-badges"
-                  class="absolute top-3 left-3 right-3 sm:top-4 sm:left-4 sm:right-auto flex flex-wrap gap-1.5 sm:gap-2"
+                  class="absolute top-3 left-3 right-16 sm:top-4 sm:left-4 sm:right-auto flex flex-wrap gap-1.5 sm:gap-2"
                 ></div>
-              </div>
-              <div class="space-y-4 sm:space-y-5">
+                <!-- Mobile Floating Slide Counter -->
                 <div
-                  class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 sm:gap-4"
+                  class="lg:hidden absolute top-3 right-3 px-2.5 py-1 rounded-full bg-[#123F2A]/90 border border-white/20 font-display text-sm text-[#82B96B] tracking-wider"
+                  id="fruit-mob-counter"
                 >
-                  <h3
-                    id="fruit-title"
-                    class="font-display text-3xl sm:text-5xl text-white tracking-wide"
-                  ></h3>
+                  01 / 05
+                </div>
+              </div>
+
+              <div
+                id="fruit-text-stage"
+                class="space-y-4 sm:space-y-5 text-center sm:text-left"
+              >
+                <div
+                  class="flex flex-col sm:flex-row items-center sm:items-baseline justify-between gap-2.5 sm:gap-4"
+                >
+                  <div>
+                    <span
+                      id="fruit-italic-sub"
+                      class="lg:hidden font-editorial italic text-xl text-[#82B96B] block mb-0.5"
+                    ></span>
+                    <h3
+                      id="fruit-title"
+                      class="font-display text-4xl sm:text-5xl text-white tracking-wide leading-none"
+                    ></h3>
+                  </div>
                   <button
                     type="button"
                     id="fruit-enquire-btn"
-                    class="inline-flex items-center justify-center sm:justify-start gap-2 px-4 py-2.5 sm:p-0 rounded-full sm:rounded-none bg-[#82B96B]/15 sm:bg-transparent border border-[#82B96B]/40 sm:border-0 font-sans font-extrabold text-xs uppercase tracking-[0.18em] text-[#82B96B] hover:text-white transition-colors self-start sm:self-auto"
+                    class="inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:p-0 rounded-full sm:rounded-none bg-[#82B96B] sm:bg-transparent text-[#123F2A] sm:text-[#82B96B] font-sans font-extrabold text-xs uppercase tracking-[0.18em] sm:hover:text-white transition-colors active:scale-95"
                   >
                     <span>Enquire Export Lot</span>
                     <svg
@@ -1171,9 +1502,11 @@
                   class="font-sans text-sm sm:text-base text-[#DCE9D8]/85 leading-relaxed"
                 ></p>
                 <div
-                  class="grid sm:grid-cols-2 gap-3 sm:gap-4 pt-3 sm:pt-4 border-t border-white/10"
+                  class="grid sm:grid-cols-2 gap-3 sm:gap-4 pt-3 sm:pt-4 border-t border-white/10 text-left"
                 >
-                  <div class="bg-white/5 p-3.5 sm:p-4 rounded-xl">
+                  <div
+                    class="bg-white/5 p-3.5 sm:p-4 rounded-xl border border-white/5"
+                  >
                     <span
                       class="font-sans font-extrabold text-[10px] uppercase tracking-[0.2em] text-[#82B96B] block mb-1"
                       >Agricultural Sourcing</span
@@ -1183,7 +1516,9 @@
                       class="font-sans text-xs sm:text-sm text-white/90 leading-snug block"
                     ></span>
                   </div>
-                  <div class="bg-white/5 p-3.5 sm:p-4 rounded-xl">
+                  <div
+                    class="bg-white/5 p-3.5 sm:p-4 rounded-xl border border-white/5"
+                  >
                     <span
                       class="font-sans font-extrabold text-[10px] uppercase tracking-[0.2em] text-[#82B96B] block mb-1"
                       >Cold-Chain Handling</span
@@ -1194,6 +1529,60 @@
                     ></span>
                   </div>
                 </div>
+              </div>
+
+              <!-- Mobile-Only Orchard Carousel Navigation Bar -->
+              <div
+                class="lg:hidden mt-5 pt-4 border-t border-white/10 flex items-center gap-3"
+              >
+                <button
+                  type="button"
+                  id="fruit-mob-prev"
+                  aria-label="Previous Fruit"
+                  class="w-11 h-11 rounded-full border border-white/25 text-white flex items-center justify-center shrink-0 active:bg-[#82B96B] active:text-[#123F2A] transition-colors"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2.2"
+                      d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                    ></path>
+                  </svg>
+                </button>
+                <div
+                  class="flex-1 h-[3px] bg-white/15 rounded-full overflow-hidden"
+                >
+                  <div
+                    id="fruit-mob-progress"
+                    class="h-full bg-[#82B96B] w-[20%] transition-all duration-500"
+                  ></div>
+                </div>
+                <button
+                  type="button"
+                  id="fruit-mob-next"
+                  aria-label="Next Fruit"
+                  class="w-11 h-11 rounded-full bg-[#82B96B] text-[#123F2A] flex items-center justify-center shrink-0 active:scale-95 transition-transform"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2.2"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    ></path>
+                  </svg>
+                </button>
               </div>
             </div>
           </div>
@@ -1208,12 +1597,12 @@
         <div
           class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 space-y-20 sm:space-y-28 md:space-y-36"
         >
-          <!-- Spices -->
+          <!-- Spices: Desktop Grid Preserved (lg:grid) + Mobile Interactive Culinary Carousel (<1024px) -->
           <div
             class="spices-block grid lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-16 items-center"
           >
             <div
-              class="lg:col-span-6 relative h-[300px] sm:h-[540px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl group"
+              class="hidden lg:block lg:col-span-6 relative h-[300px] sm:h-[540px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl group"
             >
               <img
                 src="https://images.unsplash.com/photo-1588252303782-cb80119abd6d?auto=format&fit=crop&w=1200&q=85"
@@ -1251,7 +1640,7 @@
                 <span
                   class="font-editorial italic font-normal lowercase text-[#176B45]"
                   >golden</span
-                >
+                ><br class="lg:hidden" />
                 TURMERIC.
               </h2>
               <p
@@ -1261,7 +1650,111 @@
                 delivers vibrant color value, pungent heat, and rich essential
                 oils across whole, fresh, and finely ground formats.
               </p>
-              <div class="grid grid-cols-2 gap-3 sm:gap-4">
+
+              <!-- Mobile-Exclusive Interactive Spice Origins Carousel (< 1024px) -->
+              <div class="lg:hidden space-y-4">
+                <div
+                  id="mob-spice-stage"
+                  class="mob-carousel-viewport relative h-[390px] rounded-3xl overflow-hidden bg-[#123F2A] text-white shadow-2xl border border-[#123F2A]/15"
+                >
+                  <img
+                    id="mob-spice-img"
+                    src="https://images.unsplash.com/photo-1588252303782-cb80119abd6d?auto=format&fit=crop&w=1000&q=85"
+                    alt="Indian Spices"
+                    class="absolute inset-0 w-full h-full object-cover"
+                  />
+                  <div
+                    class="absolute inset-0 bg-gradient-to-t from-[#123F2A] via-[#123F2A]/40 to-black/20"
+                  ></div>
+                  <div
+                    class="relative z-10 p-5 flex justify-between items-center"
+                  >
+                    <span
+                      id="mob-spice-tag"
+                      class="px-3 py-1 rounded-full bg-[#82B96B] text-[#123F2A] font-sans font-extrabold text-[10px] uppercase tracking-[0.18em]"
+                      >Origin Spice 01 / 04</span
+                    >
+                    <span
+                      id="mob-spice-num"
+                      class="font-display text-4xl text-white/80"
+                      >01</span
+                    >
+                  </div>
+                  <div
+                    id="mob-spice-content"
+                    class="absolute bottom-0 left-0 right-0 z-10 p-5 space-y-2"
+                  >
+                    <span
+                      id="mob-spice-kicker"
+                      class="font-editorial italic text-2xl text-[#82B96B] block"
+                      >High Color &amp; Pungency</span
+                    >
+                    <h3
+                      id="mob-spice-title"
+                      class="font-display text-4xl text-white leading-[0.9]"
+                    >
+                      RED CHILLI &amp; POWDER
+                    </h3>
+                    <p
+                      id="mob-spice-desc"
+                      class="font-sans text-xs text-[#DCE9D8]/95 leading-relaxed"
+                    >
+                      Stemless sun-dried whole pods and vibrant fine-mesh chilli
+                      powder sorted for export heat and rich natural color
+                      value.
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between gap-3">
+                  <button
+                    type="button"
+                    id="mob-spice-prev"
+                    aria-label="Previous Spice"
+                    class="w-11 h-11 rounded-full border-2 border-[#123F2A] text-[#123F2A] flex items-center justify-center shrink-0 active:bg-[#123F2A] active:text-white transition-colors"
+                  >
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2.2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                      ></path>
+                    </svg>
+                  </button>
+                  <div
+                    id="mob-spice-Indicators"
+                    class="flex-1 flex items-center justify-center gap-2"
+                  ></div>
+                  <button
+                    type="button"
+                    id="mob-spice-next"
+                    aria-label="Next Spice"
+                    class="w-11 h-11 rounded-full bg-[#123F2A] text-white flex items-center justify-center shrink-0 active:scale-95 transition-transform"
+                  >
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2.2"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Desktop 2x2 Spice Cards (Preserved for >= 1024px) -->
+              <div class="hidden lg:grid grid-cols-2 gap-3 sm:gap-4">
                 <div
                   class="p-4 sm:p-5 rounded-2xl bg-white border border-[#123F2A]/10"
                 >
@@ -1450,22 +1943,32 @@
               </div>
             </div>
             <div
-              class="lg:col-span-6 order-1 lg:order-2 relative h-[300px] sm:h-[540px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl group"
+              class="lg:col-span-6 order-1 lg:order-2 relative h-[320px] sm:h-[540px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl group bg-[#123F2A]"
             >
               <img
-                src="https://images.unsplash.com/photo-1615485500704-8e990f9900f7?auto=format&fit=crop&w=1200&q=85"
-                alt="Kolhapuri Jaggery"
+                src="https://commons.wikimedia.org/wiki/Special:FilePath/A_Jaggery.JPG"
+                onerror="
+                  this.onerror = null;
+                  this.src =
+                    'https://commons.wikimedia.org/wiki/Special:FilePath/Traditional_Jaggery_making_in_India.jpg';
+                "
+                alt="Authentic Golden Kolhapuri Jaggery Blocks"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
               />
               <div
-                class="absolute inset-0 bg-gradient-to-t from-[#123F2A]/85 via-transparent to-transparent"
+                class="absolute inset-0 bg-gradient-to-t from-[#123F2A]/90 via-[#123F2A]/20 to-transparent"
               ></div>
+              <div
+                class="absolute top-4 right-4 px-3.5 py-1.5 rounded-full bg-[#82B96B] text-[#123F2A] font-sans font-extrabold text-[10px] uppercase tracking-[0.2em] shadow-lg"
+              >
+                100% Pure Cane Gur
+              </div>
               <div
                 class="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6 text-white"
               >
                 <span
                   class="font-sans font-extrabold text-[10px] uppercase tracking-[0.24em] text-[#82B96B] block"
-                  >Kolhapur Heritage</span
+                  >Kolhapur Sugarcane Heritage</span
                 >
                 <p class="font-display text-2xl sm:text-4xl mt-1">
                   1 KG • 2 KG • 5 KG • 10 KG PACKS
@@ -1473,6 +1976,42 @@
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <!-- MOBILE-EXCLUSIVE EDITORIAL HORIZONTAL LOOKBOOK: GRAINS, MORINGA & SPECIALTY HARVEST (< 1024px) -->
+      <section
+        class="lg:hidden py-16 bg-[#17251D] text-white relative overflow-hidden border-t border-white/10"
+      >
+        <div class="px-4 sm:px-6 mb-7">
+          <div class="flex items-center gap-3 mb-2.5">
+            <span class="font-display text-2xl text-[#82B96B]">04C</span>
+            <span class="w-8 h-[2px] bg-[#82B96B]"></span>
+            <span
+              class="font-sans font-extrabold text-[10px] uppercase tracking-[0.24em] text-[#82B96B]"
+              >Specialty Export Pantry</span
+            >
+          </div>
+          <div class="flex items-end justify-between gap-4">
+            <h2 class="mobile-section-display font-display text-white">
+              MORINGA, GRAINS &amp;<br /><span
+                class="font-editorial italic font-normal lowercase text-[#82B96B]"
+                >specialty</span
+              >
+              HARVEST.
+            </h2>
+          </div>
+          <p class="font-sans text-xs text-[#DCE9D8]/80 mt-3 leading-relaxed">
+            Swipe horizontally across our nutrient-dense Herbal Moringa Powder,
+            Indian millets, kernels, dehydrated produce, and living microgreens.
+          </p>
+        </div>
+
+        <div
+          id="mob-specialty-rail"
+          class="flex overflow-x-auto no-scrollbar snap-x snap-mandatory gap-4 px-4 sm:px-6 pb-4"
+        >
+          <!-- Populated dynamically from authentic Renu Agro specialty verticals -->
         </div>
       </section>
 
@@ -1522,7 +2061,7 @@
       <!-- 06 / WHY CHOOSE US -->
       <section
         id="why-us"
-        class="py-16 sm:py-24 md:py-36 bg-[#DCE9D8]/55 relative overflow-hidden"
+        class="py-16 sm:py-24 md:py-36 bg-[#DCE9D8]/55 relative overflow-hidden lg:overflow-hidden"
       >
         <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10">
           <div
@@ -1542,9 +2081,9 @@
               >
             </h2>
           </div>
-          <div class="grid lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+          <div class="grid lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
             <div
-              class="why-card group bg-white hover:bg-[#123F2A] text-[#123F2A] hover:text-white p-6 sm:p-11 rounded-2xl sm:rounded-3xl border border-[#123F2A]/12 transition-all duration-500 flex flex-col justify-between lg:min-h-[390px] shadow-sm"
+              class="why-card mob-sticky-card-1 group bg-white hover:bg-[#123F2A] text-[#123F2A] hover:text-white p-6 sm:p-11 rounded-3xl border-2 lg:border border-[#123F2A]/15 transition-all duration-500 flex flex-col justify-between lg:min-h-[390px] shadow-xl lg:shadow-sm"
             >
               <div class="flex justify-between items-start">
                 <div
@@ -1565,7 +2104,7 @@
                   </svg>
                 </div>
                 <span
-                  class="font-display text-5xl sm:text-6xl text-stroke-forest group-hover:text-[#82B96B]"
+                  class="font-display text-6xl text-stroke-forest group-hover:text-[#82B96B]"
                   >01</span
                 >
               </div>
@@ -1574,7 +2113,7 @@
                   class="font-sans font-extrabold text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-[#176B45] group-hover:text-[#82B96B] block"
                   >Strict Farm-to-Port Grading</span
                 >
-                <h3 class="font-display text-3xl sm:text-5xl">
+                <h3 class="font-display text-4xl sm:text-5xl">
                   Premium Quality
                 </h3>
                 <p
@@ -1588,14 +2127,14 @@
             </div>
 
             <div
-              class="why-card group bg-white hover:bg-[#123F2A] text-[#123F2A] hover:text-white p-6 sm:p-11 rounded-2xl sm:rounded-3xl border border-[#123F2A]/12 transition-all duration-500 flex flex-col justify-between lg:min-h-[390px] shadow-sm"
+              class="why-card mob-sticky-card-2 group bg-[#123F2A] lg:bg-white hover:bg-[#123F2A] text-white lg:text-[#123F2A] hover:text-white p-6 sm:p-11 rounded-3xl border-2 lg:border border-[#82B96B]/30 lg:border-[#123F2A]/12 transition-all duration-500 flex flex-col justify-between lg:min-h-[390px] shadow-2xl lg:shadow-sm"
             >
               <div class="flex justify-between items-start">
                 <div
-                  class="w-13 h-13 sm:w-16 sm:h-16 p-3.5 sm:p-0 rounded-2xl bg-[#DCE9D8] group-hover:bg-[#176B45] flex items-center justify-center transition-colors"
+                  class="w-13 h-13 sm:w-16 sm:h-16 p-3.5 sm:p-0 rounded-2xl bg-[#176B45] lg:bg-[#DCE9D8] group-hover:bg-[#176B45] flex items-center justify-center transition-colors"
                 >
                   <svg
-                    class="w-6 h-6 sm:w-7 sm:h-7 text-[#123F2A] group-hover:text-[#82B96B]"
+                    class="w-6 h-6 sm:w-7 sm:h-7 text-[#82B96B] lg:text-[#123F2A] group-hover:text-[#82B96B]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -1609,20 +2148,20 @@
                   </svg>
                 </div>
                 <span
-                  class="font-display text-5xl sm:text-6xl text-stroke-forest group-hover:text-[#82B96B]"
+                  class="font-display text-6xl text-[#82B96B] lg:text-stroke-forest group-hover:text-[#82B96B]"
                   >02</span
                 >
               </div>
               <div class="mt-6 sm:mt-12 space-y-2.5 sm:space-y-3">
                 <span
-                  class="font-sans font-extrabold text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-[#176B45] group-hover:text-[#82B96B] block"
+                  class="font-sans font-extrabold text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-[#82B96B] lg:text-[#176B45] group-hover:text-[#82B96B] block"
                   >Reefer Cold-Chain Precision</span
                 >
-                <h3 class="font-display text-3xl sm:text-5xl">
+                <h3 class="font-display text-4xl sm:text-5xl">
                   On-Time Delivery
                 </h3>
                 <p
-                  class="font-sans text-sm sm:text-base text-[#17251D]/75 group-hover:text-[#DCE9D8]/90 leading-relaxed pt-1 sm:pt-2"
+                  class="font-sans text-sm sm:text-base text-[#DCE9D8]/90 lg:text-[#17251D]/75 group-hover:text-[#DCE9D8]/90 leading-relaxed pt-1 sm:pt-2"
                 >
                   Temperature-controlled logistics using modern reefer
                   containers safeguard delicate fruit freshness and ensure
@@ -1632,7 +2171,7 @@
             </div>
 
             <div
-              class="why-card group bg-white hover:bg-[#123F2A] text-[#123F2A] hover:text-white p-6 sm:p-11 rounded-2xl sm:rounded-3xl border border-[#123F2A]/12 transition-all duration-500 flex flex-col justify-between lg:min-h-[390px] shadow-sm"
+              class="why-card mob-sticky-card-3 group bg-white hover:bg-[#123F2A] text-[#123F2A] hover:text-white p-6 sm:p-11 rounded-3xl border-2 lg:border border-[#123F2A] lg:border-[#123F2A]/12 transition-all duration-500 flex flex-col justify-between lg:min-h-[390px] shadow-2xl lg:shadow-sm"
             >
               <div class="flex justify-between items-start">
                 <div
@@ -1653,7 +2192,7 @@
                   </svg>
                 </div>
                 <span
-                  class="font-display text-5xl sm:text-6xl text-stroke-forest group-hover:text-[#82B96B]"
+                  class="font-display text-6xl text-stroke-forest group-hover:text-[#82B96B]"
                   >03</span
                 >
               </div>
@@ -1662,7 +2201,7 @@
                   class="font-sans font-extrabold text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-[#176B45] group-hover:text-[#82B96B] block"
                   >Direct Farmer Network Advantage</span
                 >
-                <h3 class="font-display text-3xl sm:text-5xl">
+                <h3 class="font-display text-4xl sm:text-5xl">
                   Competitive Pricing
                 </h3>
                 <p
@@ -2188,34 +2727,15 @@
           class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-12 pb-12 sm:pb-16 border-b border-white/15"
         >
           <div class="col-span-2 lg:col-span-4 space-y-4 sm:space-y-5">
-            <div class="flex items-center gap-3">
-              <div
-                class="w-11 h-11 rounded-full bg-[#176B45] flex items-center justify-center shrink-0"
+            <div>
+              <span
+                class="font-display text-3xl sm:text-4xl tracking-wide block leading-none"
+                >RENU AGRO SERVICES</span
               >
-                <svg
-                  class="w-5 h-5 text-[#82B96B]"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                  ></path>
-                </svg>
-              </div>
-              <div>
-                <span
-                  class="font-display text-2xl sm:text-3xl tracking-wide block leading-none"
-                  >RENU AGRO SERVICES</span
-                >
-                <span
-                  class="font-sans text-[10px] font-extrabold uppercase tracking-[0.22em] sm:tracking-[0.24em] text-[#82B96B]"
-                  >Est. 2018 • Kolhapur, India</span
-                >
-              </div>
+              <span
+                class="font-sans text-[10px] font-extrabold uppercase tracking-[0.22em] sm:tracking-[0.24em] text-[#82B96B] mt-1 block"
+                >Est. 2018 • Kolhapur, India</span
+              >
             </div>
             <p class="font-editorial italic text-xl sm:text-2xl text-[#DCE9D8]">
               &ldquo;Connecting Nature&apos;s Bounty to the Global
@@ -2290,22 +2810,22 @@
               </li>
               <li>
                 <a href="#products" class="hover:text-white"
+                  >Herbal Moringa Powder</a
+                >
+              </li>
+              <li>
+                <a href="#products" class="hover:text-white"
+                  >Diwali Snacks &amp; Namkeens</a
+                >
+              </li>
+              <li>
+                <a href="#products" class="hover:text-white"
                   >Red Chilli, Ginger &amp; Turmeric</a
                 >
               </li>
               <li>
                 <a href="#products" class="hover:text-white"
-                  >Millets &amp; Millet Flour</a
-                >
-              </li>
-              <li>
-                <a href="#products" class="hover:text-white"
-                  >Cashews, Raisins &amp; Raw Sugar</a
-                >
-              </li>
-              <li>
-                <a href="#products" class="hover:text-white"
-                  >Dehydrated &amp; Microgreens</a
+                  >Millets, Cashews &amp; Raisins</a
                 >
               </li>
             </ul>
@@ -2468,6 +2988,17 @@
               >
               <div id="modal-specs" class="flex flex-wrap gap-2"></div>
             </div>
+            <!-- Optional 8-Photo Thumbnail Strip (Shown exclusively for Diwali Snacks & Namkeens: 1.jpeg - 8.jpeg) -->
+            <div id="modal-gallery-wrap" class="hidden pt-4 space-y-2">
+              <span
+                class="font-sans font-extrabold text-[10px] uppercase tracking-[0.2em] text-[#176B45] block"
+                >Festive Assortment Gallery (Tap to Preview)</span
+              >
+              <div
+                id="modal-gallery-thumbs"
+                class="grid grid-cols-4 gap-2"
+              ></div>
+            </div>
           </div>
           <div class="pt-4 border-t border-[#123F2A]/10">
             <button
@@ -2497,6 +3028,36 @@
 
     <!-- SCRIPT -->
     <script>
+      // Smart Local Image Resolver for Diwali Snacks & Namkeens (1.jpeg - 8.jpeg / 1.JPEG - 8.JPEG)
+      const diwaliSnackFiles = [
+        { num: 1, label: "Festive Assortment 01", tag: "Traditional Faral" },
+        { num: 2, label: "Crispy Namkeen 02", tag: "Spiced Savory" },
+        { num: 3, label: "Handcrafted Chakli 03", tag: "Crunchy Spiral" },
+        { num: 4, label: "Royal Chivda Mix 04", tag: "Roasted Blend" },
+        { num: 5, label: "Diwali Special 05", tag: "Artisanal Batch" },
+        { num: 6, label: "Savory Crunch 06", tag: "Export Pack" },
+        { num: 7, label: "Heritage Delicacy 07", tag: "Golden Crisp" },
+        { num: 8, label: "Festive Gift Lot 08", tag: "Freshly Sealed" },
+      ];
+
+      window.handleDiwaliImgError = function (imgEl, num) {
+        const candidates = [
+          `${num}.JPEG`,
+          `./${num}.jpeg`,
+          `./${num}.JPEG`,
+          `images/${num}.jpeg`,
+          `images/${num}.JPEG`,
+          `${num}.jpg`,
+          `${num}.JPG`,
+          `https://placehold.co/800x900/123F2A/DCE9D8?text=Diwali+Snack+${num}.jpeg`,
+        ];
+        const step = parseInt(imgEl.dataset.tryIdx || "0", 10);
+        if (step < candidates.length) {
+          imgEl.dataset.tryIdx = String(step + 1);
+          imgEl.src = candidates[step];
+        }
+      };
+
       const productCategories = [
         {
           id: "01",
@@ -2542,7 +3103,9 @@
           desc: "Authentic chemical-free golden Kolhapuri jaggery crafted from rich river-basin sugarcane in solid blocks, cubes, and free-flowing powder.",
           specs: ["Blocks, Cubes & Powder", "1 kg / 2 kg / 5 kg / 10 kg"],
           image:
-            "https://images.unsplash.com/photo-1587049352847-4a222e784d38?auto=format&fit=crop&w=1000&q=85",
+            "https://commons.wikimedia.org/wiki/Special:FilePath/A_Jaggery.JPG",
+          fallbackImage:
+            "https://commons.wikimedia.org/wiki/Special:FilePath/Traditional_Jaggery_making_in_India.jpg",
         },
         {
           id: "05",
@@ -2604,17 +3167,34 @@
         },
         {
           id: "10",
-          group: "sweeteners",
-          name: "Raw Sugar",
-          subtitle: "Unbleached Cane Crystals",
-          desc: "Natural golden raw cane sugar from Maharashtra sugar belts offering rich molasses notes and clean crystal structure.",
+          group: "spices",
+          name: "Herbal Moringa Powder",
+          subtitle: "Pure Botanical Superleaf",
+          desc: "100% natural shade-dried Indian Moringa oleifera leaf powder finely milled to lock in vibrant green chlorophyll, plant protein, and antioxidants.",
           specs: [
-            "Maharashtra Cane Belt",
-            "Natural Golden Hue",
-            "Bulk Trade Bags",
+            "Shade-Dried Moringa",
+            "Fine Export Mesh",
+            "Bulk & Retail Packs",
           ],
           image:
-            "https://images.unsplash.com/photo-1581441363689-1f3c3c414635?auto=format&fit=crop&w=1000&q=85",
+            "https://commons.wikimedia.org/wiki/Special:FilePath/Moringa_leaves_powder.jpg",
+          fallbackImage:
+            "https://commons.wikimedia.org/wiki/Special:FilePath/Moringa_oleifera_powder.jpg",
+        },
+        {
+          id: "11",
+          group: "snacks",
+          name: "Diwali Snacks & Namkeens",
+          subtitle: "Festive Indian Savories",
+          desc: "Crispy handcrafted Diwali faral, chakli, spiced chivda, shankarpali, and traditional Indian namkeens hygienically sealed for global festive markets.",
+          specs: [
+            "8 Festive Varieties",
+            "Aroma-Locked Packs",
+            "Authentic Recipe",
+          ],
+          image: "1.jpeg",
+          localNum: 1,
+          galleryNums: [1, 2, 3, 4, 5, 6, 7, 8],
         },
       ];
 
@@ -2722,88 +3302,56 @@
         },
       ];
 
+      const mobileSpicesData = [
+        {
+          num: "01",
+          tag: "Origin Spice 01 / 04",
+          kicker: "High Color & Pungency",
+          title: "RED CHILLI & POWDER",
+          desc: "Stemless sun-dried whole pods and vibrant fine-mesh chilli powder sorted for export heat and rich natural color value.",
+          image:
+            "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?auto=format&fit=crop&w=1000&q=85",
+        },
+        {
+          num: "02",
+          tag: "Origin Spice 02 / 04",
+          kicker: "Clean-Washed Rhizomes",
+          title: "FRESH INDIAN GINGER",
+          desc: "Plump, fiber-balanced, aromatic fresh ginger rhizomes harvested from fertile soils and hygienically graded for export.",
+          image:
+            "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=1000&q=85",
+        },
+        {
+          num: "03",
+          tag: "Origin Spice 03 / 04",
+          kicker: "High-Curcumin Potency",
+          title: "GOLDEN TURMERIC",
+          desc: "Sun-cured golden turmeric fingers and finely milled powder celebrated across Maharashtra for deep earthy aroma.",
+          image:
+            "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?auto=format&fit=crop&w=1000&q=85",
+        },
+        {
+          num: "04",
+          tag: "Origin Spice 04 / 04",
+          kicker: "Traditional Roasted Craft",
+          title: "MASALAS & CHUTNEYS",
+          desc: "Authentic regional Indian spice blends and dry/wet chutneys crafted from slow-roasted whole spices.",
+          image:
+            "https://images.unsplash.com/photo-1532336414038-cf19250c5757?auto=format&fit=crop&w=1000&q=85",
+        },
+      ];
+
+      let activeProductCarouselIdx = 0;
+      let activeSpiceIdx = 0;
       let activeFruitIndex = 0;
       let selectedJaggeryPack = "5 kg";
       let currentModalCategory = null;
+      let activeProductFilter = "all";
 
-      document.getElementById("current-year").textContent =
-        new Date().getFullYear();
+      const yearEl = document.getElementById("current-year");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-      // Render Products
-      const gridEl = document.getElementById("products-grid");
-      productCategories.forEach((cat) => {
-        const article = document.createElement("article");
-        article.setAttribute("data-group", cat.group);
-        article.className =
-          "product-card-item group relative h-[370px] sm:h-[500px] rounded-2xl overflow-hidden bg-[#123F2A] cursor-pointer border border-[#123F2A]/10 flex flex-col justify-between active:scale-[0.99] transition-transform";
-        const specTagsHtml = cat.specs
-          .slice(0, 3)
-          .map(
-            (sp) =>
-              `<span class="text-[10px] font-sans font-bold text-white/95 bg-white/15 backdrop-blur-sm px-2.5 py-1 rounded-md">${sp}</span>`,
-          )
-          .join("");
-        article.innerHTML = `
-                <img src="${cat.image}" alt="${cat.name}" loading="lazy" class="absolute inset-0 w-full h-full object-cover opacity-85 group-hover:scale-110 group-hover:opacity-65 transition-all duration-700 ease-out">
-                <div class="absolute inset-0 bg-gradient-to-t from-[#123F2A] via-[#123F2A]/45 to-black/25"></div>
-                <div class="relative z-10 p-5 sm:p-6 flex justify-between items-start">
-                    <span class="font-display text-4xl sm:text-5xl text-white/90 leading-none">${cat.id}</span>
-                    <span class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center text-white group-hover:bg-[#82B96B] group-hover:text-[#123F2A] transition-all">
-                        <svg class="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-45 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7m0 0H8m9 0v9"></path></svg>
-                    </span>
-                </div>
-                <div class="relative z-10 p-5 sm:p-7 space-y-2.5 sm:space-y-3">
-                    <span class="inline-block font-sans font-extrabold text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.22em] text-[#82B96B] bg-[#123F2A]/85 backdrop-blur-sm px-3 py-1 rounded-full">${cat.subtitle}</span>
-                    <h3 class="font-display text-3xl sm:text-4xl text-white leading-[0.92]">${cat.name}</h3>
-                    <p class="font-sans text-xs sm:text-sm text-[#DCE9D8]/90 line-clamp-2 leading-relaxed">${cat.desc}</p>
-                    <div class="flex flex-wrap gap-1.5 pt-1 lg:hidden">${specTagsHtml}</div>
-                </div>
-            `;
-        article.addEventListener("click", () => openModal(cat));
-        gridEl.appendChild(article);
-      });
-
-      // Mobile Quick Filter Pills Logic (Desktop always displays all cards)
-      document.querySelectorAll(".mob-filter-pill").forEach((pill) => {
-        pill.addEventListener("click", () => {
-          const filter = pill.getAttribute("data-filter");
-          document.querySelectorAll(".mob-filter-pill").forEach((p) => {
-            p.className =
-              "mob-filter-pill shrink-0 px-4 py-2.5 rounded-full bg-[#F7F8F3] text-[#123F2A] border border-[#123F2A]/15 font-sans font-extrabold text-[11px] uppercase tracking-[0.15em] transition-all";
-          });
-          pill.className =
-            "mob-filter-pill shrink-0 px-4 py-2.5 rounded-full bg-[#123F2A] text-white font-sans font-extrabold text-[11px] uppercase tracking-[0.15em] transition-all shadow-sm";
-
-          document.querySelectorAll(".product-card-item").forEach((card) => {
-            const matches =
-              filter === "all" || card.getAttribute("data-group") === filter;
-            if (matches) {
-              card.classList.remove("hidden");
-              if (window.gsap) {
-                gsap.fromTo(
-                  card,
-                  { y: 18, opacity: 0 },
-                  { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" },
-                );
-              }
-            } else {
-              card.classList.add("hidden");
-            }
-          });
-          if (window.ScrollTrigger) ScrollTrigger.refresh();
-        });
-      });
-
-      // Ensure all cards restore if resized to desktop
-      window.addEventListener("resize", () => {
-        if (window.innerWidth >= 1024) {
-          document
-            .querySelectorAll(".product-card-item")
-            .forEach((c) => c.classList.remove("hidden"));
-        }
-      });
-
-      // Form Select Dropdown
+      // Populate Form Category Select Dropdown
       const selectEl = document.getElementById("form-category");
       if (selectEl) {
         productCategories.forEach((cat) => {
@@ -2814,44 +3362,364 @@
         });
       }
 
-      // Fruit Selector (Horizontal Touch Pill Rail on Mobile/Tablet | Vertical Interactive List on Desktop)
+      function selectCategoryInForm(catName) {
+        if (selectEl && catName) {
+          const exists = Array.from(selectEl.options).some(
+            (o) => o.value === catName,
+          );
+          if (!exists) {
+            const customOpt = document.createElement("option");
+            customOpt.value = catName;
+            customOpt.textContent = catName;
+            selectEl.appendChild(customOpt);
+          }
+          selectEl.value = catName;
+        }
+        const fCont = document.getElementById("form-container");
+        const fSucc = document.getElementById("form-success");
+        if (fCont && fSucc) {
+          fCont.classList.remove("hidden");
+          fSucc.classList.add("hidden");
+        }
+        document
+          .getElementById("contact")
+          ?.scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Reliable preloader: dismiss once, even if an animation library fails to load.
+      let preloaderCompleted = false;
+      function startBrandedPreloader() {
+        const preloader = document.getElementById("preloader");
+        if (!preloader || preloaderCompleted) return;
+        preloaderCompleted = true;
+
+        const percentEl = document.getElementById("loader-percent");
+        const barEl = document.getElementById("loader-bar");
+        if (percentEl) percentEl.textContent = "100%";
+        if (barEl) barEl.style.width = "100%";
+
+        const revealSite = () => {
+          preloader.style.display = "none";
+          if (typeof initGSAPAnimations === "function") initGSAPAnimations();
+        };
+
+        if (window.gsap && typeof window.gsap.to === "function") {
+          window.gsap.to(preloader, {
+            yPercent: -100,
+            duration: 0.45,
+            ease: "power3.inOut",
+            onComplete: revealSite,
+          });
+        } else {
+          preloader.style.transition =
+            "transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)";
+          preloader.style.transform = "translateY(-100%)";
+          window.setTimeout(revealSite, 500);
+        }
+      }
+
+      // Start as soon as the document is ready. The timeout is a fail-safe
+      // so the overlay can never trap the visitor on the loading screen.
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", startBrandedPreloader, {
+          once: true,
+        });
+      } else {
+        startBrandedPreloader();
+      }
+      window.addEventListener("load", startBrandedPreloader, { once: true });
+      window.setTimeout(startBrandedPreloader, 2500);
+
+      // Helper: Touch Swipe Gesture Binder for Next-Gen Mobile Carousels
+      function attachSwipeGesture(element, onNext, onPrev) {
+        if (!element) return;
+        let startX = 0;
+        let startY = 0;
+        let isTouching = false;
+
+        element.addEventListener(
+          "touchstart",
+          (e) => {
+            if (!e.touches || !e.touches.length) return;
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            isTouching = true;
+          },
+          { passive: true },
+        );
+
+        element.addEventListener(
+          "touchend",
+          (e) => {
+            if (!isTouching || !e.changedTouches || !e.changedTouches.length)
+              return;
+            isTouching = false;
+            const diffX = e.changedTouches[0].clientX - startX;
+            const diffY = e.changedTouches[0].clientY - startY;
+            if (
+              Math.abs(diffX) > 42 &&
+              Math.abs(diffX) > Math.abs(diffY) * 1.2
+            ) {
+              if (diffX < 0) onNext();
+              else onPrev();
+            }
+          },
+          { passive: true },
+        );
+      }
+
+      // =====================================================================
+      // RENDER 11-VERTICAL LEFT-RIGHT COMBINATION GRID (MOBILE 2-COL DUET + DESKTOP 4-COL)
+      // =====================================================================
+      const gridEl = document.getElementById("products-grid");
+      function renderProductsGrid(filterGroup = "all") {
+        if (!gridEl) return;
+        gridEl.innerHTML = "";
+        const filtered =
+          filterGroup === "all"
+            ? productCategories
+            : productCategories.filter((c) => c.group === filterGroup);
+
+        filtered.forEach((cat, idx) => {
+          const isDiwaliWide = cat.id === "11";
+          const isLeftCol = idx % 2 === 0;
+          const article = document.createElement("article");
+          article.dataset.side = isDiwaliWide
+            ? "wide"
+            : isLeftCol
+              ? "left"
+              : "right";
+
+          if (isDiwaliWide) {
+            // 11th Tab: Spans size of TWO boxes (col-span-2) on both Mobile & Desktop with 1.jpeg–8.jpeg built right in
+            article.className =
+              "product-card-item product-card-wide col-span-2 lg:col-span-2 group relative min-h-[340px] sm:h-[420px] lg:h-[470px] rounded-2xl overflow-hidden bg-[#123F2A] cursor-pointer border border-[#123F2A]/15 flex flex-col justify-between shadow-lg hover:shadow-2xl transition-shadow duration-500";
+            article.innerHTML = `
+                        <img id="diwali-card-hero-img" src="1.jpeg" onerror="window.handleDiwaliImgError(this, 1)" alt="${cat.name}" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover object-center opacity-85 group-hover:scale-105 transition-transform duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#123F2A] via-[#123F2A]/55 to-black/30"></div>
+                        <div class="relative z-10 p-4 sm:p-6 flex justify-between items-start">
+                            <div class="flex items-center gap-3">
+                                <span class="font-display text-4xl sm:text-5xl text-white/95 leading-none">${cat.id}</span>
+                                <span class="px-3 py-1 rounded-full bg-[#82B96B] text-[#123F2A] font-sans font-extrabold text-[9px] sm:text-[10px] uppercase tracking-[0.2em]">Festive Special • 8 Varieties</span>
+                            </div>
+                            <span class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center text-white group-hover:bg-[#82B96B] group-hover:text-[#123F2A] group-hover:border-[#82B96B] transition-colors duration-300">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-45 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7m0 0H8m9 0v9"></path></svg>
+                            </span>
+                        </div>
+                        <div class="relative z-10 p-4 sm:p-6 space-y-3">
+                            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+                                <div>
+                                    <span class="inline-block font-sans font-extrabold text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-[#82B96B] bg-[#123F2A]/90 px-2.5 py-1 rounded-full mb-1.5">${cat.subtitle}</span>
+                                    <h3 class="font-display text-2xl sm:text-4xl lg:text-5xl text-white leading-[0.92] tracking-wide">${cat.name}</h3>
+                                </div>
+                                <span class="font-sans text-[10px] sm:text-xs font-extrabold uppercase tracking-[0.16em] text-[#DCE9D8]/90">Tap any photo or card to inspect</span>
+                            </div>
+                            <p class="font-sans text-xs sm:text-sm text-[#DCE9D8]/90 leading-relaxed max-w-2xl">${cat.desc}</p>
+                            <!-- Embedded 1.jpeg to 8.jpeg Interactive Preview Strip inside the 2-Box Card -->
+                            <div class="grid grid-cols-8 gap-1.5 sm:gap-2 pt-1">
+                                ${cat.galleryNums
+                                  .map(
+                                    (num) => `
+                                    <button type="button" data-snack-num="${num}" aria-label="Preview Diwali Snack ${num}" class="diwali-inline-thumb relative h-10 sm:h-14 rounded-lg overflow-hidden border ${num === 1 ? "border-[#82B96B] ring-2 ring-[#82B96B]/60" : "border-white/25 opacity-80 hover:opacity-100"} transition-all">
+                                        <img src="${num}.jpeg" onerror="window.handleDiwaliImgError(this, ${num})" alt="Diwali Snack ${num}" loading="lazy" class="w-full h-full object-cover">
+                                    </button>
+                                `,
+                                  )
+                                  .join("")}
+                            </div>
+                        </div>
+                    `;
+
+            let selectedSnackNum = 1;
+            article
+              .querySelectorAll(".diwali-inline-thumb")
+              .forEach((thumbBtn) => {
+                thumbBtn.addEventListener("click", (ev) => {
+                  ev.stopPropagation();
+                  selectedSnackNum = parseInt(
+                    thumbBtn.getAttribute("data-snack-num") || "1",
+                    10,
+                  );
+                  const heroImg = article.querySelector(
+                    "#diwali-card-hero-img",
+                  );
+                  if (heroImg) {
+                    delete heroImg.dataset.tryIdx;
+                    heroImg.onerror = function () {
+                      window.handleDiwaliImgError(this, selectedSnackNum);
+                    };
+                    heroImg.src = `${selectedSnackNum}.jpeg`;
+                  }
+                  article
+                    .querySelectorAll(".diwali-inline-thumb")
+                    .forEach((b) => {
+                      const isCurrent = b === thumbBtn;
+                      b.className = isCurrent
+                        ? "diwali-inline-thumb relative h-10 sm:h-14 rounded-lg overflow-hidden border border-[#82B96B] ring-2 ring-[#82B96B]/60 transition-all"
+                        : "diwali-inline-thumb relative h-10 sm:h-14 rounded-lg overflow-hidden border border-white/25 opacity-80 hover:opacity-100 transition-all";
+                    });
+                });
+              });
+
+            article.addEventListener("click", () =>
+              openModal(cat, selectedSnackNum),
+            );
+            gridEl.appendChild(article);
+            return;
+          }
+
+          const imgErrorAttr = cat.fallbackImage
+            ? `onerror="this.onerror=null;this.src='${cat.fallbackImage}';"`
+            : "";
+
+          article.className =
+            "product-card-item group relative h-[265px] sm:h-[390px] lg:h-[470px] rounded-2xl overflow-hidden bg-[#123F2A] cursor-pointer border border-[#123F2A]/12 flex flex-col justify-between shadow-md hover:shadow-2xl transition-shadow duration-500";
+          article.innerHTML = `
+                    <img src="${cat.image}" ${imgErrorAttr} alt="${cat.name}" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-85 group-hover:scale-105 group-hover:opacity-65 transition-transform duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#123F2A] via-[#123F2A]/45 to-black/25"></div>
+                    <div class="relative z-10 p-3 sm:p-5 lg:p-6 flex justify-between items-start">
+                        <span class="font-display text-3xl sm:text-5xl text-white/95 leading-none">${cat.id}</span>
+                        <span class="w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center text-white group-hover:bg-[#82B96B] group-hover:text-[#123F2A] group-hover:border-[#82B96B] transition-colors duration-300">
+                            <svg class="w-3.5 h-3.5 sm:w-5 sm:h-5 group-hover:rotate-45 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7m0 0H8m9 0v9"></path></svg>
+                        </span>
+                    </div>
+                    <div class="relative z-10 p-3 sm:p-5 lg:p-6 space-y-1.5 sm:space-y-2.5">
+                        <span class="inline-block font-sans font-extrabold text-[8px] sm:text-[10px] uppercase tracking-[0.16em] sm:tracking-[0.22em] text-[#82B96B] bg-[#123F2A]/90 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full truncate max-w-full">${cat.subtitle}</span>
+                        <h3 class="font-display text-xl sm:text-3xl lg:text-4xl text-white leading-[0.92] tracking-wide">${cat.name}</h3>
+                        <p class="hidden sm:line-clamp-2 font-sans text-xs sm:text-sm text-[#DCE9D8]/90 leading-relaxed">${cat.desc}</p>
+                        <div class="pt-0.5 sm:pt-1.5 flex flex-wrap gap-1 sm:gap-1.5">
+                            ${cat.specs
+                              .slice(0, 2)
+                              .map(
+                                (sp) =>
+                                  `<span class="text-[9px] sm:text-[11px] font-sans font-bold text-white/90 bg-white/15 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md truncate max-w-full">${sp}</span>`,
+                              )
+                              .join("")}
+                        </div>
+                    </div>
+                `;
+          article.addEventListener("click", () => openModal(cat));
+          gridEl.appendChild(article);
+        });
+      }
+      renderProductsGrid("all");
+
+      // Filter Pills Interaction
+      document.querySelectorAll(".mob-filter-pill").forEach((pill) => {
+        pill.addEventListener("click", () => {
+          activeProductFilter = pill.getAttribute("data-filter") || "all";
+          document.querySelectorAll(".mob-filter-pill").forEach((p) => {
+            const isAct = p === pill;
+            p.className = isAct
+              ? "mob-filter-pill shrink-0 px-4 py-2.5 rounded-full bg-[#123F2A] text-white font-sans font-extrabold text-[11px] uppercase tracking-[0.15em] transition-all"
+              : "mob-filter-pill shrink-0 px-4 py-2.5 rounded-full bg-[#F7F8F3] text-[#123F2A] border border-[#123F2A]/15 font-sans font-extrabold text-[11px] uppercase tracking-[0.15em] transition-all";
+          });
+          renderProductsGrid(activeProductFilter);
+          if (window.gsap) {
+            gsap.fromTo(
+              "#products-grid .product-card-item",
+              { y: 18, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.35,
+                stagger: 0.04,
+                ease: "power2.out",
+              },
+            );
+          }
+          if (window.ScrollTrigger) ScrollTrigger.refresh();
+        });
+      });
+
+      // Kolhapuri Jaggery Interactive Packaging Selector (1 kg, 2 kg, 5 kg, 10 kg)
+      const packButtons = document.querySelectorAll(".pack-btn");
+      const selectedPackLabel = document.getElementById("selected-pack-label");
+      const jaggeryEnquireBtn = document.getElementById("jaggery-enquire-btn");
+
+      packButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          selectedJaggeryPack = btn.getAttribute("data-pack") || "5 kg";
+        });
+      });
+
+      // Render Fresh Fruit Selector List (Centered Mobile Thumb Rail + Desktop Interactive Cards)
       const fruitListEl = document.getElementById("fruit-selector-list");
-      function renderFruitList() {
+
+      function centerActiveFruitTab(smooth = true) {
+        if (!fruitListEl || window.innerWidth >= 1024) return;
+        const activeBtn = fruitListEl.children[activeFruitIndex];
+        if (!activeBtn) return;
+        const targetScrollLeft =
+          activeBtn.offsetLeft -
+          fruitListEl.clientWidth / 2 +
+          activeBtn.offsetWidth / 2;
+        fruitListEl.scrollTo({
+          left: Math.max(0, targetScrollLeft),
+          behavior: smooth ? "smooth" : "auto",
+        });
+      }
+
+      function renderFruitList(centerSmooth = false) {
+        if (!fruitListEl) return;
+        const prevScrollLeft = fruitListEl.scrollLeft;
         fruitListEl.innerHTML = "";
         freshFruitsData.forEach((fruit, idx) => {
           const isSelected = idx === activeFruitIndex;
           const btn = document.createElement("button");
           btn.type = "button";
-          btn.className = `snap-start shrink-0 lg:w-full text-left px-4 py-3 lg:p-5 rounded-2xl border transition-all duration-300 flex items-center justify-between gap-3 lg:gap-4 ${isSelected ? "bg-[#176B45] border-[#82B96B] lg:translate-x-2 shadow-xl" : "bg-white/5 border-white/10 hover:bg-white/10"}`;
+          btn.className = isSelected
+            ? "shrink-0 lg:w-full text-center lg:text-left px-4 py-3 lg:p-5 rounded-2xl border bg-[#176B45] border-[#82B96B] shadow-xl transition-colors duration-300 flex items-center justify-center lg:justify-between gap-2.5 lg:gap-4"
+            : "shrink-0 lg:w-full text-center lg:text-left px-4 py-3 lg:p-5 rounded-2xl border bg-white/5 border-white/10 hover:bg-white/10 transition-colors duration-300 flex items-center justify-center lg:justify-between gap-2.5 lg:gap-4";
           btn.innerHTML = `
-                    <div class="flex items-baseline gap-2.5 lg:gap-4">
-                        <span class="font-display text-xl lg:text-2xl ${isSelected ? "text-[#82B96B]" : "text-white/40"}">${fruit.id}</span>
+                    <div class="flex items-baseline gap-2 lg:gap-4">
+                        <span class="font-display text-lg lg:text-2xl ${isSelected ? "text-[#82B96B]" : "text-white/40"}">${fruit.id}</span>
                         <div>
-                            <h3 class="font-display text-2xl sm:text-3xl lg:text-4xl tracking-wide text-white whitespace-nowrap lg:whitespace-normal">${fruit.name}</h3>
+                            <h3 class="font-display text-xl sm:text-2xl lg:text-4xl tracking-wide text-white whitespace-nowrap lg:whitespace-normal">${fruit.name}</h3>
                             <p class="hidden lg:block font-editorial italic text-lg text-[#DCE9D8]/85">${fruit.italicTag}</p>
                         </div>
                     </div>
-                    <svg class="hidden lg:block w-5 h-5 shrink-0 transition-transform ${isSelected ? "text-[#82B96B] translate-x-1" : "text-white/30"}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    <svg class="hidden lg:block w-5 h-5 shrink-0 transition-transform duration-300 ${isSelected ? "text-[#82B96B] translate-x-1" : "text-white/30"}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 `;
           btn.addEventListener("click", () => {
-            if (activeFruitIndex === idx) return;
+            if (idx === activeFruitIndex) {
+              centerActiveFruitTab(true);
+              return;
+            }
+            const dir = idx > activeFruitIndex ? 1 : -1;
             activeFruitIndex = idx;
-            renderFruitList();
-            updateFruitStage(true);
+            renderFruitList(true);
+            updateFruitStage(true, dir);
           });
           fruitListEl.appendChild(btn);
         });
+
+        if (window.innerWidth < 1024) {
+          fruitListEl.scrollLeft = prevScrollLeft;
+          requestAnimationFrame(() => centerActiveFruitTab(centerSmooth));
+        }
       }
 
       function updateFruitStage(animateChange = false) {
         const fruit = freshFruitsData[activeFruitIndex];
-        const stageEl = document.getElementById("fruit-image-stage");
-        document.getElementById("fruit-img").src = fruit.image;
+        const imgEl = document.getElementById("fruit-img");
+        const textStageEl = document.getElementById("fruit-text-stage");
+        imgEl.src = fruit.image;
+        imgEl.alt = fruit.name;
         document.getElementById("fruit-title").textContent = fruit.name;
+        const italicSub = document.getElementById("fruit-italic-sub");
+        if (italicSub) italicSub.textContent = fruit.italicTag;
         document.getElementById("fruit-desc").textContent = fruit.desc;
         document.getElementById("fruit-sourcing").textContent = fruit.sourcing;
         document.getElementById("fruit-logistics").textContent =
           fruit.logistics;
+
+        const mobCounter = document.getElementById("fruit-mob-counter");
+        if (mobCounter)
+          mobCounter.textContent = `${fruit.id} / 0${freshFruitsData.length}`;
+        const mobProg = document.getElementById("fruit-mob-progress");
+        if (mobProg)
+          mobProg.style.width = `${((activeFruitIndex + 1) / freshFruitsData.length) * 100}%`;
 
         const badgesEl = document.getElementById("fruit-badges");
         badgesEl.innerHTML = "";
@@ -2863,98 +3731,219 @@
           badgesEl.appendChild(span);
         });
 
-        if (animateChange && window.gsap && stageEl) {
+        if (animateChange && window.gsap) {
           gsap.fromTo(
-            stageEl,
-            { opacity: 0.35, scale: 0.98 },
-            { opacity: 1, scale: 1, duration: 0.45, ease: "power3.out" },
+            imgEl,
+            { scale: 1.08, opacity: 0.5 },
+            { scale: 1, opacity: 1, duration: 0.5, ease: "power3.out" },
+          );
+          if (textStageEl) {
+            gsap.fromTo(
+              textStageEl,
+              { y: 12, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" },
+            );
+          }
+        }
+      }
+      renderFruitList(false);
+      updateFruitStage();
+
+      function stepFruitSlide(delta) {
+        const total = freshFruitsData.length;
+        activeFruitIndex = (activeFruitIndex + delta + total) % total;
+        renderFruitList(true);
+        updateFruitStage(true);
+      }
+
+      document
+        .getElementById("fruit-mob-prev")
+        ?.addEventListener("click", () => stepFruitSlide(-1));
+      document
+        .getElementById("fruit-mob-next")
+        ?.addEventListener("click", () => stepFruitSlide(1));
+      attachSwipeGesture(
+        document.getElementById("fruit-card-wrapper"),
+        () => stepFruitSlide(1),
+        () => stepFruitSlide(-1),
+      );
+
+      // =====================================================================
+      // MOBILE CULINARY SPICES CAROUSEL + SPECIALTY PANTRY HORIZONTAL RAIL
+      // =====================================================================
+      const spiceIndContainer = document.getElementById("mob-spice-Indicators");
+      if (spiceIndContainer) {
+        mobileSpicesData.forEach((_, idx) => {
+          const pill = document.createElement("button");
+          pill.type = "button";
+          pill.setAttribute("aria-label", `Spice ${idx + 1}`);
+          pill.className =
+            "h-2 rounded-full transition-all duration-300 flex-1 bg-[#123F2A]/20";
+          pill.addEventListener("click", () =>
+            setMobileSpiceSlide(idx, idx >= activeSpiceIdx ? 1 : -1),
+          );
+          spiceIndContainer.appendChild(pill);
+        });
+      }
+
+      function setMobileSpiceSlide(idx, dir = 1, animate = true) {
+        const len = mobileSpicesData.length;
+        activeSpiceIdx = (idx + len) % len;
+        const item = mobileSpicesData[activeSpiceIdx];
+        const img = document.getElementById("mob-spice-img");
+        const content = document.getElementById("mob-spice-content");
+        if (!img) return;
+
+        img.src = item.image;
+        document.getElementById("mob-spice-tag").textContent = item.tag;
+        document.getElementById("mob-spice-num").textContent = item.num;
+        document.getElementById("mob-spice-kicker").textContent = item.kicker;
+        document.getElementById("mob-spice-title").textContent = item.title;
+        document.getElementById("mob-spice-desc").textContent = item.desc;
+
+        if (spiceIndContainer) {
+          Array.from(spiceIndContainer.children).forEach((el, i) => {
+            el.className =
+              i === activeSpiceIdx
+                ? "h-2 rounded-full transition-all duration-300 flex-[2] bg-[#123F2A]"
+                : "h-2 rounded-full transition-all duration-300 flex-1 bg-[#123F2A]/20";
+          });
+        }
+
+        if (animate && window.gsap) {
+          gsap.fromTo(
+            img,
+            { scale: 1.16, opacity: 0.65 },
+            { scale: 1.02, opacity: 1, duration: 0.55, ease: "power3.out" },
+          );
+          gsap.fromTo(
+            content,
+            { x: dir * 24, opacity: 0 },
+            { x: 0, opacity: 1, duration: 0.45, ease: "power2.out" },
           );
         }
       }
-      renderFruitList();
-      updateFruitStage();
+      setMobileSpiceSlide(0, 1, false);
+
+      document
+        .getElementById("mob-spice-prev")
+        ?.addEventListener("click", () =>
+          setMobileSpiceSlide(activeSpiceIdx - 1, -1),
+        );
+      document
+        .getElementById("mob-spice-next")
+        ?.addEventListener("click", () =>
+          setMobileSpiceSlide(activeSpiceIdx + 1, 1),
+        );
+      attachSwipeGesture(
+        document.getElementById("mob-spice-stage"),
+        () => setMobileSpiceSlide(activeSpiceIdx + 1, 1),
+        () => setMobileSpiceSlide(activeSpiceIdx - 1, -1),
+      );
+
+      // Populate Mobile Specialty Horizontal Lookbook Rail (Herbal Moringa Powder, Millets, Dehydrated, Cashews, Microgreens)
+      const specialtyRail = document.getElementById("mob-specialty-rail");
+      if (specialtyRail) {
+        const specialtyIds = ["10", "05", "06", "07", "08"];
+        specialtyIds
+          .map((id) => productCategories.find((c) => c.id === id))
+          .filter(Boolean)
+          .forEach((item, i) => {
+            const card = document.createElement("article");
+            const fallbackAttr = item.fallbackImage
+              ? `onerror="this.onerror=null;this.src='${item.fallbackImage}';"`
+              : "";
+            card.className =
+              "mob-specialty-card snap-center shrink-0 w-[84vw] max-w-[340px] rounded-3xl overflow-hidden bg-[#123F2A] border border-white/15 shadow-2xl flex flex-col justify-between";
+            card.innerHTML = `
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="${item.image}" ${fallbackAttr} alt="${item.name}" loading="lazy" decoding="async" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#123F2A] via-transparent to-black/30"></div>
+                        <span class="absolute top-4 left-4 font-display text-5xl text-white drop-shadow">0${i + 1}</span>
+                        <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-[#17251D]/90 border border-[#82B96B]/40 font-sans font-extrabold text-[9px] uppercase tracking-[0.18em] text-[#82B96B]">${item.subtitle}</span>
+                    </div>
+                    <div class="p-5 space-y-3">
+                        <h3 class="font-display text-4xl text-white leading-[0.9]">${item.name}</h3>
+                        <p class="font-sans text-xs text-[#DCE9D8]/85 leading-relaxed">${item.desc}</p>
+                        <div class="flex flex-wrap gap-1.5 pt-1">
+                            ${item.specs.map((s) => `<span class="px-2.5 py-1 rounded-md bg-white/10 text-[10px] font-sans font-bold text-[#DCE9D8]">${s}</span>`).join("")}
+                        </div>
+                        <button type="button" class="w-full mt-2 py-3 rounded-full bg-[#82B96B] text-[#123F2A] font-sans font-extrabold text-[10px] uppercase tracking-[0.18em] active:scale-95 transition-transform">Request Export Lot</button>
+                    </div>
+                `;
+            card
+              .querySelector("button")
+              .addEventListener("click", () => openModal(item));
+            specialtyRail.appendChild(card);
+          });
+      }
 
       document
         .getElementById("fruit-enquire-btn")
-        .addEventListener("click", () => {
+        ?.addEventListener("click", () => {
           const fruit = freshFruitsData[activeFruitIndex];
           selectCategoryInForm(`Fresh Fruits - ${fruit.name}`);
         });
 
-      // Process Steps
+      // Process Steps (With Scroll-Activated Color Transitions across Forest, Emerald & Dark Themes)
       const processContainer = document.getElementById(
         "process-steps-container",
       );
+      const stepThemes = [
+        "forest",
+        "emerald",
+        "dark",
+        "forest",
+        "emerald",
+        "dark",
+      ];
       processSteps.forEach((step, index) => {
         const isEven = index % 2 === 0;
         const div = document.createElement("div");
         div.className = `process-step-card relative flex flex-col lg:flex-row items-start lg:items-center justify-between ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"}`;
         div.innerHTML = `
                 <div class="w-full lg:w-[45%] pl-9 sm:pl-14 lg:pl-0">
-                    <div class="group p-5 sm:p-9 rounded-2xl sm:rounded-3xl bg-[#F7F8F3] hover:bg-[#123F2A] hover:text-white border border-[#123F2A]/10 transition-all duration-500 shadow-sm">
+                    <div data-theme="${stepThemes[index]}" class="process-card-inner p-5 sm:p-9 rounded-2xl sm:rounded-3xl border shadow-sm">
                         <div class="flex items-center justify-between mb-2.5 sm:mb-4">
-                            <span class="font-sans font-extrabold text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#176B45] group-hover:text-[#82B96B]">${step.tag}</span>
-                            <span class="font-display text-4xl sm:text-5xl text-[#123F2A]/15 group-hover:text-[#82B96B] leading-none">${step.num}</span>
+                            <span class="proc-tag font-sans font-extrabold text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.2em]">${step.tag}</span>
+                            <span class="proc-num font-display text-4xl sm:text-5xl leading-none">${step.num}</span>
                         </div>
                         <h3 class="font-display text-2xl sm:text-4xl tracking-wide mb-2 sm:mb-3">${step.title}</h3>
-                        <p class="font-sans text-sm sm:text-base text-[#17251D]/75 group-hover:text-[#DCE9D8]/90 leading-relaxed">${step.desc}</p>
+                        <p class="proc-desc font-sans text-sm sm:text-base leading-relaxed">${step.desc}</p>
                     </div>
                 </div>
-                <div class="absolute left-3.5 sm:left-5 lg:left-1/2 top-7 sm:top-8 lg:top-1/2 -translate-x-1/2 lg:-translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#82B96B] border-[3px] sm:border-4 border-white shadow-[0_0_0_2px_#123F2A] z-10"></div>
+                <div class="process-step-node absolute left-3.5 sm:left-5 lg:left-1/2 top-7 sm:top-8 lg:top-1/2 -translate-x-1/2 lg:-translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#82B96B] border-[3px] sm:border-4 border-white shadow-[0_0_0_2px_#123F2A] z-10"></div>
                 <div class="hidden lg:block lg:w-[45%]"></div>
             `;
         processContainer.appendChild(div);
       });
 
-      // Jaggery selector
-      document.querySelectorAll(".pack-btn").forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-          selectedJaggeryPack = e.currentTarget.getAttribute("data-pack");
-          document.querySelectorAll(".pack-btn").forEach((b) => {
-            b.className =
-              "pack-btn min-h-[50px] py-3 sm:py-3.5 rounded-xl font-display text-2xl tracking-wide bg-[#F7F8F3] text-[#123F2A] hover:bg-[#DCE9D8] transition-all active:scale-95";
-          });
-          e.currentTarget.className =
-            "pack-btn min-h-[50px] py-3 sm:py-3.5 rounded-xl font-display text-2xl tracking-wide bg-[#123F2A] text-white shadow-lg sm:scale-[1.03] active:scale-95";
-          document.getElementById("selected-pack-label").textContent =
-            `Selected: ${selectedJaggeryPack}`;
-          document
-            .getElementById("jaggery-enquire-btn")
-            .querySelector("span").textContent =
-            `Enquire ${selectedJaggeryPack} Jaggery Export Lot`;
-        });
-      });
-
-      document
-        .getElementById("jaggery-enquire-btn")
-        .addEventListener("click", () => {
-          selectCategoryInForm(
-            `Kolhapuri Jaggery (${selectedJaggeryPack} Packaging)`,
-          );
-        });
-
-      function selectCategoryInForm(catName) {
-        if (
-          !Array.from(selectEl.options).some((opt) => opt.value === catName)
-        ) {
-          const customOpt = document.createElement("option");
-          customOpt.value = catName;
-          customOpt.textContent = catName;
-          selectEl.appendChild(customOpt);
-        }
-        selectEl.value = catName;
-        document
-          .getElementById("contact")
-          .scrollIntoView({ behavior: "smooth" });
-      }
-
-      // Modal
+      // Modal (Supports 8-Image Thumbnail Switcher for Diwali Snacks & Namkeens)
       const modalEl = document.getElementById("product-modal");
       const modalContent = document.getElementById("modal-content");
+      let mobileOpen = false;
 
-      function openModal(cat) {
+      function openModal(cat, initialSnackNum = 1) {
         currentModalCategory = cat;
-        document.getElementById("modal-img").src = cat.image;
+        const modalImg = document.getElementById("modal-img");
+        delete modalImg.dataset.tryIdx;
+
+        if (cat.localNum) {
+          modalImg.onerror = function () {
+            window.handleDiwaliImgError(this, initialSnackNum);
+          };
+          modalImg.src = `${initialSnackNum}.jpeg`;
+        } else if (cat.fallbackImage) {
+          modalImg.onerror = function () {
+            this.onerror = null;
+            this.src = cat.fallbackImage;
+          };
+          modalImg.src = cat.image;
+        } else {
+          modalImg.onerror = null;
+          modalImg.src = cat.image;
+        }
+
         document.getElementById("modal-id").textContent = cat.id;
         document.getElementById("modal-subtitle").textContent = cat.subtitle;
         document.getElementById("modal-title").textContent = cat.name;
@@ -2969,6 +3958,36 @@
           badge.innerHTML = `<svg class="w-3.5 h-3.5 text-[#176B45]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>${s}`;
           specsEl.appendChild(badge);
         });
+
+        // Exclusive 8-Image Gallery Strip inside Modal ONLY for Diwali Snacks & Namkeens
+        const galleryWrap = document.getElementById("modal-gallery-wrap");
+        const galleryThumbs = document.getElementById("modal-gallery-thumbs");
+        if (cat.galleryNums && galleryWrap && galleryThumbs) {
+          galleryWrap.classList.remove("hidden");
+          galleryThumbs.innerHTML = "";
+          cat.galleryNums.forEach((num) => {
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = `relative h-14 rounded-xl overflow-hidden border-2 transition-all ${num === initialSnackNum ? "border-[#123F2A] scale-105 shadow-md" : "border-transparent opacity-75 hover:opacity-100"}`;
+            btn.innerHTML = `<img src="${num}.jpeg" onerror="window.handleDiwaliImgError(this, ${num})" alt="Snack ${num}" class="w-full h-full object-cover">`;
+            btn.addEventListener("click", () => {
+              delete modalImg.dataset.tryIdx;
+              modalImg.onerror = function () {
+                window.handleDiwaliImgError(this, num);
+              };
+              modalImg.src = `${num}.jpeg`;
+              Array.from(galleryThumbs.children).forEach((child, cIdx) => {
+                child.className =
+                  cIdx + 1 === num
+                    ? "relative h-14 rounded-xl overflow-hidden border-2 border-[#123F2A] scale-105 shadow-md transition-all"
+                    : "relative h-14 rounded-xl overflow-hidden border-2 border-transparent opacity-75 hover:opacity-100 transition-all";
+              });
+            });
+            galleryThumbs.appendChild(btn);
+          });
+        } else if (galleryWrap) {
+          galleryWrap.classList.add("hidden");
+        }
 
         modalEl.classList.remove("opacity-0", "pointer-events-none");
         modalContent.classList.remove("translate-y-6", "sm:scale-95");
@@ -2985,89 +4004,68 @@
 
       document
         .getElementById("modal-close-btn")
-        .addEventListener("click", closeModal);
+        ?.addEventListener("click", closeModal);
       document
         .getElementById("modal-close-btn-mobile")
-        .addEventListener("click", closeModal);
-      modalEl.addEventListener("click", (e) => {
+        ?.addEventListener("click", closeModal);
+      modalEl?.addEventListener("click", (e) => {
         if (e.target === modalEl) closeModal();
       });
       document
         .getElementById("modal-enquire-btn")
-        .addEventListener("click", () => {
+        ?.addEventListener("click", () => {
           if (currentModalCategory) {
             closeModal();
             selectCategoryInForm(currentModalCategory.name);
           }
         });
+
       // Mobile Menu & Navbar Contrast State
       const mobileToggle = document.getElementById("mobile-toggle");
       const mobileMenu = document.getElementById("mobile-menu");
       const menuIconOpen = document.getElementById("menu-icon-open");
       const menuIconClose = document.getElementById("menu-icon-close");
-      const mobileNavEnquire = document.getElementById("mobile-nav-enquire");
-      let mobileOpen = false;
 
       function syncHeaderAppearance() {
         const navbar = document.getElementById("navbar");
         const logoText = document.getElementById("nav-logo-text");
-        const logoIcon = document.getElementById("nav-logo-icon");
-        const navCta = document.getElementById("nav-cta");
         const isScrolled = window.scrollY > 60;
 
         if (mobileOpen) {
           navbar.className =
             "fixed top-0 left-0 w-full z-50 py-4 bg-transparent border-b border-white/10 transition-all duration-300";
-          logoText.className =
-            "flex flex-col text-white transition-colors duration-300";
-          logoIcon.className =
-            "w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center border bg-white/10 border-white/25 text-[#82B96B] shrink-0";
+          if (logoText)
+            logoText.className =
+              "flex flex-col text-white transition-colors duration-300";
           mobileToggle.className =
             "w-11 h-11 rounded-full flex items-center justify-center border bg-white text-[#123F2A] border-white transition-all duration-300 active:scale-95";
-          if (mobileNavEnquire)
-            mobileNavEnquire.classList.add("opacity-0", "pointer-events-none");
           return;
         }
 
-        if (mobileNavEnquire)
-          mobileNavEnquire.classList.remove("opacity-0", "pointer-events-none");
-
         if (isScrolled) {
           navbar.className =
-            "fixed top-0 left-0 w-full z-50 py-2.5 lg:py-3 bg-[#F7F8F3]/95 backdrop-blur-xl border-b border-[#123F2A]/12 shadow-sm transition-all duration-500";
-          logoText.className =
-            "flex flex-col text-[#123F2A] transition-colors duration-300";
-          logoIcon.className =
-            "w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center border bg-[#123F2A] border-[#123F2A] text-[#82B96B] transition-all duration-500 shrink-0";
+            "fixed top-0 left-0 w-full z-50 py-2.5 lg:py-3.5 bg-[#F7F8F3]/95 backdrop-blur-xl border-b border-[#123F2A]/12 shadow-sm transition-all duration-500";
+          if (logoText)
+            logoText.className =
+              "flex flex-col text-[#123F2A] transition-colors duration-300";
           mobileToggle.className =
             "w-11 h-11 rounded-full flex items-center justify-center border bg-[#123F2A] text-white border-[#123F2A] transition-all duration-300 active:scale-95";
-          if (mobileNavEnquire)
-            mobileNavEnquire.className =
-              "px-3.5 py-2 rounded-full bg-[#176B45] text-white font-sans font-extrabold text-[10px] uppercase tracking-[0.16em] shadow-sm transition-all duration-300";
-          navCta.className =
-            "group relative inline-flex items-center justify-center px-7 py-3 rounded-full overflow-hidden bg-[#123F2A] text-white border border-[#123F2A] font-sans font-extrabold text-xs uppercase tracking-[0.16em] transition-all";
-          navCta.querySelector("span:nth-child(1)").className =
-            "absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-[#82B96B]";
-          navCta.querySelector("span:nth-child(2)").className =
-            "relative z-10 flex items-center gap-2 group-hover:text-[#123F2A] transition-colors";
+          document.querySelectorAll(".nav-desk-link").forEach((l) => {
+            l.className =
+              "nav-desk-link px-4 py-2 rounded-full font-sans text-xs font-extrabold uppercase tracking-[0.14em] text-[#123F2A]/85 hover:text-[#123F2A] transition-all";
+          });
         } else {
           navbar.className =
             "fixed top-0 left-0 w-full z-50 py-4 lg:py-6 bg-transparent border-b border-white/10 transition-all duration-500";
-          logoText.className =
-            "flex flex-col text-white transition-colors duration-300";
-          logoIcon.className =
-            "w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center border bg-white/10 border-white/25 text-[#82B96B] backdrop-blur-md transition-all duration-500 shrink-0";
+          if (logoText)
+            logoText.className =
+              "flex flex-col text-white transition-colors duration-300";
           mobileToggle.className =
             "w-11 h-11 rounded-full flex items-center justify-center border bg-white/15 text-white border-white/30 backdrop-blur-md transition-all duration-300 active:scale-95";
-          if (mobileNavEnquire)
-            mobileNavEnquire.className =
-              "px-3.5 py-2 rounded-full bg-white text-[#123F2A] font-sans font-extrabold text-[10px] uppercase tracking-[0.16em] shadow-sm transition-all duration-300";
-          navCta.className =
-            "group relative inline-flex items-center justify-center px-7 py-3.5 rounded-full overflow-hidden bg-white text-[#123F2A] border border-white font-sans font-extrabold text-xs uppercase tracking-[0.16em] transition-all";
-          navCta.querySelector("span:nth-child(1)").className =
-            "absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-[#176B45]";
-          navCta.querySelector("span:nth-child(2)").className =
-            "relative z-10 flex items-center gap-2 group-hover:text-white transition-colors";
+          document.querySelectorAll(".nav-desk-link").forEach((l) => {
+            l.className =
+              "nav-desk-link px-4 py-2 rounded-full font-sans text-xs font-extrabold uppercase tracking-[0.14em] text-white/90 hover:text-white transition-all";
+          });
         }
       }
 
@@ -3129,52 +4127,170 @@
         link.addEventListener("click", () => setMobileMenuState(false));
       });
 
-      // Navbar Scroll
-      window.addEventListener("scroll", syncHeaderAppearance, {
-        passive: true,
+      // Navbar Scroll (rAF throttled for zero scroll lag)
+      let lastScrolledState = null;
+      let navScrollTicking = false;
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (!navScrollTicking) {
+            requestAnimationFrame(() => {
+              const nowScrolled = window.scrollY > 60;
+              if (nowScrolled !== lastScrolledState || mobileOpen) {
+                lastScrolledState = nowScrolled;
+                syncHeaderAppearance();
+              }
+              navScrollTicking = false;
+            });
+            navScrollTicking = true;
+          }
+        },
+        { passive: true },
+      );
+
+      // Working Export Enquiry Form Submission & Reset
+      const enquiryFormEl = document.getElementById("enquiry-form");
+      const formContainerEl = document.getElementById("form-container");
+      const formSuccessEl = document.getElementById("form-success");
+
+      enquiryFormEl?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = document.getElementById("form-name").value.trim();
+        const email = document.getElementById("form-email").value.trim();
+        const category = document.getElementById("form-category").value;
+        const message = document.getElementById("form-message").value.trim();
+
+        document.getElementById("success-name").textContent = name || "Partner";
+        const mailSubject = encodeURIComponent(
+          `Export Enquiry: ${category} - ${name}`,
+        );
+        const mailBody = encodeURIComponent(
+          `Name: ${name}\nEmail: ${email}\nProduct Category: ${category}\n\nMessage:\n${message}`,
+        );
+        document.getElementById("success-email-link").href =
+          `mailto:renuagroservices@gmail.com?subject=${mailSubject}&body=${mailBody}`;
+
+        formContainerEl.classList.add("hidden");
+        formSuccessEl.classList.remove("hidden");
       });
 
-      // Preloader & GSAP
-      const initPreloader = () => {
-        let percent = 0;
-        const percentEl = document.getElementById("loader-percent");
-        const barEl = document.getElementById("loader-bar");
-        const preloader = document.getElementById("preloader");
+      document
+        .getElementById("reset-form-btn")
+        ?.addEventListener("click", () => {
+          enquiryFormEl.reset();
+          formSuccessEl.classList.add("hidden");
+          formContainerEl.classList.remove("hidden");
+        });
 
-        const interval = setInterval(() => {
-          percent += Math.floor(Math.random() * 18) + 8;
-          if (percent >= 100) {
-            percent = 100;
-            clearInterval(interval);
-            setTimeout(() => {
-              gsap.to(preloader, {
-                clipPath: "inset(0% 0% 100% 0%)",
-                duration: 1.05,
-                ease: "power4.inOut",
-                onComplete: () => (preloader.style.display = "none"),
-              });
-              initGSAPAnimations();
-            }, 200);
-          }
-          percentEl.textContent = String(percent).padStart(3, "0") + "%";
-          barEl.style.width = percent + "%";
-        }, 50);
-      };
-
-      if (document.readyState === "complete") {
-        initPreloader();
-      } else {
-        window.addEventListener("load", initPreloader);
+      // Custom Desktop Cursor Tracking
+      if (window.matchMedia("(pointer: fine)").matches && window.gsap) {
+        const cDot = document.getElementById("cursor-dot");
+        const cRing = document.getElementById("cursor-ring");
+        if (cDot && cRing) {
+          const xDot = gsap.quickTo(cDot, "x", {
+            duration: 0.12,
+            ease: "power3.out",
+          });
+          const yDot = gsap.quickTo(cDot, "y", {
+            duration: 0.12,
+            ease: "power3.out",
+          });
+          const xRing = gsap.quickTo(cRing, "x", {
+            duration: 0.35,
+            ease: "power3.out",
+          });
+          const yRing = gsap.quickTo(cRing, "y", {
+            duration: 0.35,
+            ease: "power3.out",
+          });
+          window.addEventListener(
+            "mousemove",
+            (e) => {
+              xDot(e.clientX);
+              yDot(e.clientY);
+              xRing(e.clientX);
+              yRing(e.clientY);
+            },
+            { passive: true },
+          );
+        }
       }
 
+      // Split Hero Target Words Grouped by Word (Prevents Mid-Word Single-Letter Line Breaks)
+      function prepareHeroCharacterSplit() {
+        if (window.innerWidth >= 1024) return;
+        document.querySelectorAll(".hero-split-target").forEach((target) => {
+          if (target.dataset.splitDone === "true") return;
+          const words = target.textContent.trim().split(/\s+/);
+          target.innerHTML = words
+            .map((word) => {
+              const charsHtml = word
+                .split("")
+                .map(
+                  (ch) =>
+                    `<span class="inline-block overflow-hidden align-bottom"><span class="mob-hero-char inline-block will-change-transform">${ch}</span></span>`,
+                )
+                .join("");
+              return `<span class="inline-block whitespace-nowrap">${charsHtml}</span>`;
+            })
+            .join('<span class="inline-block">&nbsp;</span>');
+          target.dataset.splitDone = "true";
+        });
+      }
+      prepareHeroCharacterSplit();
+
+      let gsapInitialized = false;
       function initGSAPAnimations() {
-        if (!window.gsap || !window.ScrollTrigger) return;
+        if (gsapInitialized || !window.gsap || !window.ScrollTrigger) return;
+        gsapInitialized = true;
         gsap.registerPlugin(ScrollTrigger);
+        ScrollTrigger.config({ ignoreMobileResize: true });
+
+        // Global Top Scroll Progress Bar
+        gsap.to("#global-scroll-bar", {
+          width: "100%",
+          ease: "none",
+          scrollTrigger: {
+            trigger: document.body,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.2,
+          },
+        });
+
+        // Shared Scroll-Driven Color Morphing on "From Indian Farm to Global Market" Slides (Desktop & Mobile)
+        gsap.utils.toArray(".process-step-card").forEach((stepWrapper) => {
+          const cardInner = stepWrapper.querySelector(".process-card-inner");
+          const stepNode = stepWrapper.querySelector(".process-step-node");
+          if (!cardInner) return;
+
+          ScrollTrigger.create({
+            trigger: stepWrapper,
+            start: "top 72%",
+            end: "bottom 28%",
+            onEnter: () => {
+              cardInner.classList.add("is-scroll-active");
+              if (stepNode) stepNode.classList.add("is-node-active");
+            },
+            onEnterBack: () => {
+              cardInner.classList.add("is-scroll-active");
+              if (stepNode) stepNode.classList.add("is-node-active");
+            },
+            onLeave: () => {
+              cardInner.classList.remove("is-scroll-active");
+              if (stepNode) stepNode.classList.remove("is-node-active");
+            },
+            onLeaveBack: () => {
+              cardInner.classList.remove("is-scroll-active");
+              if (stepNode) stepNode.classList.remove("is-node-active");
+            },
+          });
+        });
 
         const mm = gsap.matchMedia();
 
         // =========================================================================
-        // DESKTOP ANIMATIONS (>= 1024px) — Preserved 100% Intact
+        // DESKTOP ANIMATIONS (>= 1024px) — Upgraded with Richer Scroll Transitions
         // =========================================================================
         mm.add("(min-width: 1024px)", () => {
           const heroTl = gsap.timeline({ defaults: { ease: "power4.out" } });
@@ -3229,6 +4345,20 @@
           );
 
           gsap.fromTo(
+            "#products-grid .product-card-item",
+            { y: 55, opacity: 0, scale: 0.96 },
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 0.85,
+              stagger: 0.07,
+              ease: "power3.out",
+              scrollTrigger: { trigger: "#products-grid", start: "top 80%" },
+            },
+          );
+
+          gsap.fromTo(
             "#process-line-fill",
             { scaleY: 0 },
             {
@@ -3240,6 +4370,33 @@
                 end: "bottom 75%",
                 scrub: true,
               },
+            },
+          );
+
+          gsap.utils.toArray(".process-step-card").forEach((card, i) => {
+            gsap.fromTo(
+              card,
+              { x: i % 2 === 0 ? -50 : 50, opacity: 0 },
+              {
+                x: 0,
+                opacity: 1,
+                duration: 0.85,
+                ease: "power3.out",
+                scrollTrigger: { trigger: card, start: "top 84%" },
+              },
+            );
+          });
+
+          gsap.fromTo(
+            ".why-card",
+            { y: 60, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.9,
+              stagger: 0.14,
+              ease: "power3.out",
+              scrollTrigger: { trigger: "#why-us", start: "top 78%" },
             },
           );
 
@@ -3260,120 +4417,217 @@
         });
 
         // =========================================================================
-        // MOBILE & TABLET CINEMATIC TOUCH ANIMATIONS (< 1024px)
-        // Smooth, GPU-lightweight, zero-jitter ScrollTrigger choreography
+        // MOBILE & TABLET EXTREME EDITORIAL GSAP CHOREOGRAPHY (< 1024px)
+        // Left-Right Duet Entrances, Clip-Path Unveils & Color-Morphing Timeline
         // =========================================================================
         mm.add(
           "(max-width: 1023px) and (prefers-reduced-motion: no-preference)",
           () => {
-            // 1. Mobile Hero Entrance (crisp masked typography + gentle ambient zoom)
+            // 1. Hero Character-by-Character 3D Reveal + Editorial Word & Ambient Scale
             const mobHeroTl = gsap.timeline({
-              defaults: { ease: "power3.out" },
+              defaults: { ease: "power4.out" },
             });
             mobHeroTl
               .fromTo(
                 "#hero-img",
-                { scale: 1.14 },
-                { scale: 1.03, duration: 1.6, ease: "power2.out" },
+                { scale: 1.22 },
+                { scale: 1.05, duration: 1.8, ease: "power2.out" },
                 0,
               )
               .fromTo(
-                ".hero-line-1 span, .hero-line-2 span",
-                { yPercent: 110, opacity: 0 },
-                { yPercent: 0, opacity: 1, duration: 0.9, stagger: 0.12 },
+                ".mob-hero-char",
+                { yPercent: 120, rotateX: -40, opacity: 0 },
+                {
+                  yPercent: 0,
+                  rotateX: 0,
+                  opacity: 1,
+                  duration: 0.85,
+                  stagger: 0.022,
+                },
                 0.05,
               )
               .fromTo(
+                ".mobile-hero-italic",
+                { yPercent: 100, opacity: 0 },
+                { yPercent: 0, opacity: 1, duration: 0.85, ease: "power3.out" },
+                0.28,
+              )
+              .fromTo(
                 ".hero-meta",
-                { y: 18, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.65, stagger: 0.08 },
+                { y: 24, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.7, stagger: 0.09 },
                 "-=0.5",
               );
 
-            // 2. About Section Stagger & Smooth Image Unveil
+            // Subtle Hero Scroll Parallax
+            gsap.to("#hero-img", {
+              yPercent: 12,
+              ease: "none",
+              scrollTrigger: {
+                trigger: "#home",
+                start: "top top",
+                end: "bottom top",
+                scrub: true,
+              },
+            });
+
+            // 2. Massive Section Headline Entrances Across Every Mobile Section
+            gsap.utils
+              .toArray(
+                "#about .mobile-section-display, #products .mobile-section-display, #fruit-showcase-section .mobile-section-display, #spices-jaggery-section .mobile-section-display, #process .mobile-section-display, #why-us .mobile-section-display, #global-map-section .mobile-section-display, #contact .mobile-section-display",
+              )
+              .forEach((heading) => {
+                gsap.fromTo(
+                  heading,
+                  { y: 44, opacity: 0, clipPath: "inset(0% 0% 100% 0%)" },
+                  {
+                    y: 0,
+                    opacity: 1,
+                    clipPath: "inset(0% 0% 0% 0%)",
+                    duration: 0.9,
+                    ease: "power4.out",
+                    scrollTrigger: { trigger: heading, start: "top 86%" },
+                  },
+                );
+              });
+
+            // 3. About Narrative & Clip-Path + Inner Image Parallax
             gsap.fromTo(
               ".about-reveal-text",
-              { y: 32, opacity: 0 },
+              { y: 34, opacity: 0 },
               {
                 y: 0,
                 opacity: 1,
-                duration: 0.75,
+                duration: 0.8,
                 stagger: 0.1,
                 ease: "power3.out",
-                scrollTrigger: { trigger: "#about", start: "top 82%" },
+                scrollTrigger: { trigger: "#about", start: "top 80%" },
               },
             );
 
             gsap.fromTo(
               ".about-clip-img",
-              { clipPath: "inset(10% 6% 10% 6% round 16px)", opacity: 0.6 },
+              { clipPath: "inset(14% 8% 14% 8% round 18px)" },
               {
                 clipPath: "inset(0% 0% 0% 0% round 16px)",
-                opacity: 1,
-                duration: 0.95,
-                ease: "power3.out",
-                scrollTrigger: { trigger: ".about-clip-img", start: "top 85%" },
+                duration: 1.15,
+                ease: "power4.out",
+                scrollTrigger: { trigger: ".about-clip-img", start: "top 84%" },
               },
             );
 
-            // 3. Product Cards Lightweight Staggered Scroll Entrances
-            gsap.utils.toArray(".product-card-item").forEach((card) => {
-              gsap.fromTo(
-                card,
-                { y: 28, opacity: 0 },
-                {
-                  y: 0,
-                  opacity: 1,
-                  duration: 0.65,
-                  ease: "power2.out",
-                  scrollTrigger: {
-                    trigger: card,
-                    start: "top 88%",
-                    once: true,
-                  },
-                },
-              );
+            gsap.to(".about-parallax-img", {
+              yPercent: -10,
+              ease: "none",
+              scrollTrigger: {
+                trigger: ".about-clip-img",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+              },
             });
 
-            // 4. Fresh Fruit Showcase Entrance
-            gsap.fromTo(
-              "#fruit-card-wrapper",
-              { y: 30, opacity: 0 },
-              {
-                y: 0,
-                opacity: 1,
-                duration: 0.75,
-                ease: "power3.out",
-                scrollTrigger: {
-                  trigger: "#fruit-showcase-section",
-                  start: "top 78%",
-                  once: true,
-                },
-              },
-            );
-
-            // 5. Spices & Kolhapuri Jaggery Blocks
+            // 4. Mobile Left-Right Combination Duet Entrances (Odd cards from Left, Even cards from Right)
             gsap.utils
-              .toArray([".spices-block", ".jaggery-block"])
-              .forEach((block) => {
+              .toArray("#products-grid .product-card-item")
+              .forEach((card) => {
+                const isLeft = card.dataset.side === "left";
                 gsap.fromTo(
-                  block,
-                  { y: 34, opacity: 0 },
+                  card,
+                  { x: isLeft ? -36 : 36, y: 26, opacity: 0, scale: 0.95 },
                   {
+                    x: 0,
                     y: 0,
                     opacity: 1,
-                    duration: 0.8,
+                    scale: 1,
+                    duration: 0.75,
                     ease: "power3.out",
-                    scrollTrigger: {
-                      trigger: block,
-                      start: "top 84%",
-                      once: true,
-                    },
+                    scrollTrigger: { trigger: card, start: "top 90%" },
+                  },
+                );
+              });
+            // 4. Mobile Left-Right Combination Duet Entrances + Double-Box 11th Card Reveal
+            gsap.utils
+              .toArray("#products-grid .product-card-item")
+              .forEach((card) => {
+                const side = card.dataset.side;
+                const xOffset =
+                  side === "wide" ? 0 : side === "left" ? -32 : 32;
+                gsap.fromTo(
+                  card,
+                  { x: xOffset, y: 28, opacity: 0, scale: 0.96 },
+                  {
+                    x: 0,
+                    y: 0,
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.75,
+                    ease: "power3.out",
+                    scrollTrigger: { trigger: card, start: "top 90%" },
                   },
                 );
               });
 
-            // 6. Farm-to-Global Scrubbed Timeline Beam + Step Cards
+            // 5. Orchard Fruit Showcase Card Stage Reveal
+            gsap.fromTo(
+              "#fruit-card-wrapper",
+              { y: 42, scale: 0.96, opacity: 0 },
+              {
+                y: 0,
+                scale: 1,
+                opacity: 1,
+                duration: 0.85,
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: "#fruit-showcase-section",
+                  start: "top 76%",
+                },
+              },
+            );
+
+            // 6. Spices Carousel & Kolhapuri Jaggery Studio Reveals
+            gsap.fromTo(
+              "#mob-spice-stage",
+              { clipPath: "inset(10% 6% 10% 6% round 24px)", opacity: 0.4 },
+              {
+                clipPath: "inset(0% 0% 0% 0% round 24px)",
+                opacity: 1,
+                duration: 0.95,
+                ease: "power3.out",
+                scrollTrigger: { trigger: ".spices-block", start: "top 80%" },
+              },
+            );
+
+            gsap.fromTo(
+              ".jaggery-block",
+              { y: 40, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.85,
+                ease: "power3.out",
+                scrollTrigger: { trigger: ".jaggery-block", start: "top 82%" },
+              },
+            );
+
+            // 7. Specialty Pantry Horizontal Cards Entrance
+            gsap.fromTo(
+              ".mob-specialty-card",
+              { x: 40, opacity: 0 },
+              {
+                x: 0,
+                opacity: 1,
+                duration: 0.75,
+                stagger: 0.1,
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: "#mob-specialty-rail",
+                  start: "top 85%",
+                },
+              },
+            );
+
+            // 8. Farm-to-Global Scrubbed Timeline Beam + Layered Step Entrances
             gsap.fromTo(
               "#process-line-fill",
               { scaleY: 0 },
@@ -3384,7 +4638,7 @@
                   trigger: "#process-steps-container",
                   start: "top 75%",
                   end: "bottom 80%",
-                  scrub: 0.4,
+                  scrub: 0.35,
                 },
               },
             );
@@ -3392,53 +4646,29 @@
             gsap.utils.toArray(".process-step-card").forEach((stepCard) => {
               gsap.fromTo(
                 stepCard,
-                { x: 18, opacity: 0 },
-                {
-                  x: 0,
-                  opacity: 1,
-                  duration: 0.6,
-                  ease: "power2.out",
-                  scrollTrigger: {
-                    trigger: stepCard,
-                    start: "top 88%",
-                    once: true,
-                  },
-                },
-              );
-            });
-
-            // 7. Why Us Strength Cards
-            gsap.utils.toArray(".why-card").forEach((card) => {
-              gsap.fromTo(
-                card,
-                { y: 26, opacity: 0 },
+                { y: 28, opacity: 0 },
                 {
                   y: 0,
                   opacity: 1,
                   duration: 0.65,
-                  ease: "power2.out",
-                  scrollTrigger: {
-                    trigger: card,
-                    start: "top 88%",
-                    once: true,
-                  },
+                  ease: "power3.out",
+                  scrollTrigger: { trigger: stepCard, start: "top 88%" },
                 },
               );
             });
 
-            // 8. Global Map Trade Arcs Reveal on Mobile Viewport Entry
+            // 9. Global Map Trade Arcs Draw Animation
             gsap.fromTo(
               ".trade-arc",
               { strokeDashoffset: 500 },
               {
                 strokeDashoffset: 0,
-                duration: 1.8,
+                duration: 1.9,
                 stagger: 0.18,
                 ease: "power2.out",
                 scrollTrigger: {
                   trigger: "#global-map-section",
                   start: "top 80%",
-                  once: true,
                 },
               },
             );
