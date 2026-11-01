@@ -421,6 +421,33 @@
       </div>
     </div>
 
+    <!-- Independent preloader failsafe: this runs before the main site script and
+         does not depend on GSAP, DOMContentLoaded, window.load, or other code. -->
+    <script>
+      (function () {
+        var loader = document.getElementById("preloader");
+        if (!loader) return;
+        var dismissed = false;
+        function dismissLoader() {
+          if (dismissed) return;
+          dismissed = true;
+          loader.style.transition =
+            "transform 0.55s cubic-bezier(0.16, 1, 0.3, 1)";
+          loader.style.transform = "translate3d(0, -100%, 0)";
+          loader.style.pointerEvents = "none";
+          window.setTimeout(function () {
+            loader.style.display = "none";
+            loader.setAttribute("aria-hidden", "true");
+          }, 600);
+        }
+        // Keep the branded loader briefly, then always reveal the page.
+        window.setTimeout(dismissLoader, 1200);
+        // Also recover immediately if the page is already ready.
+        if (document.readyState === "complete")
+          window.setTimeout(dismissLoader, 1200);
+      })();
+    </script>
+
     <!-- Custom Desktop Cursor -->
     <div
       class="hidden lg:block pointer-events-none fixed inset-0 z-[9999] overflow-hidden"
@@ -2448,9 +2475,9 @@
                     >
                       Mrs. Minal Kothare:
                       <a
-                        href="tel:+9198506216603"
+                        href="tel:+919850626603"
                         class="hover:text-[#176B45] underline whitespace-nowrap"
-                        >+91 98506216603</a
+                        >+91 9850626603</a
                       >
                     </p>
                   </div>
@@ -2849,8 +2876,8 @@
                 >
               </p>
               <p>
-                <a href="tel:+9198506216603" class="hover:text-[#82B96B]"
-                  >+91 98506216603</a
+                <a href="tel:+919850626603" class="hover:text-[#82B96B]"
+                  >+91 9850626603</a
                 >
               </p>
               <p class="text-[#82B96B] break-all">
@@ -2865,28 +2892,13 @@
           class="py-6 sm:py-8 border-b border-white/10 flex items-center justify-between gap-4 sm:gap-6"
         >
           <span
-            class="font-display text-[15.5vw] lg:text-[11.5rem] leading-[0.82] text-white/95 tracking-tight select-none"
+            id="footer-back-to-top"
+            role="button"
+            tabindex="0"
+            aria-label="Back to top"
+            class="font-display text-[15.5vw] lg:text-[11.5rem] leading-[0.82] text-white/95 tracking-tight select-none cursor-pointer"
             >RENU AGRO</span
           >
-          <a
-            href="#home"
-            aria-label="Back to top"
-            class="w-12 h-12 sm:w-20 sm:h-20 rounded-full bg-[#82B96B] hover:bg-white text-[#123F2A] flex items-center justify-center shrink-0 transition-transform duration-300 hover:-translate-y-1 active:scale-95"
-          >
-            <svg
-              class="w-5 h-5 sm:w-8 sm:h-8"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5 10l7-7m0 0l7 7m-7-7v18"
-              ></path>
-            </svg>
-          </a>
         </div>
         <div
           class="pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-4 font-sans text-[11px] sm:text-xs text-[#DCE9D8]/65 text-center sm:text-left"
@@ -3640,7 +3652,42 @@
       packButtons.forEach((btn) => {
         btn.addEventListener("click", () => {
           selectedJaggeryPack = btn.getAttribute("data-pack") || "5 kg";
+          if (selectedPackLabel)
+            selectedPackLabel.textContent = `Selected: ${selectedJaggeryPack}`;
+          packButtons.forEach((packBtn) => {
+            const active = packBtn === btn;
+            packBtn.classList.toggle("bg-[#123F2A]", active);
+            packBtn.classList.toggle("text-white", active);
+            packBtn.classList.toggle("shadow-lg", active);
+            packBtn.classList.toggle("sm:scale-[1.03]", active);
+            packBtn.classList.toggle("bg-[#F7F8F3]", !active);
+            packBtn.classList.toggle("text-[#123F2A]", !active);
+          });
+          if (jaggeryEnquireBtn) {
+            const label = jaggeryEnquireBtn.querySelector("span");
+            if (label)
+              label.textContent = `Enquire ${selectedJaggeryPack} Jaggery Export Lot`;
+          }
         });
+      });
+
+      // Open a pre-addressed email draft for direct export enquiries.
+      function openExportEmail(category, details = "") {
+        const subject = encodeURIComponent(`Export Enquiry: ${category}`);
+        const body = encodeURIComponent(`Hello Renu Agro Services,
+
+I would like to enquire about: ${category}.
+${details}
+
+Please share availability, pricing, and export details.`);
+        window.location.href = `mailto:renuagroservices@gmail.com?subject=${subject}&body=${body}`;
+      }
+
+      jaggeryEnquireBtn?.addEventListener("click", () => {
+        openExportEmail(
+          "Kolhapuri Jaggery",
+          `Required packaging: ${selectedJaggeryPack}`,
+        );
       });
 
       // Render Fresh Fruit Selector List (Centered Mobile Thumb Rail + Desktop Interactive Cards)
@@ -3882,7 +3929,7 @@
         .getElementById("fruit-enquire-btn")
         ?.addEventListener("click", () => {
           const fruit = freshFruitsData[activeFruitIndex];
-          selectCategoryInForm(`Fresh Fruits - ${fruit.name}`);
+          openExportEmail(`Fresh Fruits - ${fruit.name}`);
         });
 
       // Process Steps (With Scroll-Activated Color Transitions across Forest, Emerald & Dark Themes)
@@ -4015,8 +4062,9 @@
         .getElementById("modal-enquire-btn")
         ?.addEventListener("click", () => {
           if (currentModalCategory) {
+            const categoryName = currentModalCategory.name;
             closeModal();
-            selectCategoryInForm(currentModalCategory.name);
+            openExportEmail(categoryName);
           }
         });
 
@@ -4155,23 +4203,60 @@
 
       enquiryFormEl?.addEventListener("submit", (e) => {
         e.preventDefault();
+        if (!enquiryFormEl.reportValidity()) return;
         const name = document.getElementById("form-name").value.trim();
         const email = document.getElementById("form-email").value.trim();
         const category = document.getElementById("form-category").value;
         const message = document.getElementById("form-message").value.trim();
-
-        document.getElementById("success-name").textContent = name || "Partner";
         const mailSubject = encodeURIComponent(
           `Export Enquiry: ${category} - ${name}`,
         );
-        const mailBody = encodeURIComponent(
-          `Name: ${name}\nEmail: ${email}\nProduct Category: ${category}\n\nMessage:\n${message}`,
-        );
-        document.getElementById("success-email-link").href =
-          `mailto:renuagroservices@gmail.com?subject=${mailSubject}&body=${mailBody}`;
+        const mailBody = encodeURIComponent(`Name: ${name}
+Email: ${email}
+Product Category: ${category}
 
-        formContainerEl.classList.add("hidden");
-        formSuccessEl.classList.remove("hidden");
+Message:
+${message}`);
+        const mailtoUrl = `mailto:renuagroservices@gmail.com?subject=${mailSubject}&body=${mailBody}`;
+        const whatsappText =
+          encodeURIComponent(`Hello Renu Agro Services, I would like to make an export enquiry.
+Name: ${name}
+Email: ${email}
+Product Category: ${category}
+Message: ${message}`);
+        const whatsappUrl = `https://wa.me/917875717111?text=${whatsappText}`;
+        const emailFallback = document.getElementById("success-email-link");
+        if (emailFallback) emailFallback.href = mailtoUrl;
+        const successName = document.getElementById("success-name");
+        if (successName) successName.textContent = name || "Partner";
+        const successText = formSuccessEl?.querySelector("p");
+        if (successText)
+          successText.innerHTML = `Your enquiry is ready. If your email app does not open, use WhatsApp to send it directly.`;
+        const successActions = formSuccessEl?.querySelector(
+          ".flex.flex-wrap.justify-center",
+        );
+        if (
+          successActions &&
+          !document.getElementById("success-whatsapp-link")
+        ) {
+          const whatsappLink = document.createElement("a");
+          whatsappLink.id = "success-whatsapp-link";
+          whatsappLink.href = whatsappUrl;
+          whatsappLink.target = "_blank";
+          whatsappLink.rel = "noopener noreferrer";
+          whatsappLink.className =
+            "px-7 py-4 rounded-full bg-[#176B45] text-white font-sans font-extrabold text-xs uppercase tracking-[0.18em] inline-flex items-center gap-2";
+          whatsappLink.textContent = "Send via WhatsApp";
+          successActions.insertBefore(
+            whatsappLink,
+            document.getElementById("reset-form-btn"),
+          );
+        } else if (document.getElementById("success-whatsapp-link")) {
+          document.getElementById("success-whatsapp-link").href = whatsappUrl;
+        }
+        formContainerEl?.classList.add("hidden");
+        formSuccessEl?.classList.remove("hidden");
+        window.location.href = mailtoUrl;
       });
 
       document
@@ -4181,6 +4266,18 @@
           formSuccessEl.classList.add("hidden");
           formContainerEl.classList.remove("hidden");
         });
+
+      // Footer word acts as the discreet back-to-top control.
+      const footerTopText = document.getElementById("footer-back-to-top");
+      const scrollPageToTop = () =>
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      footerTopText?.addEventListener("click", scrollPageToTop);
+      footerTopText?.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          scrollPageToTop();
+        }
+      });
 
       // Custom Desktop Cursor Tracking
       if (window.matchMedia("(pointer: fine)").matches && window.gsap) {
